@@ -1,0 +1,22 @@
+<div class="wb-form">
+  <div class="wb-form-row">
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Maneuver.kind"}}</span>
+      <select name="system.kind" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.maneuverKinds selected=systemSource.kind localize=true}}</select>
+    </label>
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Maneuver.defence"}}</span>
+      <select name="system.defence" {{#unless editable}}disabled{{/unless}}>
+        <option value="" {{#unless systemSource.defence}}selected{{/unless}}>—</option>
+        {{selectOptions config.aircraftDefences selected=systemSource.defence localize=true}}
+      </select>
+    </label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Maneuver.cost"}}</span>{{formInput systemFields.cost value=systemSource.cost placeholder="1 Reserve"}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Maneuver.requirement"}}</span>{{formInput systemFields.requirement value=systemSource.requirement placeholder=(localize "WARBIRDS.Maneuver.requirementPlaceholder")}}</label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Maneuver.effect"}}</span>{{formInput systemFields.effect value=systemSource.effect}}</label>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Maneuver.onSuccess"}}</span>{{formInput systemFields.onSuccess value=systemSource.onSuccess}}</label>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Maneuver.onFailure"}}</span>{{formInput systemFields.onFailure value=systemSource.onFailure}}</label>
+</div>

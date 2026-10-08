@@ -1,0 +1,20 @@
+<div class="wb-form">
+  <div class="wb-form-row">
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Sponsorship.kind"}}</span>
+      <select name="system.kind" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.sponsorshipKinds selected=systemSource.kind localize=true}}</select>
+    </label>
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Sponsorship.status"}}</span>
+      <select name="system.status" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.sponsorshipStatus selected=systemSource.status localize=true}}</select>
+    </label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Sponsorship.fp"}}</span>{{formInput systemFields.fp value=systemSource.fp}}</label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Sponsorship.employer"}}</span>{{formInput systemFields.employer value=systemSource.employer}}</label>
+  <div class="wb-form-row">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Sponsorship.risk"}}</span>{{formInput systemFields.risk value=systemSource.risk placeholder=(localize "WARBIRDS.Sponsorship.riskPlaceholder")}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Sponsorship.duration"}}</span>{{formInput systemFields.duration value=systemSource.duration placeholder="3 months"}}</label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Sponsorship.obligations"}}</span>{{formInput systemFields.obligations value=systemSource.obligations placeholder=(localize "WARBIRDS.Sponsorship.obligationsPlaceholder")}}</label>
+  <p class="wb-hint">{{localize "WARBIRDS.Sponsorship.hint"}}</p>
+</div>

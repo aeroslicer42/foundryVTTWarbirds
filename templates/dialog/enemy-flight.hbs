@@ -1,0 +1,62 @@
+<div class="wb-roll-dialog wb-enemy-flight">
+  <input type="hidden" name="gradesJson" value="{{gradesJson}}">
+  {{#if sources}}
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.EnemyFlight.source"}}</label>
+    <div class="form-fields">
+      <select name="source">{{#each sources}}<option value="{{id}}">{{name}}</option>{{/each}}</select>
+    </div>
+  </div>
+  {{else}}
+  <p class="wb-weapon-line"><strong>{{sourceName}}</strong></p>
+  {{/if}}
+
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.EnemyFlight.count"}}</label>
+    <div class="form-fields">
+      <input type="number" name="count" value="2" min="1" max="12" step="1">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.EnemyFlight.prefix"}}</label>
+    <div class="form-fields">
+      <input type="text" name="prefix" value="{{localize "WARBIRDS.EnemyFlight.defaultPrefix"}}" placeholder="Red, Bandit…">
+      <input type="number" name="start" value="1" min="0" step="1" class="wb-narrow" data-tooltip="{{localize "WARBIRDS.EnemyFlight.start"}}">
+    </div>
+    <p class="hint">{{localize "WARBIRDS.EnemyFlight.prefixHint"}}</p>
+  </div>
+
+  <fieldset class="wb-roll-target">
+    <legend>{{localize "WARBIRDS.EnemyFlight.crew"}}</legend>
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.EnemyFlight.grade"}}</label>
+      <div class="form-fields">
+        <select name="grade">{{#each grades}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}</select>
+      </div>
+      <p class="hint">{{localize "WARBIRDS.EnemyFlight.gradeHint"}}</p>
+    </div>
+    <div class="wb-enemy-skills">
+      <label class="wb-field"><span>{{localize "WARBIRDS.Stats.sa"}}</span><input type="number" name="crew-sa" value="{{sa}}" min="-9" max="9" step="1"></label>
+      {{#each skills}}
+      <label class="wb-field"><span>{{label}}</span><input type="number" name="crew-{{key}}" value="{{value}}" min="0" max="6" step="1"></label>
+      {{/each}}
+    </div>
+    <div class="form-group">
+      <label class="checkbox"><input type="checkbox" name="saveGrade"> {{localize "WARBIRDS.EnemyFlight.saveGrade"}}</label>
+    </div>
+  </fieldset>
+
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.EnemyFlight.disposition"}}</label>
+    <div class="form-fields">
+      <select name="disposition">
+        {{#each dispositions}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+      </select>
+    </div>
+  </div>
+  {{#if canPlace}}
+  <div class="form-group">
+    <label class="checkbox"><input type="checkbox" name="place" checked> {{localize "WARBIRDS.EnemyFlight.place" name=placeName}}</label>
+  </div>
+  {{/if}}
+</div>

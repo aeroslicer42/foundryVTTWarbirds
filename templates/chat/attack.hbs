@@ -1,0 +1,92 @@
+<div class="wb-chat-card wb-attack-card">
+  <header class="wb-card-header">
+    <img src="{{actor.img}}" alt="{{actor.name}}">
+    <div class="wb-card-titles">
+      <h3>{{title}}</h3>
+      <span class="wb-card-subtitle">{{localize "WARBIRDS.Weapon.lead"}} +{{weapon.damage}} · {{localize "WARBIRDS.Weapon.ap"}} {{weapon.ap}} · {{#if extraDice}}2d6kh{{else}}1d6{{/if}} {{wbSigned bonus}}</span>
+    </div>
+    {{#if target}}
+    <div class="wb-card-target" data-tooltip="{{localize "WARBIRDS.Roll.target"}}">
+      <img src="{{target.img}}" alt="{{target.name}}">
+      <span>{{target.name}}</span>
+    </div>
+    {{/if}}
+  </header>
+
+  <ul class="wb-card-parts">
+    {{#each parts}}<li><span>{{label}}</span><span>{{value}}</span></li>{{/each}}
+  </ul>
+
+  <div class="wb-card-defence">
+    {{#if multi}}
+    <span>{{defenceLabel}}</span>
+    {{else}}
+    {{#if part}}<span class="wb-card-part"><i class="fa-solid fa-location-crosshairs"></i> {{#unless (eq part.roll null)}}<span class="wb-card-part-roll">{{localize "WARBIRDS.Vessel.hitLocation"}} {{part.roll}}</span> {{/unless}}<strong>{{part.name}}</strong>{{#unless (eq defence null)}} · {{localize "WARBIRDS.Roll.defence"}} <strong>{{defence}}</strong>{{/unless}}</span>
+    {{else}}
+    {{#unless (eq defence null)}}
+    <span>{{defenceLabel}}: <strong>{{defence}}</strong></span>
+    {{else}}
+    <span>{{localize "WARBIRDS.Roll.noDefenceGiven"}}</span>
+    {{/unless}}
+    {{/if}}
+    {{#unless (eq armour null)}}
+    <span>{{armourLabel}} {{armour}} − {{localize "WARBIRDS.Weapon.ap"}} {{weapon.ap}} = <strong>{{armourEffective}}</strong></span>
+    {{/unless}}
+    {{/if}}
+    {{#unless (eq scale "none")}}<span class="wb-card-scale">{{#if (eq scale "down")}}{{localize "WARBIRDS.Roll.scaleDown"}}{{else}}{{localize "WARBIRDS.Roll.scaleUp"}}{{/if}}</span>{{/unless}}
+  </div>
+
+  <ol class="wb-card-attacks{{#if multi}} wb-card-attacks-multi{{/if}}">
+    {{#each attacks}}
+    <li class="wb-card-attack{{#if hit}} hit{{/if}}{{#if (eq hit false)}} miss{{/if}}">
+      {{#if ../multi}}
+      <span class="wb-card-attack-line">
+        {{#if target}}<strong>{{target.name}}</strong>{{/if}}{{#if part}}{{#if target}} · {{/if}}<i class="fa-solid fa-location-crosshairs"></i> {{#unless (eq part.roll null)}}{{localize "WARBIRDS.Vessel.hitLocation"}} {{part.roll}}: {{/unless}}{{part.name}}{{/if}}{{#unless (eq defence null)}} · {{localize "WARBIRDS.Roll.defence"}} {{defence}}{{/unless}}{{#unless (eq armourEffective null)}} · {{../armourLabel}} {{armour}} − {{localize "WARBIRDS.Weapon.ap"}} {{../weapon.ap}} = {{armourEffective}}{{/unless}}
+      </span>
+      {{/if}}
+      <span class="wb-card-attack-dice">{{#each dice}}<span class="wb-die{{#unless active}} discarded{{/unless}}{{#if (eq result 1)}} one{{/if}}{{#if (eq result 6)}} six{{/if}}"{{#unless active}} data-tooltip="{{localize "WARBIRDS.Roll.discardedDie"}}"{{/unless}}>{{result}}</span>{{/each}}</span>
+      <span class="wb-card-attack-total">{{total}}</span>
+      {{#if autoMiss}}
+      <span class="wb-card-attack-result">{{localize "WARBIRDS.Roll.autoMiss"}}</span>
+      {{else if (eq hit null)}}
+      <span class="wb-card-attack-result">{{localize "WARBIRDS.Roll.compareToDefence"}}</span>
+      {{else}}
+        {{#if hit}}
+        <span class="wb-card-attack-result">
+          <strong>{{localize "WARBIRDS.Roll.hit"}}</strong> · {{localize "WARBIRDS.Roll.lead"}} {{wbSigned lead}} ·
+          {{localize "WARBIRDS.Roll.damage"}} {{damage}}{{#unless (eq final null)}} → <strong>{{final}}</strong>{{/unless}}
+        </span>
+        {{#unless (eq final null)}}
+        {{#if final}}
+        <button type="button" class="wb-card-apply" data-action="applyDamage" data-index="{{index}}" {{#if (lookup ../applied index)}}disabled{{/if}}>
+          <i class="fa-solid fa-burst"></i> {{#if (lookup ../applied index)}}{{localize "WARBIRDS.Roll.applied"}}{{else}}{{localize "WARBIRDS.Roll.applyDamage"}}{{/if}}
+        </button>
+        {{/if}}
+        {{/unless}}
+        {{else}}
+        <span class="wb-card-attack-result">{{localize "WARBIRDS.Roll.miss"}} · {{localize "WARBIRDS.Roll.lead"}} {{wbSigned lead}}</span>
+        {{/if}}
+      {{/if}}
+    </li>
+    {{/each}}
+  </ol>
+
+  {{#if kills}}
+  <div class="wb-card-kills">
+    {{#each kills}}
+    <p class="wb-card-kill{{#unless credited}} pending{{/unless}}">
+      <i class="fa-solid {{#if (eq kind "air")}}fa-jet-fighter{{else}}fa-explosion{{/if}}"></i>
+      {{#if credited}}{{localize "WARBIRDS.Pilot.killCredited" kind=(localize kindLabel) name=name count=count}}
+      {{else}}{{localize "WARBIRDS.Pilot.killPending" name=name}} <button type="button" class="wb-card-apply" data-action="creditKill" data-target="{{@key}}"><i class="fa-solid fa-medal"></i> {{localize "WARBIRDS.Pilot.creditKill"}}</button>{{/if}}
+    </p>
+    {{/each}}
+  </div>
+  {{/if}}
+
+  {{#if footer}}
+  <footer class="wb-card-footer">
+    {{#if ammo}}<span class="wb-card-ammo{{#if ammo.empty}} empty{{/if}}"><i class="fa-solid fa-boxes-stacked"></i> {{localize "WARBIRDS.Weapon.ammo"}} {{ammo.remaining}}/{{ammo.max}}{{#if ammo.empty}} · {{localize "WARBIRDS.Roll.outOfAmmo"}}{{/if}}</span>{{/if}}
+    {{#if readyRound}}<span class="wb-card-cooldown"><i class="fa-solid fa-hourglass-half"></i> {{localize "WARBIRDS.Roll.readyRound" round=readyRound}}</span>{{/if}}
+  </footer>
+  {{/if}}
+</div>

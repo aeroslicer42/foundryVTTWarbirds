@@ -1,0 +1,15 @@
+<div class="wb-form">
+  <div class="wb-form-row wb-form-row-4">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.value"}}</span>{{formInput systemFields.value value=systemSource.value}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.quantity"}}</span>{{formInput systemFields.quantity value=systemSource.quantity}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.armour"}}</span>{{formInput systemFields.armour value=systemSource.armour}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.defence"}}</span>{{formInput systemFields.defence value=systemSource.defence}}</label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field wb-field-check"><input type="checkbox" name="system.equipped" {{checked systemSource.equipped}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.Gear.equipped"}}</span></label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.usesCurrent"}}</span>{{formInput systemFields.uses.fields.value value=systemSource.uses.value}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Gear.usesMax"}}</span>{{formInput systemFields.uses.fields.max value=systemSource.uses.max}}</label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Gear.notes"}}</span>{{formInput systemFields.notes value=systemSource.notes}}</label>
+  <p class="wb-hint">{{localize "WARBIRDS.Gear.valueHint"}}</p>
+</div>

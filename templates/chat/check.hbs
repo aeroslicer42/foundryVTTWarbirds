@@ -1,0 +1,45 @@
+<div class="wb-chat-card wb-check-card">
+  <header class="wb-card-header">
+    <img src="{{actor.img}}" alt="{{actor.name}}">
+    <div class="wb-card-titles">
+      <h3>{{title}}</h3>
+      {{#if subtitle}}<span class="wb-card-subtitle">{{subtitle}}</span>{{/if}}
+    </div>
+    <div class="wb-card-total{{#if success}} success{{/if}}{{#if (eq success false)}} failure{{/if}}">
+      <span class="wb-card-total-value">{{effectiveTotal}}</span>
+      {{#if spent}}<span class="wb-card-spent" data-tooltip="{{localize "WARBIRDS.Roll.reserveSpentTooltip"}}">+{{spent}}</span>{{/if}}
+    </div>
+  </header>
+
+  <div class="wb-card-dice">
+    {{#each dice}}
+    <span class="wb-die{{#unless active}} discarded{{/unless}}{{#if (eq result 1)}} one{{/if}}{{#if (eq result 6)}} six{{/if}}" data-tooltip="{{#unless active}}{{localize "WARBIRDS.Roll.discardedDie"}}{{else}}1d6{{/unless}}">{{result}}</span>
+    {{/each}}
+    <span class="wb-card-formula">{{formula}}{{#if knack}} · {{localize "WARBIRDS.Roll.knack"}}{{/if}}</span>
+  </div>
+
+  <ul class="wb-card-parts">
+    {{#each parts}}<li><span>{{label}}</span><span>{{value}}</span></li>{{/each}}
+  </ul>
+
+  {{#unless (eq difficulty null)}}
+  <div class="wb-card-outcome {{#if success}}success{{else}}failure{{/if}}">
+    <span class="wb-card-outcome-label">{{#if success}}{{localize "WARBIRDS.Roll.success"}}{{else}}{{localize "WARBIRDS.Roll.failure"}}{{/if}}</span>
+    <span class="wb-card-outcome-detail">{{difficultyLabel}} {{difficulty}} · {{localize "WARBIRDS.Roll.lead"}} {{wbSigned lead}}</span>
+  </div>
+  {{#if critFail}}
+  <p class="wb-card-crit"><i class="fa-solid fa-skull-crossbones"></i> {{localize "WARBIRDS.Roll.critFailAvailable"}}</p>
+  {{/if}}
+  {{/unless}}
+
+  {{#if note}}<p class="wb-card-note"><i class="fa-solid fa-circle-info"></i> {{note}}</p>{{/if}}
+
+  {{#if reserve}}
+  <footer class="wb-card-footer">
+    <span class="wb-card-reserve">{{localize "WARBIRDS.Pilot.reserve"}} {{reserve.value}}/{{reserve.max}}</span>
+    <button type="button" data-action="spendReserve" {{#unless reserve.value}}disabled{{/unless}}>
+      <i class="fa-solid fa-bolt"></i> {{localize "WARBIRDS.Roll.spendReserve"}}
+    </button>
+  </footer>
+  {{/if}}
+</div>

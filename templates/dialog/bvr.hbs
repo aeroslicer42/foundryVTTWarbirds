@@ -1,0 +1,20 @@
+<div class="wb-roll-dialog">
+  <p class="hint">{{localize "WARBIRDS.Bvr.resolveHint"}}</p>
+  {{#each fighters}}
+  <fieldset class="wb-roll-target">
+    <legend>{{localize "WARBIRDS.Bvr.fighter" n=index}}</legend>
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.Table.name"}}</label>
+      <div class="form-fields"><input type="text" name="name{{index}}" value="{{name}}"></div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.Bvr.tactic"}}</label>
+      <div class="form-fields">
+        <select name="tactic{{index}}">
+          {{#each options}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </div>
+    </div>
+  </fieldset>
+  {{/each}}
+</div>

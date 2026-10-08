@@ -1,0 +1,33 @@
+<div class="wb-form">
+  <div class="wb-form-row">
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Trait.category"}}</span>
+      <select name="system.category" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.traitCategories selected=systemSource.category localize=true}}</select>
+    </label>
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Trait.restriction"}}</span>
+      <select name="system.restriction" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.traitRestrictions selected=systemSource.restriction localize=true}}</select>
+    </label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Trait.timesTaken"}}</span>{{formInput systemFields.timesTaken value=systemSource.timesTaken}}</label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field wb-field-check"><input type="checkbox" name="system.active" {{checked systemSource.active}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.Trait.active"}}</span></label>
+    <label class="wb-field wb-field-check" data-tooltip="{{localize "WARBIRDS.Trait.situationalHint"}}"><input type="checkbox" name="system.situational" {{checked systemSource.situational}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.Trait.situational"}}</span></label>
+    <label class="wb-field wb-field-check" data-tooltip="{{localize "WARBIRDS.Trait.grantsBvrHint"}}"><input type="checkbox" name="system.grants.bvr" {{checked systemSource.grants.bvr}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.TraitModifier.bvr"}}</span></label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field wb-field-check" data-tooltip="{{localize "WARBIRDS.Trait.grantsHelicopterHint"}}"><input type="checkbox" name="system.grants.helicopter" {{checked systemSource.grants.helicopter}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.TraitModifier.helicopter"}}</span></label>
+    <label class="wb-field wb-field-check" data-tooltip="{{localize "WARBIRDS.Trait.grantsStrafingDieHint"}}"><input type="checkbox" name="system.grants.strafingDie" {{checked systemSource.grants.strafingDie}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.TraitModifier.strafingDie"}}</span></label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Trait.effect"}}</span>{{formInput systemFields.effect value=systemSource.effect placeholder=(localize "WARBIRDS.Trait.effectPlaceholder")}}</label>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Trait.conflicts"}}</span>{{formInput systemFields.conflicts value=systemSource.conflicts}}</label>
+  <fieldset class="wb-fieldset">
+    <legend>{{localize "WARBIRDS.Trait.modifiers"}}</legend>
+    <p class="wb-hint">{{localize "WARBIRDS.Trait.modifiersHint"}}</p>
+    <div class="wb-modifier-grid">
+      {{#each modifierFields}}
+      <label class="wb-field wb-field-mod"><span>{{label}}</span><input type="number" name="system.modifiers.{{key}}" value="{{value}}" step="1" {{#unless ../editable}}disabled{{/unless}}></label>
+      {{/each}}
+    </div>
+  </fieldset>
+</div>

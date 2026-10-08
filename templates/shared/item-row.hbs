@@ -1,0 +1,26 @@
+{{!-- One embedded item row. Expects `item` ({id, name, img, system, summary}), `editable`, optional
+      `toggleField` (a boolean system path such as "system.equipped") with `toggleLabel`/`toggleOn`,
+      and optional `rollAction` + `rollLabel` (+ `rollIcon`) for a roll button. --}}
+<li class="wb-item-row draggable" data-item-id="{{item.id}}" data-item-type="{{item.type}}">
+  <img class="wb-item-img" src="{{item.img}}" alt="{{item.name}}" data-action="editItem">
+  <div class="wb-item-main">
+    <a class="wb-item-name" data-action="editItem">{{item.name}}</a>{{#if item.badge}} <span class="wb-item-badge {{item.badge.css}}">{{item.badge.label}}</span>{{/if}}
+    {{#if item.summary}}<div class="wb-item-summary">{{item.summary}}</div>{{/if}}
+  </div>
+  {{#if rollAction}}
+  <button type="button" class="wb-roll-button" data-action="{{rollAction}}" data-tooltip="{{localize rollLabel}}" {{#unless owner}}disabled{{/unless}}>
+    <i class="fa-solid {{#if rollIcon}}{{rollIcon}}{{else}}fa-dice-d6{{/if}}"></i> <span>{{localize rollLabel}}</span>
+  </button>
+  {{/if}}
+  {{#if toggleField}}
+  <button type="button" class="wb-icon-button{{#if toggleOn}} active{{/if}}" data-action="toggleItemField" data-field="{{toggleField}}"
+          data-tooltip="{{localize toggleLabel}}" {{#unless editable}}disabled{{/unless}}>
+    <i class="fa-solid {{#if toggleOn}}fa-circle-check{{else}}fa-circle{{/if}}"></i>
+  </button>
+  {{/if}}
+  {{#if editable}}
+  <button type="button" class="wb-icon-button" data-action="deleteItem" data-tooltip="{{localize "WARBIRDS.UI.delete"}}">
+    <i class="fa-solid fa-trash"></i>
+  </button>
+  {{/if}}
+</li>

@@ -1,0 +1,27 @@
+<div class="wb-chat-card wb-maneuver-card">
+  <header class="wb-card-header">
+    <img src="{{img}}" alt="{{title}}">
+    <div class="wb-card-titles">
+      <h3>{{title}}</h3>
+      <span class="wb-card-subtitle">{{kind}}{{#if defence}} · {{localize "WARBIRDS.Maneuver.defence"}}: {{defence}}{{/if}}</span>
+    </div>
+  </header>
+  {{#if effect}}<p class="wb-card-effect">{{effect}}</p>{{/if}}
+  <ul class="wb-card-parts">
+    {{#if cost}}<li><span>{{localize "WARBIRDS.Maneuver.cost"}}</span><span>{{cost}}</span></li>{{/if}}
+    {{#if requirement}}<li><span>{{localize "WARBIRDS.Maneuver.requirement"}}</span><span>{{requirement}}</span></li>{{/if}}
+    {{#if onSuccess}}<li><span>{{localize "WARBIRDS.Maneuver.onSuccess"}}</span><span>{{onSuccess}}</span></li>{{/if}}
+    {{#if onFailure}}<li><span>{{localize "WARBIRDS.Maneuver.onFailure"}}</span><span>{{onFailure}}</span></li>{{/if}}
+  </ul>
+  {{#if description}}<div class="wb-card-description">{{{description}}}</div>{{/if}}
+  {{#if secret}}
+  <footer class="wb-card-footer">
+    <span class="wb-card-secret"><i class="fa-solid fa-user-secret"></i> {{localize "WARBIRDS.Bvr.secretCard"}}</span>
+    {{#if revealed}}
+    <span class="wb-card-revealed">{{localize "WARBIRDS.Bvr.revealed"}}</span>
+    {{else}}
+    <button type="button" data-action="revealChoice"><i class="fa-solid fa-eye"></i> {{localize "WARBIRDS.Bvr.reveal"}}</button>
+    {{/if}}
+  </footer>
+  {{/if}}
+</div>

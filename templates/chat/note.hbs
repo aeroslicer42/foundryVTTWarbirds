@@ -1,0 +1,18 @@
+<div class="wb-chat-card wb-note-card">
+  <header class="wb-card-header">
+    <img src="{{actor.img}}" alt="{{actor.name}}">
+    <div class="wb-card-titles">
+      <h3>{{title}}</h3>
+      {{#if subtitle}}<span class="wb-card-subtitle">{{subtitle}}</span>{{/if}}
+    </div>
+    {{#if icon}}<i class="wb-card-icon {{icon}}"></i>{{/if}}
+  </header>
+  {{#if choice}}
+  <div class="wb-card-choice">
+    <span class="wb-card-choice-label">{{choice.label}}</span>
+    <strong>{{choice.value}}</strong>
+  </div>
+  {{/if}}
+  {{#each lines}}<p class="wb-card-note">{{this}}</p>{{/each}}
+  {{#if description}}<div class="wb-card-description">{{{description}}}</div>{{/if}}
+</div>

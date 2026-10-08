@@ -1,0 +1,93 @@
+<div class="wb-roll-dialog">
+  <ul class="wb-roll-parts">
+    {{#each parts}}
+    <li><span class="label">{{label}}</span><span class="value">{{display}}</span></li>
+    {{/each}}
+    <li class="wb-roll-base"><span class="label">{{localize "WARBIRDS.Roll.base"}}</span><span class="value">{{#if extraDie}}2d6kh{{else}}1d6{{/if}} {{base}}</span></li>
+  </ul>
+  <p class="wb-weapon-line">
+    <strong>{{weapon.name}}</strong> · {{localize "WARBIRDS.Weapon.lead"}} +{{weapon.damage}} · {{localize "WARBIRDS.Weapon.ap"}} {{weapon.ap}}
+    {{#if weapon.ammo.tracked}} · {{localize "WARBIRDS.Weapon.ammo"}} {{weapon.ammo.value}}/{{weapon.ammo.max}}{{/if}}
+    {{#if extraDie}} · {{localize "WARBIRDS.Roll.extraDieShort"}}{{/if}}
+    {{#if missOnOne}} · {{localize "WARBIRDS.Roll.missOnOneShort"}}{{/if}}
+  </p>
+  {{#if special}}<p class="wb-weapon-special"><i class="fa-solid fa-circle-info"></i> {{special}}</p>{{/if}}
+  {{#each warnings}}<p class="wb-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{this}}</p>{{/each}}
+
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.Roll.attacks"}}</label>
+    <div class="form-fields">
+      <select name="attacks">
+        {{#each attackOptions}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{value}}</option>{{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.Roll.modifier"}}</label>
+    <div class="form-fields">
+      <input type="number" name="modifier" value="0" step="1" autofocus>
+    </div>
+    <p class="hint">{{localize "WARBIRDS.Roll.attackModifierHint"}}</p>
+  </div>
+
+  {{#if altMode}}
+  <div class="form-group">
+    <label class="checkbox"><input type="checkbox" name="altMode"> {{altMode.label}} ({{altMode.detail}})</label>
+  </div>
+  {{/if}}
+
+  <fieldset class="wb-roll-target">
+    <legend>{{#if targets}}{{localize "WARBIRDS.Roll.targets"}}: {{#each targets}}{{#if @index}}, {{/if}}{{name}}{{/each}}{{else if target}}{{localize "WARBIRDS.Roll.target"}}: {{target.name}}{{else}}{{localize "WARBIRDS.Roll.noTarget"}}{{/if}}</legend>
+    {{#if targets}}<p class="hint">{{localize "WARBIRDS.Roll.groupedHint"}}</p>{{/if}}
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.Roll.defenceUsed"}}</label>
+      <div class="form-fields">
+        <select name="defenceType">
+          {{#each defenceChoices}}<option value="{{value}}" data-number="{{number}}" data-armour="{{armour}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+        <input type="number" name="defence" value="{{defaultDefence}}" step="1" placeholder="?">
+      </div>
+      {{#if chosenDefence}}<p class="hint wb-chosen-defence"><i class="fa-solid fa-shield-halved"></i> {{chosenDefence}}</p>{{/if}}
+      <p class="hint">{{#if isVessel}}{{localize "WARBIRDS.Roll.vesselDefenceHint"}}{{else}}{{localize "WARBIRDS.Roll.defenceHint"}}{{/if}}</p>
+    </div>
+    {{#if secondLocation}}
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.Roll.secondLocation"}}</label>
+      <div class="form-fields">
+        <select name="defenceType2">
+          {{#each secondLocation}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </div>
+      <p class="hint">{{localize "WARBIRDS.Roll.secondLocationHint"}}</p>
+    </div>
+    {{/if}}
+    {{#if showEPM}}
+    <div class="form-group">
+      <label class="checkbox"><input type="checkbox" name="applyEPM" {{#if epmChecked}}checked{{/if}}> {{localize "WARBIRDS.Roll.applyEPM" epm=target.epm}}</label>
+    </div>
+    {{/if}}
+    <div class="form-group">
+      <label>{{armourLabel}}</label>
+      <div class="form-fields">
+        <input type="number" name="armour" value="{{armourValue}}" step="1" placeholder="?">
+      </div>
+      <p class="hint">{{localize "WARBIRDS.Roll.armourHint" ap=weapon.ap}}</p>
+    </div>
+    <div class="form-group">
+      <label>{{localize "WARBIRDS.Roll.scale"}}</label>
+      <div class="form-fields">
+        <select name="scale">
+          {{#each scales}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+        </select>
+      </div>
+      {{#if fragmentary}}<p class="hint">{{localize "WARBIRDS.Roll.fragmentaryHint"}}</p>{{/if}}
+    </div>
+  </fieldset>
+
+  {{#if weapon.ammo.tracked}}
+  <div class="form-group">
+    <label class="checkbox"><input type="checkbox" name="consumeAmmo" checked> {{localize "WARBIRDS.Roll.consumeAmmo"}}</label>
+  </div>
+  {{/if}}
+</div>

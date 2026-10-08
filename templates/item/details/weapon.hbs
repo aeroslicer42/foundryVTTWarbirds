@@ -1,0 +1,59 @@
+<div class="wb-form">
+  <div class="wb-form-row">
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Weapon.category"}}</span>
+      <select name="system.category" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.weaponCategories selected=systemSource.category localize=true}}</select>
+    </label>
+    <label class="wb-field">
+      <span>{{localize "WARBIRDS.Weapon.skill"}}</span>
+      <select name="system.skill" {{#unless editable}}disabled{{/unless}}>
+        <option value="" {{#unless systemSource.skill}}selected{{/unless}}>{{localize "WARBIRDS.Weapon.skillDefault"}}{{#unless systemSource.skill}} ({{system.skillLabel}}){{/unless}}</option>
+        {{selectOptions config.weaponSkills selected=systemSource.skill localize=true}}
+        <option value="best" {{#if (eq systemSource.skill "best")}}selected{{/if}}>{{localize "WARBIRDS.Weapon.skillBest"}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="wb-form-row wb-form-row-4">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.accuracy"}}</span>{{formInput systemFields.accuracy value=systemSource.accuracy}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.damage"}}</span><span class="wb-prefix">{{localize "WARBIRDS.Weapon.lead"}} +</span>{{formInput systemFields.damage value=systemSource.damage}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.ap"}}</span>{{formInput systemFields.ap value=systemSource.ap}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.attacksPerRound"}}</span>{{formInput systemFields.attacksPerRound value=systemSource.attacksPerRound}}</label>
+  </div>
+  <div class="wb-form-row wb-form-row-4">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.ammoCurrent"}}</span>{{formInput systemFields.ammo.fields.value value=systemSource.ammo.value}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.ammoMax"}}</span>{{formInput systemFields.ammo.fields.max value=systemSource.ammo.max}}</label>
+    <label class="wb-field wb-field-check"><input type="checkbox" name="system.ammo.tracked" {{checked systemSource.ammo.tracked}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.Weapon.ammoTracked"}}</span></label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.pylons"}}</span>{{formInput systemFields.pylons value=systemSource.pylons}}</label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field wb-field-check"><input type="checkbox" name="system.mounted" {{checked systemSource.mounted}} {{#unless editable}}disabled{{/unless}}><span>{{localize "WARBIRDS.Weapon.mounted"}}</span></label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.range"}}</span>{{formInput systemFields.range value=systemSource.range placeholder="25 m"}}</label>
+  </div>
+  <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.special"}}</span>{{formInput systemFields.special value=systemSource.special placeholder=(localize "WARBIRDS.Weapon.specialPlaceholder")}}</label>
+  <div class="wb-form-row">
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.cooldown"}}</span>{{formInput systemFields.cooldown value=systemSource.cooldown}}</label>
+    <label class="wb-field wb-field-wide">
+      <span>{{localize "WARBIRDS.Weapon.rechargeLabel"}}</span>
+      <select name="system.recharge" {{#unless editable}}disabled{{/unless}}>
+        <option value="" {{#unless systemSource.recharge}}selected{{/unless}}>{{localize "WARBIRDS.Weapon.recharge.none"}}</option>
+        <option value="round" {{#if (eq systemSource.recharge "round")}}selected{{/if}}>{{localize "WARBIRDS.Weapon.recharge.round"}}</option>
+        <option value="scene" {{#if (eq systemSource.recharge "scene")}}selected{{/if}}>{{localize "WARBIRDS.Weapon.recharge.scene"}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="wb-form-row">
+    <label class="wb-field wb-field-wide"><span>{{localize "WARBIRDS.Weapon.altModeLabel"}}</span>{{formInput systemFields.altMode.fields.label value=systemSource.altMode.label placeholder=(localize "WARBIRDS.Weapon.altModePlaceholder")}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.altModeAccuracy"}}</span>{{formInput systemFields.altMode.fields.accuracy value=systemSource.altMode.accuracy}}</label>
+    <label class="wb-field"><span>{{localize "WARBIRDS.Weapon.altModeDamage"}}</span>{{formInput systemFields.altMode.fields.damage value=systemSource.altMode.damage}}</label>
+  </div>
+  <p class="wb-hint">{{localize "WARBIRDS.Weapon.automationHint"}}</p>
+  <fieldset class="wb-fieldset">
+    <legend>{{localize "WARBIRDS.Weapon.flags"}}</legend>
+    <div class="wb-flag-grid">
+      {{#each flagFields}}
+      <label class="wb-field wb-field-check"><input type="checkbox" name="system.flags.{{key}}" {{checked value}} {{#unless ../editable}}disabled{{/unless}}><span>{{label}}</span></label>
+      {{/each}}
+    </div>
+  </fieldset>
+  <p class="wb-hint">{{localize "WARBIRDS.Weapon.hint"}}</p>
+</div>

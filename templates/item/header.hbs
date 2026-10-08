@@ -1,0 +1,20 @@
+<header class="wb-header wb-item-header">
+  <img class="wb-portrait wb-portrait-small" src="{{document.img}}" alt="{{document.name}}" data-action="editImage" data-edit="img">
+  <div class="wb-header-main">
+    <div class="wb-name-row">
+      {{#if editable}}
+      {{formInput fields.name value=source.name placeholder=(localize "DOCUMENT.FIELDS.name.label") classes="wb-name-input"}}
+      {{else}}
+      <h1 class="wb-name">{{document.name}}</h1>
+      {{/if}}
+    </div>
+    <div class="wb-header-fields">
+      <span class="wb-type-badge">{{typeLabel}}</span>
+      {{#if actor}}<span class="wb-hint">{{localize "WARBIRDS.Item.ownedBy" name=actor.name}}</span>{{/if}}
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Item.source"}}</span>
+        {{formInput systemFields.source value=systemSource.source placeholder=(localize "WARBIRDS.Item.sourcePlaceholder")}}
+      </label>
+    </div>
+  </div>
+</header>

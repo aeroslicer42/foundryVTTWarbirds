@@ -1,0 +1,67 @@
+<div class="wb-chat-card wb-dogfight-card">
+  <header class="wb-card-header">
+    <i class="wb-card-icon fa-solid fa-jet-fighter-up"></i>
+    <div class="wb-card-titles">
+      <h3>{{localize "WARBIRDS.Dogfight.title"}}</h3>
+      <span class="wb-card-subtitle">{{localize "WARBIRDS.Dogfight.round" round=round}}</span>
+    </div>
+  </header>
+
+  <ol class="wb-dogfight-order">
+    {{#each order}}
+    <li class="wb-dogfight-entry side-{{side}}{{#if crippled}} crippled{{/if}}">
+      <span class="wb-dogfight-rank">{{rank}}</span>
+      <img src="{{img}}" alt="">
+      <span class="wb-dogfight-name">{{name}}</span>
+      <span class="wb-dogfight-side">{{localize sideLabel}}</span>
+      <span class="wb-dogfight-sa">{{localize "WARBIRDS.Stats.sa"}} {{wbSigned sa}}</span>
+      <span class="wb-dogfight-total">{{#if (eq initiative null)}}—{{else}}{{initiative}}{{/if}}</span>
+    </li>
+    {{/each}}
+  </ol>
+
+  {{#if bonus}}
+  <p class="wb-card-note">{{localize "WARBIRDS.Dogfight.outnumber" side=(localize bonus.sideLabel) own=bonus.own other=bonus.other bonus=bonus.value}}</p>
+  {{/if}}
+
+  {{#unless ready}}
+  <p class="wb-card-note">{{localize "WARBIRDS.Dogfight.waiting"}}</p>
+  {{else}}
+    {{#if oneSided}}<p class="wb-card-note">{{localize "WARBIRDS.Dogfight.oneSided"}}</p>{{/if}}
+    {{#each shooters}}
+    <p class="wb-dogfight-line"><strong>{{name}}</strong> {{localize "WARBIRDS.Dogfight.mayShoot"}}
+      {{#each targets}}{{#if @index}}, {{/if}}{{name}} ({{localize "WARBIRDS.Roll.lead"}} {{wbSigned lead}}{{#if tie}}, {{localize "WARBIRDS.Dogfight.tieSa"}}{{/if}}){{/each}}
+    </p>
+    {{/each}}
+    {{#each standoffs}}
+    <p class="wb-dogfight-line wb-dogfight-standoff"><i class="fa-solid fa-ban"></i> {{localize "WARBIRDS.Dogfight.standoff" a=a b=b}}</p>
+    {{/each}}
+
+    {{#if losers.length}}
+    <div class="wb-dogfight-losers">
+      {{#each losers}}
+      <div class="wb-dogfight-loser" data-combatant-id="{{id}}">
+        <div class="wb-dogfight-loser-head">
+          <img src="{{img}}" alt="">
+          <span><strong>{{name}}</strong> · {{localize "WARBIRDS.Dogfight.shotBy"}} {{#each attackers}}{{#if @index}}, {{/if}}{{name}} ({{wbSigned lead}}){{/each}}</span>
+        </div>
+        {{#if defence}}
+        <div class="wb-card-choice">
+          <span class="wb-card-choice-label">{{localize "WARBIRDS.Dogfight.defends"}}</span>
+          <strong>{{localize defence.label}}{{#unless (eq defence.value null)}} {{defence.value}}{{/unless}}</strong>
+          <button type="button" class="wb-dogfight-rechoose" data-action="chooseDefence" data-combatant-id="{{id}}" data-defence="" data-tooltip="{{localize "WARBIRDS.Dogfight.rechoose"}}"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+        {{else}}
+        <div class="wb-dogfight-buttons">
+          {{#each ../choices}}
+          <button type="button" data-action="chooseDefence" data-combatant-id="{{../id}}" data-defence="{{key}}"{{#if (eq key "stunt")}}{{#if ../crippled}} disabled{{/if}}{{/if}}>{{localize label}}</button>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{/if}}
+    <p class="wb-card-note wb-dogfight-footnote">{{localize "WARBIRDS.Dogfight.manual"}}</p>
+  {{/unless}}
+</div>

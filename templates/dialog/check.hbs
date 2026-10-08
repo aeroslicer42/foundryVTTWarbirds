@@ -1,0 +1,55 @@
+<div class="wb-roll-dialog">
+  <ul class="wb-roll-parts">
+    {{#each parts}}
+    <li><span class="label">{{label}}</span><span class="value">{{display}}</span></li>
+    {{/each}}
+    <li class="wb-roll-base"><span class="label">{{localize "WARBIRDS.Roll.base"}}</span><span class="value">1d6 {{base}}</span></li>
+  </ul>
+
+  {{#if stat}}
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.Table.stat"}}</label>
+    <div class="form-fields">
+      <select name="stat">
+        {{#each stat.options}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+      </select>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="form-group">
+    <label>{{localize "WARBIRDS.Roll.modifier"}}</label>
+    <div class="form-fields">
+      <input type="number" name="modifier" value="0" step="1" autofocus>
+    </div>
+    <p class="hint">{{localize "WARBIRDS.Roll.modifierHint"}}</p>
+  </div>
+
+  {{#if allowDifficulty}}
+  <div class="form-group">
+    <label>{{difficultyLabel}}</label>
+    <div class="form-fields">
+      <select name="difficulty">
+        {{#each difficulties}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+      </select>
+      <input type="number" name="difficultyCustom" value="{{customDifficulty}}" step="1" min="0" placeholder="#" data-tooltip="{{localize "WARBIRDS.Roll.customDifficultyHint"}}">
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if toggles.length}}
+  <fieldset class="wb-roll-toggles">
+    <legend>{{localize "WARBIRDS.Roll.options"}}</legend>
+    {{#each toggles}}
+    <label class="checkbox"><input type="checkbox" name="toggle-{{key}}" {{#if checked}}checked{{/if}}> {{label}} <span class="wb-toggle-value">({{wbSigned value}})</span></label>
+    {{/each}}
+  </fieldset>
+  {{/if}}
+
+  {{#if showKnack}}
+  <div class="form-group">
+    <label class="checkbox"><input type="checkbox" name="knack" {{#if knack}}checked{{/if}}> {{localize "WARBIRDS.Roll.knack"}}</label>
+    <p class="hint">{{localize "WARBIRDS.Roll.knackHint"}}</p>
+  </div>
+  {{/if}}
+</div>

@@ -1,0 +1,15 @@
+{{!-- A Health / Structure track. Expects `track` = {boxes, overflow, field, damage} and `editable`. --}}
+<div class="wb-track" data-field="{{track.field}}">
+  {{#each track.boxes}}
+  <button type="button" class="wb-track-box{{#if filled}} filled{{/if}}{{#if current}} current{{/if}}"
+          data-action="setTrack" data-field="{{../track.field}}" data-index="{{index}}"
+          {{#unless ../editable}}disabled{{/unless}}
+          data-tooltip="{{localize "WARBIRDS.Track.boxTooltip" index=index penalty=label}}">
+    <span class="box"></span>
+    <span class="penalty">{{label}}</span>
+  </button>
+  {{/each}}
+  {{#if track.overflow}}
+  <span class="wb-track-overflow" data-tooltip="{{localize "WARBIRDS.Track.overflowTooltip"}}">+{{track.overflow}}</span>
+  {{/if}}
+</div>
