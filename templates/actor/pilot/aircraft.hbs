@@ -1,0 +1,94 @@
+<section class="tab aircraft {{tab.cssClass}}" data-group="primary" data-tab="aircraft">
+  {{#if aircraft}}
+  <section class="wb-panel wb-linked-aircraft">
+    <header class="wb-linked-header">
+      <img class="wb-linked-img" src="{{aircraft.img}}" alt="{{aircraft.name}}">
+      <div class="wb-linked-main">
+        <a class="wb-linked-name" data-action="openDocument" data-uuid="{{aircraft.uuid}}">{{aircraft.name}}</a>
+        <div class="wb-linked-sub">{{aircraft.model}} · <span class="wb-status">{{aircraft.status}}</span></div>
+        {{#unless aircraft.flownByThisPilot}}
+        <div class="wb-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "WARBIRDS.Pilot.aircraftNotLinkedBack"}}</div>
+        {{/unless}}
+      </div>
+      {{#if editable}}
+      <div class="wb-linked-controls">
+        <button type="button" data-action="openDocument" data-uuid="{{aircraft.uuid}}"><i class="fa-solid fa-up-right-from-square"></i> {{localize "WARBIRDS.UI.open"}}</button>
+        <button type="button" data-action="unlinkDocument" data-field="aircraft"><i class="fa-solid fa-link-slash"></i> {{localize "WARBIRDS.UI.unlink"}}</button>
+      </div>
+      {{/if}}
+    </header>
+
+    <div class="wb-columns">
+      <div class="wb-column">
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.fighterStats"}}</h3>
+        <dl class="wb-stat-list">
+          {{#each aircraft.stats}}
+          <div class="wb-stat-item"><dt>{{localize label}}</dt><dd>{{value}}</dd></div>
+          {{/each}}
+        </dl>
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.structureTrack"}}</h3>
+        {{> "systems/warbirds/templates/shared/track.hbs" track=aircraft.track editable=false}}
+      </div>
+      <div class="wb-column">
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.ratings"}}</h3>
+        <dl class="wb-stat-list">
+          {{#each aircraft.ratings}}
+          <div class="wb-stat-item"><dt>{{localize label}}</dt>
+            {{#if rollable}}
+            <dd><button type="button" class="wb-roll-button" data-action="rollAircraftRating" data-rating="{{key}}" {{#unless ../owner}}disabled{{/unless}}><i class="fa-solid fa-dice-d6"></i> {{value}}</button></dd>
+            {{else}}
+            <dd>1d6 {{value}}</dd>
+            {{/if}}
+          </div>
+          {{/each}}
+        </dl>
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.defences"}}</h3>
+        <dl class="wb-stat-list">
+          {{#each aircraft.defences}}
+          <div class="wb-stat-item"><dt>{{localize label}}</dt>
+            {{#if (eq key "stunt")}}
+            <dd><button type="button" class="wb-roll-button" data-action="rollAircraftRating" data-rating="stunt" {{#unless ../owner}}disabled{{/unless}}><i class="fa-solid fa-dice-d6"></i> {{value}}</button></dd>
+            {{else}}
+            <dd>{{value}}</dd>
+            {{/if}}
+          </div>
+          {{/each}}
+        </dl>
+      </div>
+    </div>
+
+    <div class="wb-columns">
+      <div class="wb-column">
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.loadout"}}</h3>
+        <ul class="wb-simple-list">
+          {{#each aircraft.weapons}}
+          <li data-item-id="{{id}}"><img src="{{img}}" alt=""><span class="name">{{name}}</span><span class="summary">{{summary}}</span>
+            <button type="button" class="wb-roll-button" data-action="fireAircraftWeapon" data-item-id="{{id}}" {{#unless ../owner}}disabled{{/unless}}><i class="fa-solid fa-crosshairs"></i> <span>{{localize "WARBIRDS.Roll.fire"}}</span></button>
+          </li>
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noWeapons"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="wb-column">
+        <h3 class="wb-subtitle">{{localize "WARBIRDS.Headers.traits"}}</h3>
+        <ul class="wb-simple-list">
+          {{#each aircraft.traits}}
+          <li><img src="{{img}}" alt=""><span class="name">{{name}}</span><span class="summary">{{summary}}</span></li>
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noTraits"}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </section>
+  {{else}}
+  <section class="wb-panel wb-drop-zone">
+    <i class="fa-solid fa-jet-fighter fa-2x"></i>
+    <p>{{localize "WARBIRDS.Pilot.noAircraft"}}</p>
+    {{#if editable}}
+    <button type="button" data-action="linkAircraft"><i class="fa-solid fa-link"></i> {{localize "WARBIRDS.Pilot.linkAircraft"}}</button>
+    {{/if}}
+  </section>
+  {{/if}}
+</section>

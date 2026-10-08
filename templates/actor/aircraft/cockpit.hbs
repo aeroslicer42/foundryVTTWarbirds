@@ -1,0 +1,149 @@
+<section class="tab cockpit {{tab.cssClass}}" data-group="primary" data-tab="cockpit">
+
+  {{!-- Instrument panel: the stat block --}}
+  <section class="wb-panel wb-instruments">
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.performanceHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.performance"}}</span>
+      <span class="wb-dial-value">{{system.performanceTotal}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.performance value=systemSource.performance}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.armourHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.armour"}}</span>
+      <span class="wb-dial-value">{{system.armourTotal}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.armour value=systemSource.armour}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.structureHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.structure"}}</span>
+      <span class="wb-dial-value">{{system.structure.value}}<span class="wb-dial-max">/{{system.structure.total}}</span></span>
+      <label class="wb-dial-input">{{formInput systemFields.structure.fields.max value=systemSource.structure.max}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.drHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.dr"}}</span>
+      <span class="wb-dial-value">{{system.structure.drTotal}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.structure.fields.dr value=systemSource.structure.dr}}</label>
+    </div>
+    <div class="wb-dial{{#unless system.hasRadar}} wb-dial-off{{/unless}}" data-tooltip="{{localize "WARBIRDS.Aircraft.radarHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.radar"}}</span>
+      <span class="wb-dial-value">{{radarDisplay}}</span>
+      <label class="wb-dial-input">
+        <input type="number" name="system.radar.value" value="{{systemSource.radar.value}}" min="-5" max="9" step="1" placeholder="—" {{#unless editable}}disabled{{/unless}}>
+      </label>
+      <label class="wb-dial-check" data-tooltip="{{localize "WARBIRDS.Aircraft.gunsightOnlyHint"}}">
+        <input type="checkbox" name="system.radar.gunsightOnly" {{checked systemSource.radar.gunsightOnly}} {{#unless editable}}disabled{{/unless}}>
+        <span>{{localize "WARBIRDS.Aircraft.gunsightOnly"}}</span>
+      </label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.epmHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.epm"}}</span>
+      <span class="wb-dial-value">{{system.epmTotal}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.epm value=systemSource.epm}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.superHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.super"}}</span>
+      <span class="wb-dial-value">{{system.superTotal}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.super value=systemSource.super}}</label>
+    </div>
+    <div class="wb-dial wb-dial-flags">
+      <label class="wb-dial-check" data-tooltip="{{localize "WARBIRDS.Aircraft.bvrHint"}}">
+        <input type="checkbox" name="system.bvr" {{checked systemSource.bvr}} {{#unless editable}}disabled{{/unless}}>
+        <span>{{localize "WARBIRDS.Aircraft.bvr"}}{{#if system.bvrCapable}} <i class="fa-solid fa-satellite-dish"></i>{{/if}}</span>
+      </label>
+      <label class="wb-dial-input wb-dial-threat" data-tooltip="{{localize "WARBIRDS.Aircraft.threatHint"}}">
+        <span>{{localize "WARBIRDS.Aircraft.threat"}}</span>
+        {{formInput systemFields.threat value=systemSource.threat}}
+      </label>
+    </div>
+  </section>
+
+  <div class="wb-columns">
+    {{!-- Ratings and defences --}}
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.ratings"}}
+          <span class="wb-panel-sub">{{#if (eq flight.source "pilot")}}{{localize "WARBIRDS.Aircraft.flownBy" name=flight.name}}{{else}}{{localize "WARBIRDS.Aircraft.usingCrew"}}{{/if}}</span>
+        </h2>
+        <dl class="wb-stat-list wb-ratings">
+          {{#each ratings}}
+          <div class="wb-stat-item" data-tooltip="{{localize formula}}">
+            <dt>{{localize label}}</dt>
+            {{#if rollable}}
+            <dd><button type="button" class="wb-roll-button" data-action="rollRating" data-rating="{{key}}" {{#unless ../owner}}disabled{{/unless}}><i class="fa-solid fa-dice-d6"></i> {{value}}</button></dd>
+            {{else}}
+            <dd data-tooltip="{{localize "WARBIRDS.Roll.useFireButton"}}">1d6 {{value}}</dd>
+            {{/if}}
+          </div>
+          {{/each}}
+        </dl>
+        {{#if system.ratings.autoLose}}<p class="wb-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{#if (eq system.status "down")}}{{localize "WARBIRDS.Aircraft.downWarning"}}{{else}}{{localize "WARBIRDS.Aircraft.crippledWarning"}}{{/if}}</p>{{/if}}
+        {{#if canBailOut}}
+        <div class="wb-button-row">
+          <button type="button" class="wb-roll-button wb-bail-out" data-action="bailOut" data-tooltip="{{bailOut.hint}}" {{#unless owner}}disabled{{/unless}}><i class="fa-solid fa-parachute-box"></i> <span>{{localize "WARBIRDS.Roll.bailOut"}}</span>{{#if bailOut.detail}} · {{bailOut.detail}}{{/if}}</button>
+          <span class="wb-hint">{{bailOut.hint}}</span>
+        </div>
+        {{/if}}
+        {{#if system.superTotal}}<p class="wb-hint">{{localize "WARBIRDS.Aircraft.superHintShort" super=system.superTotal}}</p>{{/if}}
+        {{#if gritty}}<p class="wb-hint wb-gritty-hint"><i class="fa-solid fa-skull"></i> {{localize "WARBIRDS.Aircraft.grittyOn"}}</p>{{/if}}
+        {{#if system.totals.helicopter}}<p class="wb-hint"><i class="fa-solid fa-helicopter"></i> {{localize "WARBIRDS.Aircraft.helicopterHint"}}</p>{{/if}}
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.defences"}}</h2>
+        <dl class="wb-stat-list wb-defences">
+          {{#each defences}}
+          <div class="wb-stat-item" data-tooltip="{{localize formula}}">
+            <dt>{{localize label}}</dt>
+            {{#if (eq key "stunt")}}
+            <dd><button type="button" class="wb-roll-button" data-action="rollRating" data-rating="stunt" {{#unless ../owner}}disabled{{/unless}}><i class="fa-solid fa-dice-d6"></i> {{value}}</button></dd>
+            {{else}}
+            <dd>{{value}}</dd>
+            {{/if}}
+          </div>
+          {{/each}}
+        </dl>
+        {{#unless system.ratings.canStunt}}<p class="wb-hint">{{localize "WARBIRDS.Aircraft.noStunts"}}</p>{{/unless}}
+        {{#if system.epmTotal}}<p class="wb-hint">{{localize "WARBIRDS.Aircraft.epmHintShort" epm=system.epmTotal}}</p>{{/if}}
+      </section>
+    </div>
+
+    {{!-- Structure track, loadout, traits --}}
+    <div class="wb-column">
+      <section class="wb-panel">
+        <div class="wb-track-header">
+          <span>{{localize "WARBIRDS.Headers.structureTrack"}}</span>
+          <span class="wb-penalty-badge">{{localize "WARBIRDS.Track.penalty"}} {{wbSigned system.penalty}}</span>
+          <label class="wb-bonus wb-wounds"><span>{{localize "WARBIRDS.Aircraft.damage"}}</span>{{formInput systemFields.damage value=systemSource.damage}}</label>
+        </div>
+        {{> "systems/warbirds/templates/shared/track.hbs" track=track editable=editable}}
+        <label class="wb-field wb-track-custom">
+          <span>{{localize "WARBIRDS.Aircraft.customTrack"}}</span>
+          {{formInput systemFields.structure.fields.track value=systemSource.structure.track placeholder=(localize "WARBIRDS.Aircraft.customTrackPlaceholder")}}
+        </label>
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.loadout"}}
+          <span class="wb-panel-sub{{#if system.hardpoints.over}} wb-over{{/if}}" {{#if system.hardpoints.over}}data-tooltip="{{localize "WARBIRDS.Aircraft.hardpointsOver"}}"{{/if}}>{{#if system.hardpoints.over}}<i class="fa-solid fa-triangle-exclamation"></i> {{/if}}{{localize "WARBIRDS.Aircraft.hardpointsUsed" used=system.hardpoints.used total=system.hardpoints.total}}</span>
+        </h2>
+        <ul class="wb-item-list">
+          {{#each weapons}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner rollAction="fireWeapon" rollLabel="WARBIRDS.Roll.fire" rollIcon="fa-crosshairs"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noWeaponsMounted"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.traits"}}</h2>
+        <ul class="wb-item-list">
+          {{#each traits}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noTraits"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>

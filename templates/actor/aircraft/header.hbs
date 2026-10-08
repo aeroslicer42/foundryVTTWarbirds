@@ -1,0 +1,51 @@
+<header class="wb-header wb-cockpit-header">
+  <img class="wb-portrait" src="{{document.img}}" alt="{{document.name}}" data-action="editImage" data-edit="img">
+  <div class="wb-header-main">
+    <div class="wb-name-row">
+      {{#if editable}}
+      {{formInput fields.name value=source.name placeholder=(localize "DOCUMENT.FIELDS.name.label") classes="wb-name-input"}}
+      {{else}}
+      <h1 class="wb-name">{{document.name}}</h1>
+      {{/if}}
+      <span class="wb-status wb-status-{{system.status}}">{{statusLabel}}</span>
+    </div>
+    <div class="wb-header-fields">
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Aircraft.model"}}</span>
+        {{formInput systemFields.model value=systemSource.model placeholder="F-4 Phantom II"}}
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Aircraft.role"}}</span>
+        {{formInput systemFields.role value=systemSource.role}}
+      </label>
+      <label class="wb-field wb-field-era">
+        <span>{{localize "WARBIRDS.Aircraft.era"}}</span>
+        <select name="system.era" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.eras selected=systemSource.era localize=true}}</select>
+      </label>
+    </div>
+  </div>
+  <div class="wb-header-side wb-pilot-slot">
+    {{#if pilot}}
+    <img class="wb-pilot-img" src="{{pilot.img}}" alt="{{pilot.name}}">
+    <div class="wb-pilot-info">
+      <span class="wb-gauge-label">{{localize "WARBIRDS.Aircraft.pilot"}}</span>
+      <span class="wb-pilot-row">
+        <a class="wb-pilot-name" data-action="openDocument" data-uuid="{{pilot.uuid}}">{{pilot.name}}{{#if pilot.callsign}} <span class="wb-muted">“{{pilot.callsign}}”</span>{{/if}}</a>
+        {{#if editable}}
+        <button type="button" class="wb-icon-button" data-action="unlinkDocument" data-field="pilot" data-tooltip="{{localize "WARBIRDS.UI.unlink"}}"><i class="fa-solid fa-link-slash"></i></button>
+        {{/if}}
+      </span>
+    </div>
+    {{else}}
+    <div class="wb-pilot-info">
+      <span class="wb-gauge-label">{{localize "WARBIRDS.Aircraft.pilot"}}</span>
+      <span class="wb-pilot-row">
+        <span class="wb-pilot-name wb-muted">{{#if flight.name}}{{flight.name}}{{else}}{{localize "WARBIRDS.Aircraft.crewStats"}}{{/if}}</span>
+        {{#if editable}}
+        <button type="button" class="wb-icon-button" data-action="linkPilot" data-tooltip="{{localize "WARBIRDS.Aircraft.linkPilot"}}"><i class="fa-solid fa-link"></i></button>
+        {{/if}}
+      </span>
+    </div>
+    {{/if}}
+  </div>
+</header>

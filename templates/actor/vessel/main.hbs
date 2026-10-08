@@ -1,0 +1,134 @@
+<section class="tab main {{tab.cssClass}}" data-group="primary" data-tab="main">
+
+  {{!-- Overall stats --}}
+  <section class="wb-panel wb-instruments wb-instruments-vessel">
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.performanceHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.performance"}}</span>
+      <span class="wb-dial-value">{{system.performance}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.performance value=systemSource.performance}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.armourHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.armour"}}</span>
+      <span class="wb-dial-value">{{system.armour}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.armour value=systemSource.armour}}</label>
+    </div>
+    <div class="wb-dial">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.structure"}}</span>
+      <span class="wb-dial-value">{{system.structure.value}}<span class="wb-dial-max">/{{system.structure.max}}</span></span>
+      <label class="wb-dial-input">{{formInput systemFields.structure.fields.max value=systemSource.structure.max}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Aircraft.drHint"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.dr"}}</span>
+      <span class="wb-dial-value">{{system.structure.dr}}</span>
+      <label class="wb-dial-input">{{formInput systemFields.structure.fields.dr value=systemSource.structure.dr}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Vessel.defenceTooltip"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Secondary.defence"}}</span>
+      <span class="wb-dial-value">{{system.defence.value}}</span>
+      <label class="wb-dial-input"><span>{{localize "WARBIRDS.Vessel.base"}}</span>{{formInput systemFields.defence.fields.base value=systemSource.defence.base}}</label>
+      <label class="wb-dial-input"><span>{{localize "WARBIRDS.UI.bonus"}}</span>{{formInput systemFields.defence.fields.bonus value=systemSource.defence.bonus}}</label>
+    </div>
+    <div class="wb-dial" data-tooltip="{{localize "WARBIRDS.Vessel.threatTooltip"}}">
+      <span class="wb-dial-label">{{localize "WARBIRDS.Aircraft.threat"}}</span>
+      <span class="wb-dial-value">{{system.threat.value}}</span>
+      <label class="wb-dial-input"><span>{{localize "WARBIRDS.Vessel.base"}}</span>{{formInput systemFields.threat.fields.base value=systemSource.threat.base}}</label>
+      <label class="wb-dial-input"><span>{{localize "WARBIRDS.UI.bonus"}}</span>{{formInput systemFields.threat.fields.bonus value=systemSource.threat.bonus}}</label>
+      {{#if system.threat.loss}}<span class="wb-dial-check">−{{system.threat.loss}} {{localize "WARBIRDS.Vessel.fromDestroyed"}}</span>{{/if}}
+    </div>
+  </section>
+
+  <section class="wb-panel">
+    <div class="wb-track-header">
+      <span>{{localize "WARBIRDS.Vessel.mainStructure"}}</span>
+      <span class="wb-penalty-badge">{{localize "WARBIRDS.Track.penalty"}} {{wbSigned system.penalty}}</span>
+      <label class="wb-bonus wb-wounds"><span>{{localize "WARBIRDS.Aircraft.damage"}}</span>{{formInput systemFields.damage value=systemSource.damage}}</label>
+    </div>
+    {{> "systems/warbirds/templates/shared/track.hbs" track=track editable=editable}}
+    <div class="wb-inline-fields">
+      <label class="wb-field wb-field-wide wb-track-custom">
+        <span>{{localize "WARBIRDS.Aircraft.customTrack"}}</span>
+        {{formInput systemFields.structure.fields.track value=systemSource.structure.track placeholder=(localize "WARBIRDS.Aircraft.customTrackPlaceholder")}}
+      </label>
+      <span class="wb-hint">{{localize "WARBIRDS.Vessel.structureHint"}}</span>
+    </div>
+  </section>
+
+  {{!-- Sub-systems --}}
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">
+      {{localize "WARBIRDS.Vessel.subsystems"}}
+      <span class="wb-panel-sub">{{localize "WARBIRDS.Vessel.gunners" count=totals.gunners}}</span>
+      <button type="button" class="wb-roll-button" data-action="rollHitLocation" data-tooltip="{{localize "WARBIRDS.Vessel.hitLocationTooltip"}}" {{#unless owner}}disabled{{/unless}}><i class="fa-solid fa-dice-d6"></i> <span>{{localize "WARBIRDS.Vessel.hitLocation"}}</span></button>
+      {{#if editable}}
+      <button type="button" class="wb-icon-button" data-action="addSubsystem" data-tooltip="{{localize "WARBIRDS.Vessel.addSubsystem"}}"><i class="fa-solid fa-plus"></i></button>
+      {{/if}}
+    </h2>
+    <div class="wb-subsystems">
+      <div class="wb-sub-head">
+        <span class="name">{{localize "WARBIRDS.Table.name"}}</span>
+        <span class="loc" data-tooltip="{{localize "WARBIRDS.Vessel.locationHint"}}">d6</span>
+        <span class="num">{{localize "WARBIRDS.Vessel.defShort"}}</span>
+        <span class="num">{{localize "WARBIRDS.Vessel.armShort"}}</span>
+        <span class="str">{{localize "WARBIRDS.Aircraft.structure"}}</span>
+        <span class="dmg">{{localize "WARBIRDS.Vessel.dmgShort"}}</span>
+        <span class="attack" data-tooltip="{{localize "WARBIRDS.Vessel.attackEnabled"}}">{{localize "WARBIRDS.Vessel.attackColumns"}}</span>
+        <span class="controls"></span>
+      </div>
+      {{#each subsystems}}
+      <div class="wb-sub{{#if disabled}} wb-disabled{{/if}}" data-record-id="{{id}}" data-record-name="{{name}}">
+        <div class="wb-sub-main">
+          <div class="name">
+            <input type="text" name="system.subsystems.{{id}}.name" value="{{source.name}}" {{#unless ../editable}}disabled{{/unless}}>
+            <input type="text" class="wb-sub-group" name="system.subsystems.{{id}}.group" value="{{source.group}}" placeholder="{{localize "WARBIRDS.Vessel.group"}}" {{#unless ../editable}}disabled{{/unless}}>
+          </div>
+          <input type="text" class="loc" name="system.subsystems.{{id}}.location" value="{{source.location}}" placeholder="–" data-tooltip="{{localize "WARBIRDS.Vessel.locationHint"}}" {{#unless ../editable}}disabled{{/unless}}>
+          <input type="number" class="num" name="system.subsystems.{{id}}.defence" value="{{source.defence}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}>
+          <input type="number" class="num" name="system.subsystems.{{id}}.armour" value="{{source.armour}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}>
+          <div class="str">
+            <input type="number" name="system.subsystems.{{id}}.structure.max" value="{{source.structure.max}}" min="1" step="1" {{#unless ../editable}}disabled{{/unless}}>
+            <span class="wb-sub-track" data-tooltip="{{localize "WARBIRDS.Vessel.subTrack" dr=source.structure.dr}}">{{#each penalties}}<i class="{{#if (lt @index ../damage)}}hit{{/if}}">{{this}}</i>{{/each}}</span>
+          </div>
+          <div class="dmg">
+            <span class="wb-gauge-counter">
+              <button type="button" class="wb-icon-button" data-action="adjustField" data-field="subsystems.{{id}}.damage" data-delta="-1" data-min="0" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button>
+              <span class="wb-sub-damage{{#if disabled}} disabled{{/if}}">{{damage}}</span>
+              <button type="button" class="wb-icon-button" data-action="adjustField" data-field="subsystems.{{id}}.damage" data-delta="1" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-plus"></i></button>
+            </span>
+            {{#if statusLabel}}<span class="wb-sub-status">{{statusLabel}}</span>{{/if}}
+          </div>
+          <div class="attack">
+            <input type="checkbox" class="wb-sub-attack-toggle" name="system.subsystems.{{id}}.attack.enabled" {{checked source.attack.enabled}} data-tooltip="{{localize "WARBIRDS.Vessel.attackEnabled"}}" {{#unless ../editable}}disabled{{/unless}}>
+            {{#if attack.enabled}}
+            <input type="number" name="system.subsystems.{{id}}.attack.bonus" value="{{source.attack.bonus}}" step="1" data-tooltip="{{localize "WARBIRDS.Vessel.attackBonus"}}" {{#unless ../editable}}disabled{{/unless}}>
+            <input type="number" name="system.subsystems.{{id}}.attack.damage" value="{{source.attack.damage}}" min="0" step="1" data-tooltip="{{localize "WARBIRDS.Vessel.attackDamage"}}" {{#unless ../editable}}disabled{{/unless}}>
+            <input type="number" name="system.subsystems.{{id}}.attack.ap" value="{{source.attack.ap}}" min="0" step="1" data-tooltip="{{localize "WARBIRDS.Weapon.ap"}}" {{#unless ../editable}}disabled{{/unless}}>
+            <button type="button" class="wb-roll-button" data-action="fireSubsystem" data-tooltip="{{attackLabel}}" {{#unless ../owner}}disabled{{/unless}}{{#if disabled}} disabled{{/if}}><i class="fa-solid fa-crosshairs"></i></button>
+            {{/if}}
+          </div>
+          <span class="controls">
+            {{#if ../editable}}
+            <button type="button" class="wb-icon-button" data-action="deleteRecord" data-field="subsystems" data-tooltip="{{localize "WARBIRDS.UI.delete"}}"><i class="fa-solid fa-trash"></i></button>
+            {{/if}}
+          </span>
+        </div>
+        <div class="wb-sub-extra">
+          <input type="text" name="system.subsystems.{{id}}.special" value="{{source.special}}" placeholder="{{localize "WARBIRDS.Vessel.specialPlaceholder"}}" {{#unless ../editable}}disabled{{/unless}}>
+          <span class="wb-sub-reduction" data-tooltip="{{localize "WARBIRDS.Vessel.reductionHint"}}">
+            {{localize "WARBIRDS.Aircraft.threat"}} −<input type="number" name="system.subsystems.{{id}}.threatReduction.amount" value="{{source.threatReduction.amount}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}>
+            {{localize "WARBIRDS.Vessel.perUnits"}} <input type="number" name="system.subsystems.{{id}}.threatReduction.per" value="{{source.threatReduction.per}}" min="1" step="1" {{#unless ../editable}}disabled{{/unless}}>
+          </span>
+        </div>
+      </div>
+      {{else}}
+      <div class="wb-empty">{{localize "WARBIRDS.Vessel.noSubsystems"}}</div>
+      {{/each}}
+    </div>
+    <div class="wb-location-table">
+      <span class="wb-hint">{{localize "WARBIRDS.Vessel.locationTable"}}</span>
+      {{#each locationTable}}
+      <span class="wb-chip"><strong>{{roll}}</strong> {{#if names.length}}{{#each names}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}{{else}}{{localize "WARBIRDS.Vessel.mainStructure"}}{{/if}}</span>
+      {{/each}}
+    </div>
+    <p class="wb-hint">{{localize "WARBIRDS.Vessel.rulesHint"}}</p>
+  </section>
+</section>

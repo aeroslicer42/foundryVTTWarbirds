@@ -1,0 +1,215 @@
+{
+  "id": "warbirds",
+  "type": "system",
+  "title": "Warbirds — Jet Age",
+  "description": "Outrider Studios' Warbirds role-playing game (Rapidfire system) for Foundry VTT, set up for the Jet Age sourcebook: pilots, aircraft with Radar/EPM/Super ratings, dogfights, strafing, BVR missile combat and the Rank/Fame standing systems.",
+  "version": "0.6.1",
+  "authors": [
+    {
+      "name": "Aero"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14.359",
+    "verified": "14.368",
+    "maximum": "14"
+  },
+  "esmodules": [
+    "module/warbirds.mjs"
+  ],
+  "styles": [
+    {
+      "src": "css/warbirds-variables.css",
+      "layer": "variables"
+    },
+    "css/warbirds.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "aircraft",
+      "label": "Jet Age Aircraft",
+      "path": "packs/aircraft",
+      "type": "Actor",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "samples",
+      "label": "Sample Pilot & NPCs",
+      "path": "packs/samples",
+      "type": "Actor",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "vessels",
+      "label": "Airships, Trains & Fortifications",
+      "path": "packs/vessels",
+      "type": "Actor",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "path": "packs/weapons",
+      "type": "Item",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "traits",
+      "label": "Warbird Traits",
+      "path": "packs/traits",
+      "type": "Item",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "maneuvers",
+      "label": "Manoeuvres & Tactics",
+      "path": "packs/maneuvers",
+      "type": "Item",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "macros",
+      "label": "Warbirds Macros",
+      "path": "packs/macros",
+      "type": "Macro",
+      "system": "warbirds",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Warbirds",
+      "sorting": "m",
+      "color": "#3f4a22",
+      "packs": [
+        "aircraft",
+        "samples",
+        "vessels",
+        "weapons",
+        "traits",
+        "maneuvers",
+        "macros"
+      ]
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "pilot": {
+        "htmlFields": [
+          "background",
+          "contacts",
+          "biography",
+          "notes"
+        ]
+      },
+      "aircraft": {
+        "htmlFields": [
+          "description",
+          "notes"
+        ]
+      },
+      "npc": {
+        "htmlFields": [
+          "description",
+          "notes"
+        ]
+      },
+      "vessel": {
+        "htmlFields": [
+          "description",
+          "notes"
+        ]
+      }
+    },
+    "Item": {
+      "weapon": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "trait": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "maneuver": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "sponsorship": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "gear": {
+        "htmlFields": [
+          "description"
+        ]
+      }
+    }
+  },
+  "grid": {
+    "type": 1,
+    "distance": 1,
+    "units": "m",
+    "diagonals": 0
+  },
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "reserve",
+  "initiative": "1d6 + @initiative",
+  "socket": false,
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "css",
+        "lang",
+        "templates"
+      ]
+    }
+  },
+  "url": "https://github.com/aeroslicer42/foundryVTTWarbirds",
+  "manifest": "https://raw.githubusercontent.com/aeroslicer42/warbirds/main/system.json",
+  "download": "https://github.com/aeroslicer42/warbirds/releases/download/v0.6.1/warbirds-0.6.1.zip",
+  "bugs": "https://github.com/aeroslicer42/warbirds/issues",
+  "changelog": "https://github.com/aeroslicer42/warbirds/blob/main/CHANGELOG.md"
+}

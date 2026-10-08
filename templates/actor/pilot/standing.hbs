@@ -1,0 +1,63 @@
+<section class="tab standing {{tab.cssClass}}" data-group="primary" data-tab="standing">
+  <div class="wb-columns">
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{standingLabel}}</h2>
+        {{#if (eq standingMode "fame")}}
+        <div class="wb-inline-fields">
+          <label class="wb-field"><span>{{localize "WARBIRDS.Standing.fame"}}</span>{{formInput systemFields.fame.fields.value value=systemSource.fame.value}}</label>
+          <label class="wb-field"><span>{{localize "WARBIRDS.Standing.famePoints"}}</span>{{formInput systemFields.fame.fields.points value=systemSource.fame.points}}</label>
+          <span class="wb-hint">{{localize "WARBIRDS.Standing.nextFame" fp=system.standing.nextFameAt}}</span>
+        </div>
+        <button type="button" class="wb-toggle wb-toggle-danger{{#if system.scandal}} active{{/if}}" data-action="toggleField" data-field="scandal"
+                data-tooltip="{{localize "WARBIRDS.Standing.scandalTooltip"}}" {{#unless editable}}disabled{{/unless}}>
+          <i class="fa-solid fa-newspaper"></i> {{localize "WARBIRDS.Standing.scandal"}}
+          {{#if system.scandal}}<span class="wb-penalty-badge">{{wbSigned system.standing.scandalPenalty}}</span>{{/if}}
+        </button>
+        <p class="wb-hint">{{localize "WARBIRDS.Standing.fameHint" skills=standingSkills}}</p>
+        {{else}}
+        <div class="wb-inline-fields">
+          <label class="wb-field"><span>{{localize "WARBIRDS.Standing.rank"}}</span>{{formInput systemFields.rank.fields.value value=systemSource.rank.value}}</label>
+          <label class="wb-field"><span>{{localize "WARBIRDS.Pilot.unit"}}</span>{{formInput systemFields.unit value=systemSource.unit}}</label>
+        </div>
+        <p class="wb-hint">{{localize "WARBIRDS.Standing.rankHint" skills=standingSkills}}</p>
+        {{/if}}
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.sponsors"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="sponsorship" data-preset='{"kind":"sponsor"}' data-tooltip="{{localize "WARBIRDS.UI.addSponsor"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each sponsors}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noSponsors"}}</li>
+          {{/each}}
+        </ul>
+        <p class="wb-hint">{{localize "WARBIRDS.Standing.activeFP" fp=activeFP}}</p>
+      </section>
+    </div>
+
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.contracts"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="sponsorship" data-preset='{"kind":"contract"}' data-tooltip="{{localize "WARBIRDS.UI.addContract"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each contracts}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noContracts"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>

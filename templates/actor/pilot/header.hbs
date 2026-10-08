@@ -1,0 +1,50 @@
+<header class="wb-header">
+  <img class="wb-portrait" src="{{document.img}}" alt="{{document.name}}" data-action="editImage" data-edit="img">
+  <div class="wb-header-main">
+    <div class="wb-name-row">
+      {{#if editable}}
+      {{formInput fields.name value=source.name placeholder=(localize "DOCUMENT.FIELDS.name.label") classes="wb-name-input"}}
+      {{else}}
+      <h1 class="wb-name">{{document.name}}</h1>
+      {{/if}}
+      <span class="wb-status wb-status-{{system.status}}">{{statusLabel}}</span>
+    </div>
+    <div class="wb-header-fields">
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Pilot.callsign"}}</span>
+        {{formInput systemFields.callsign value=systemSource.callsign placeholder="—"}}
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Pilot.player"}}</span>
+        {{formInput systemFields.player value=systemSource.player}}
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Pilot.nationality"}}</span>
+        {{formInput systemFields.nationality value=systemSource.nationality}}
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Pilot.squadron"}}</span>
+        {{formInput systemFields.squadron value=systemSource.squadron}}
+      </label>
+    </div>
+  </div>
+  <div class="wb-header-side">
+    <div class="wb-gauge" data-tooltip="{{localize "WARBIRDS.Pilot.standingTooltip"}}">
+      <span class="wb-gauge-label">{{standingLabel}}</span>
+      <span class="wb-gauge-value">{{system.standing.value}}</span>
+    </div>
+    <div class="wb-gauge wb-gauge-reserve" data-tooltip="{{localize "WARBIRDS.Pilot.reserveTooltip" suggested=system.reserve.suggested}}">
+      <span class="wb-gauge-label">{{localize "WARBIRDS.Pilot.reserve"}}</span>
+      <span class="wb-gauge-counter">
+        <button type="button" class="wb-icon-button" data-action="adjustField" data-field="reserve.value" data-delta="-1" data-min="0" {{#unless editable}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button>
+        <span class="wb-gauge-value">{{system.reserve.value}}</span>
+        <span class="wb-gauge-max">/ {{system.reserve.max}}</span>
+        <button type="button" class="wb-icon-button" data-action="adjustField" data-field="reserve.value" data-delta="1" {{#unless editable}}disabled{{/unless}}><i class="fa-solid fa-plus"></i></button>
+      </span>
+    </div>
+    <button type="button" class="wb-toggle{{#if system.lifeOnTheLine}} active{{/if}}" data-action="toggleField" data-field="lifeOnTheLine"
+            data-tooltip="{{localize "WARBIRDS.Pilot.lifeOnTheLineTooltip"}}" {{#unless editable}}disabled{{/unless}}>
+      <i class="fa-solid fa-skull"></i> {{localize "WARBIRDS.Pilot.lifeOnTheLine"}}
+    </button>
+  </div>
+</header>

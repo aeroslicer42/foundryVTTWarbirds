@@ -1,0 +1,12 @@
+<section class="tab notes {{tab.cssClass}}" data-group="primary" data-tab="notes">
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.description"}}</h2>
+    <prose-mirror name="system.description" value="{{systemSource.description}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.description}}}</prose-mirror>
+  </section>
+  {{#unless limited}}
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.notes"}}</h2>
+    <prose-mirror name="system.notes" value="{{systemSource.notes}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.notes}}}</prose-mirror>
+  </section>
+  {{/unless}}
+</section>

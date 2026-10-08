@@ -1,0 +1,1354 @@
+/* Warbirds — sheet styles (system cascade layer). */
+
+/* ---------------------------------------------------------------------- */
+/*  Window                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.application.warbirds .window-content {
+  background: var(--wb-bg);
+  color: var(--wb-text);
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Window title bar: a gunmetal band with stencil lettering. */
+.application.warbirds .window-header {
+  background: linear-gradient(180deg, #2f3640, #1b1f24);
+  border-bottom: 2px solid var(--wb-olive);
+}
+
+.application.warbirds .window-header .window-title {
+  font-family: var(--wb-font-stencil);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.application.warbirds .window-header .window-icon { color: var(--wb-amber); }
+
+.application.warbirds .window-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.application.warbirds .tab {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
+.application.warbirds .tab.active {
+  display: block;
+  overflow: hidden auto;
+}
+
+.application.warbirds nav.tabs {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 0.75rem;
+  border-bottom: 1px solid var(--wb-border);
+  background: var(--wb-bg-header);
+  gap: 0.25rem;
+}
+
+.application.warbirds nav.tabs .item {
+  padding: 0.35rem 0.6rem;
+  font-family: var(--wb-font-stencil);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  color: var(--wb-text-muted);
+  border-bottom: 2px solid transparent;
+}
+
+.application.warbirds nav.tabs .item.active {
+  color: var(--wb-accent-text);
+  border-bottom-color: var(--wb-accent);
+  text-shadow: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Header                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  padding: 0.6rem 0.75rem;
+  background: var(--wb-bg-header);
+  border-bottom: 2px solid var(--wb-border-strong);
+}
+
+.warbirds .wb-portrait {
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border: 2px solid var(--wb-border-strong);
+  border-radius: 4px;
+  background: var(--wb-bg-inset);
+  cursor: pointer;
+}
+
+.warbirds .wb-portrait-small {
+  width: 56px;
+  height: 56px;
+}
+
+.warbirds .wb-header-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.warbirds .wb-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.warbirds .wb-name,
+.warbirds input.wb-name-input {
+  font-family: var(--wb-font-stencil);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid var(--wb-border);
+  background: transparent;
+  color: var(--wb-text);
+  height: auto;
+  padding: 0 0.2rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Status: an annunciator lamp with its legend. */
+.warbirds .wb-status {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--wb-font-stencil);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.55rem 0.15rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--wb-border);
+  color: var(--wb-text-muted);
+  background: var(--wb-bg-panel);
+  --wb-lamp: var(--wb-green);
+}
+
+.warbirds .wb-status::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--wb-lamp);
+  box-shadow: 0 0 0.35rem var(--wb-lamp);
+}
+
+.warbirds .wb-status-wounded,
+.warbirds .wb-status-smoke,
+.warbirds .wb-status-damaged { border-color: var(--wb-amber); color: var(--wb-accent-text); --wb-lamp: var(--wb-amber); }
+.warbirds .wb-status-down,
+.warbirds .wb-status-crippled,
+.warbirds .wb-status-out,
+.warbirds .wb-status-dead,
+.warbirds .wb-status-adrift,
+.warbirds .wb-status-destroyed { border-color: var(--wb-red); color: var(--wb-red); --wb-lamp: var(--wb-red); }
+
+.warbirds .wb-header-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+}
+
+.warbirds .wb-header-fields .wb-field {
+  flex: 1 1 140px;
+}
+
+.warbirds .wb-header-fields .wb-field-era { flex: 1 1 210px; }
+
+.warbirds .wb-header-side {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 150px;
+}
+
+/* Gauges in the header (Rank/Fame, Reserve) */
+.warbirds .wb-gauge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--wb-dial-bg);
+  color: var(--wb-dial-text);
+  border-radius: 4px;
+  border: 1px solid var(--wb-border);
+}
+
+.warbirds .wb-gauge-label {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-dial-label);
+}
+
+.warbirds .wb-gauge-value {
+  font-family: var(--wb-font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.warbirds .wb-gauge-max {
+  font-family: var(--wb-font-mono);
+  font-size: 0.8rem;
+  color: var(--wb-dial-label);
+}
+
+.warbirds .wb-gauge-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.warbirds .wb-gauge .wb-icon-button {
+  color: var(--wb-dial-label);
+}
+
+/* Pilot slot on the aircraft header */
+.warbirds .wb-pilot-slot {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--wb-bg-panel);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+}
+
+.warbirds .wb-pilot-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--wb-border-strong);
+}
+
+.warbirds .wb-pilot-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.warbirds .wb-pilot-info .wb-gauge-label { color: var(--wb-text-muted); }
+
+.warbirds .wb-pilot-row { display: flex; align-items: center; gap: 0.25rem; }
+
+.warbirds .wb-pilot-name {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.warbirds .wb-muted { color: var(--wb-text-muted); font-weight: 400; cursor: default; }
+
+/* ---------------------------------------------------------------------- */
+/*  Layout                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-columns {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.warbirds .wb-column {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.warbirds .wb-columns + .wb-columns { margin-top: 0.75rem; }
+
+.warbirds .wb-panel {
+  background: var(--wb-bg-panel);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+  padding: 0.5rem 0.6rem 0.6rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.warbirds .wb-panel + .wb-panel { margin-top: 0.75rem; }
+
+.warbirds .wb-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--wb-border-strong);
+  font-family: var(--wb-font-stencil);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wb-text-label);
+}
+
+.warbirds .wb-panel-title .wb-icon-button { margin-left: auto; }
+
+.warbirds .wb-panel-sub {
+  margin-left: auto;
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--wb-text-muted);
+}
+
+.warbirds .wb-subtitle {
+  margin: 0.5rem 0 0.25rem;
+  font-family: var(--wb-font-stencil);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wb-text-label);
+  border: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Fields                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.warbirds .wb-field > span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-muted);
+}
+
+.warbirds .wb-field-wide { flex: 2 1 240px; }
+
+.warbirds .wb-field-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.warbirds .wb-field-check > span {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+  color: var(--wb-text);
+}
+
+.warbirds .wb-inline-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.warbirds .wb-inline-fields .wb-field { flex: 0 1 120px; }
+.warbirds .wb-inline-fields .wb-field-wide { flex: 1 1 240px; }
+.warbirds .wb-inline-fields .wb-hint { flex: 1 1 100%; margin: 0; }
+
+.warbirds .wb-hint {
+  font-size: 0.72rem;
+  color: var(--wb-text-muted);
+  margin: 0.35rem 0 0;
+  line-height: 1.3;
+}
+
+.warbirds .wb-warning {
+  font-size: 0.75rem;
+  color: var(--wb-red);
+  margin: 0.35rem 0 0;
+}
+
+.warbirds .wb-form { display: flex; flex-direction: column; gap: 0.5rem; }
+.warbirds .wb-form-row { display: flex; gap: 0.5rem; }
+.warbirds .wb-form-row > .wb-field { flex: 1 1 0; }
+.warbirds .wb-form-row > .wb-field-wide { flex: 2 1 0; }
+.warbirds .wb-prefix { font-size: 0.75rem; color: var(--wb-text-muted); }
+
+.warbirds .wb-fieldset {
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem 0.5rem;
+  margin: 0;
+}
+
+.warbirds .wb-fieldset legend {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-text-label);
+  padding: 0 0.3rem;
+}
+
+.warbirds .wb-flag-grid,
+.warbirds .wb-modifier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.25rem 0.75rem;
+}
+
+.warbirds .wb-field-mod {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.warbirds .wb-field-mod > span { text-transform: none; letter-spacing: 0; font-size: 0.75rem; color: var(--wb-text); }
+.warbirds .wb-field-mod input { width: 3.5rem; flex: 0 0 auto; text-align: center; }
+
+.warbirds .wb-type-badge {
+  align-self: flex-start;
+  font-family: var(--wb-font-stencil);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: var(--wb-olive-deep);
+  color: #f3efdf;
+}
+
+.warbirds input[type="number"] { text-align: center; }
+
+.warbirds input:not([type="checkbox"]):not([type="radio"]),
+.warbirds select {
+  background: var(--wb-bg-inset);
+  color: var(--wb-text);
+  border: 1px solid var(--wb-border);
+}
+
+/* Core draws checkboxes with icons and sizes them through these variables; never give them a border or background. */
+.warbirds input[type="checkbox"] {
+  --checkbox-checked-color: var(--wb-amber);
+  --checkbox-background-color: transparent;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.warbirds .wb-dial-check input[type="checkbox"],
+.warbirds .wb-sub-main .attack input[type="checkbox"],
+.warbirds .wb-override input[type="checkbox"],
+.warbirds .wb-skill-row input.knack,
+.warbirds .wb-table input[type="checkbox"] {
+  --checkbox-size: 16px;
+  --checkbox-font-size: 13px;
+}
+
+.warbirds input:disabled,
+.warbirds select:disabled { opacity: 0.8; }
+
+/* ---------------------------------------------------------------------- */
+/*  Stats                                                                  */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.warbirds .wb-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem 0.25rem;
+  background: var(--wb-bg-inset);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+}
+
+.warbirds .wb-stat input { width: 3.2rem; font-size: 1.1rem; font-weight: 700; font-family: var(--wb-font-mono); }
+
+.warbirds .wb-stat-label {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-text-label);
+}
+
+.warbirds .wb-stat-value {
+  font-family: var(--wb-font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--wb-accent-text);
+  line-height: var(--form-field-height, 1.8rem);
+}
+
+.warbirds .wb-stat-derived { background: var(--wb-dial-bg); }
+.warbirds .wb-stat-derived .wb-stat-label { color: var(--wb-dial-label); }
+.warbirds .wb-stat-derived .wb-stat-value { color: var(--wb-dial-text); }
+
+.warbirds .wb-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.warbirds .wb-secondary-grid-npc { grid-template-columns: repeat(3, 1fr); }
+
+.warbirds .wb-secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem 0.25rem;
+  background: var(--wb-bg-inset);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+}
+
+.warbirds .wb-secondary-label {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-text-label);
+}
+
+.warbirds .wb-secondary-value {
+  font-family: var(--wb-font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--wb-accent-text);
+}
+
+.warbirds .wb-bonus {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-muted);
+}
+
+.warbirds .wb-bonus input { width: 3rem; height: 1.5rem; font-size: 0.8rem; }
+
+.warbirds .wb-override {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wb-text-muted);
+  white-space: nowrap;
+}
+
+.warbirds .wb-override input[type="number"] { width: 3rem; height: 1.5rem; font-size: 0.8rem; }
+
+/* Stat lists (aircraft ratings etc.) */
+.warbirds .wb-stat-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  margin: 0;
+}
+
+.warbirds .wb-stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--wb-bg-inset);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+}
+
+.warbirds .wb-stat-item dt {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-label);
+  margin: 0;
+}
+
+.warbirds .wb-stat-item dd {
+  font-family: var(--wb-font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--wb-accent-text);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Tracks                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-track-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  font-family: var(--wb-font-stencil);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-text-label);
+}
+
+.warbirds .wb-track-header .wb-wounds { margin-left: auto; }
+
+.warbirds .wb-penalty-badge {
+  font-family: var(--wb-font-mono);
+  font-size: 0.7rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: var(--wb-dial-bg);
+  color: var(--wb-dial-text);
+}
+
+.warbirds .wb-track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.warbirds .wb-track-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  width: 2rem;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.warbirds .wb-track-box .box {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 2px solid var(--wb-border-strong);
+  border-radius: 3px;
+  background: var(--wb-box-empty);
+  transition: background 0.1s;
+}
+
+.warbirds .wb-track-box.filled .box { background: var(--wb-box-filled); border-color: var(--wb-box-filled); box-shadow: 0 0 5px color-mix(in srgb, var(--wb-box-filled) 60%, transparent); }
+.warbirds .wb-track-box.current .box { box-shadow: 0 0 0 2px var(--wb-amber), 0 0 6px var(--wb-amber); }
+.warbirds .wb-track-box:hover .box { border-color: var(--wb-amber); }
+.warbirds .wb-track-box:disabled { cursor: default; }
+
+.warbirds .wb-track-box .penalty {
+  font-family: var(--wb-font-mono);
+  font-size: 0.68rem;
+  color: var(--wb-text-muted);
+}
+
+.warbirds .wb-track-overflow {
+  font-family: var(--wb-font-mono);
+  font-weight: 700;
+  color: var(--wb-red);
+  padding-bottom: 0.9rem;
+}
+
+.warbirds .wb-track-custom { margin-top: 0.5rem; }
+
+/* ---------------------------------------------------------------------- */
+/*  Tables                                                                 */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  background: transparent;
+  border: none;
+}
+
+.warbirds .wb-table thead th {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-muted);
+  text-align: left;
+  padding: 0.15rem 0.25rem;
+  border-bottom: 1px solid var(--wb-border);
+  background: transparent;
+}
+
+.warbirds .wb-table td {
+  padding: 0.1rem 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 40%, transparent);
+  vertical-align: middle;
+}
+
+.warbirds .wb-table tbody tr:hover { background: var(--wb-row-hover); }
+
+.warbirds .wb-table th.num,
+.warbirds .wb-table td.num { text-align: center; width: 3.2rem; }
+.warbirds .wb-table td.num input[type="number"] { width: 2.8rem; height: 1.6rem; padding: 0; }
+.warbirds .wb-table th.stat,
+.warbirds .wb-table td.stat { width: 5.5rem; }
+.warbirds .wb-table td.stat select { height: 1.6rem; padding: 0 0.2rem; font-size: 0.75rem; }
+.warbirds .wb-table td.name input { height: 1.6rem; padding: 0 0.3rem; background: transparent; border-color: transparent; }
+.warbirds .wb-table td.name input:focus,
+.warbirds .wb-table td.name input:hover { border-color: var(--wb-border); background: var(--wb-bg-inset); }
+.warbirds .wb-table td.controls { width: 1.6rem; text-align: right; }
+.warbirds .wb-table .wb-total {
+  font-family: var(--wb-font-mono);
+  font-weight: 700;
+  color: var(--wb-accent-text);
+  white-space: nowrap;
+  width: 4.5rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Skill rows (grid instead of a table so two columns fit side by side)   */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-skill-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1rem;
+  align-items: start;
+}
+
+.warbirds .wb-skill-column { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+
+.warbirds .wb-skill-row {
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) 3.9rem 2.2rem 2.2rem 1.2rem 3.3rem 1.3rem;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.05rem 0.15rem;
+  border-radius: 3px;
+  border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 35%, transparent);
+}
+
+.warbirds .wb-skill-column-npc .wb-skill-row { grid-template-columns: minmax(4rem, 1fr) 3.9rem 2.2rem 3.3rem 1.3rem; }
+.warbirds .wb-skill-row:hover:not(.wb-skill-head) { background: var(--wb-row-hover); }
+
+.warbirds .wb-skill-head {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-muted);
+  border-bottom: 1px solid var(--wb-border);
+  padding-bottom: 0.15rem;
+}
+
+.warbirds .wb-skill-head .num, .warbirds .wb-skill-head .knack, .warbirds .wb-skill-head .roll { text-align: center; }
+.warbirds .wb-skill-row input:not([type="checkbox"]), .warbirds .wb-skill-row select { height: 1.55rem; min-width: 0; font-size: 0.8rem; }
+.warbirds .wb-skill-row input.name { width: 100%; padding: 0 0.3rem; background: transparent; border-color: transparent; }
+.warbirds .wb-skill-row input.name:hover,
+.warbirds .wb-skill-row input.name:focus { border-color: var(--wb-border); background: var(--wb-bg-inset); }
+.warbirds .wb-skill-row select.stat { width: 100%; padding: 0 0.1rem; font-size: 0.72rem; }
+.warbirds .wb-skill-row input.num { width: 100%; padding: 0; text-align: center; font-family: var(--wb-font-mono); }
+.warbirds .wb-skill-row input.knack { margin: 0 auto; }
+.warbirds .wb-skill-row .roll { width: 100%; justify-content: center; padding: 0 0.2rem; height: 1.5rem; }
+.warbirds .wb-skill-row .controls { display: flex; justify-content: flex-end; }
+.warbirds .wb-skill-row .controls .wb-icon-button { width: 1.3rem; height: 1.3rem; }
+
+/* NPC stat block across the full width */
+.warbirds .wb-npc-block .wb-stat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 420px; }
+.warbirds .wb-npc-block .wb-secondary-grid-npc { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 0.5rem; }
+.warbirds .wb-npc-block .wb-secondary-grid { margin-top: 0.5rem; }
+.warbirds .wb-armament { margin-top: 0.5rem; }
+
+/* ---------------------------------------------------------------------- */
+/*  Item lists                                                             */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-item-list,
+.warbirds .wb-record-list,
+.warbirds .wb-simple-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.warbirds .wb-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.3rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.warbirds .wb-item-row:hover { background: var(--wb-row-hover); border-color: var(--wb-border); }
+
+.warbirds .wb-item-img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border: 1px solid var(--wb-border);
+  border-radius: 3px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.warbirds .wb-item-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.warbirds .wb-item-name { font-weight: 700; cursor: pointer; }
+.warbirds .wb-item-summary { font-size: 0.72rem; color: var(--wb-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.warbirds .wb-item-badge { display: inline-block; font-family: var(--wb-font-mono); font-size: 0.62rem; padding: 0 0.35rem; border-radius: 999px; border: 1px solid var(--wb-border); vertical-align: middle; }
+.warbirds .wb-item-badge.wb-badge-cooling { color: var(--wb-red); border-color: var(--wb-red); }
+
+.warbirds .wb-empty {
+  font-size: 0.75rem;
+  color: var(--wb-text-muted);
+  font-style: italic;
+  padding: 0.25rem 0.3rem;
+}
+
+.warbirds .wb-simple-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.3rem;
+}
+
+.warbirds .wb-simple-list img { width: 22px; height: 22px; border-radius: 3px; border: 1px solid var(--wb-border); }
+.warbirds .wb-simple-list .name { font-weight: 700; }
+.warbirds .wb-simple-list .summary { font-size: 0.72rem; color: var(--wb-text-muted); margin-left: auto; text-align: right; }
+
+/* Records (advantages) */
+.warbirds .wb-record {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--wb-border);
+  border-left-width: 4px;
+  border-left-color: var(--wb-green);
+  border-radius: 4px;
+  background: var(--wb-bg-inset);
+}
+
+.warbirds .wb-advantage-disadvantage { border-left-color: var(--wb-red); }
+.warbirds .wb-record-row { display: flex; align-items: center; gap: 0.3rem; }
+.warbirds .wb-record-row input, .warbirds .wb-record-row select { height: 1.6rem; font-size: 0.8rem; }
+.warbirds .wb-record-name { flex: 1 1 auto; font-weight: 700; }
+.warbirds .wb-record-row select { flex: 0 0 auto; width: auto; }
+.warbirds .wb-record-description { height: 1.5rem; font-size: 0.75rem; }
+
+/* ---------------------------------------------------------------------- */
+/*  Buttons                                                                */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-icon-button {
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  color: var(--wb-text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.warbirds .wb-icon-button:hover:not(:disabled) { color: var(--wb-accent-text); background: var(--wb-row-hover); }
+.warbirds .wb-icon-button.active { color: var(--wb-green); }
+.warbirds .wb-icon-button:disabled { opacity: 0.4; cursor: default; }
+
+.warbirds .wb-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  height: auto;
+  font-family: var(--wb-font-stencil);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--wb-border);
+  background: var(--wb-bg-panel);
+  color: var(--wb-text-muted);
+  border-radius: 4px;
+}
+
+.warbirds .wb-toggle.active { border-color: var(--wb-red); color: var(--wb-red); background: color-mix(in srgb, var(--wb-red) 12%, transparent); }
+.warbirds .wb-toggle-danger.active .wb-penalty-badge { background: var(--wb-red); color: #fff; }
+
+/* ---------------------------------------------------------------------- */
+/*  Aircraft cockpit                                                       */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-instruments {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.4rem;
+  background: var(--wb-dial-bg);
+  border-color: var(--wb-gunmetal);
+  margin-bottom: 0.75rem;
+}
+
+.warbirds .wb-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem 0.2rem;
+  border-radius: 6px;
+  background: radial-gradient(ellipse at 50% 20%, color-mix(in srgb, var(--wb-dial-bg) 55%, #3a4048), var(--wb-dial-bg) 80%);
+  border: 1px solid #3a4048;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+  min-width: 0;
+}
+
+.warbirds .wb-dial-label {
+  font-family: var(--wb-font-stencil);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wb-dial-label);
+  text-align: center;
+}
+
+.warbirds .wb-dial-value {
+  font-family: var(--wb-font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--wb-dial-text);
+  line-height: 1.1;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--wb-dial-text) 45%, transparent);
+}
+
+.warbirds .wb-dial-max { font-size: 0.85rem; color: var(--wb-dial-label); }
+
+.warbirds .wb-dial-input input {
+  width: 3rem;
+  height: 1.4rem;
+  font-size: 0.75rem;
+  background: #11141a;
+  color: #e6e1d2;
+  border-color: #3a4048;
+}
+
+.warbirds .wb-dial-input { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+.warbirds .wb-dial-input > span { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wb-dial-label); }
+
+.warbirds .wb-dial-check {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  color: var(--wb-dial-label);
+}
+
+.warbirds .wb-dial-off .wb-dial-value { color: #5c6168; }
+.warbirds .wb-dial-flags { justify-content: center; gap: 0.35rem; }
+.warbirds .wb-dial-threat input { width: 2.6rem; }
+
+.warbirds .wb-modifier-summary { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.5rem; align-items: center; }
+.warbirds .wb-chip {
+  font-family: var(--wb-font-mono);
+  font-size: 0.7rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: var(--wb-bg-inset);
+  border: 1px solid var(--wb-border);
+}
+
+/* Linked aircraft on the pilot sheet */
+.warbirds .wb-linked-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+.warbirds .wb-linked-img { width: 64px; height: 64px; object-fit: cover; border-radius: 4px; border: 2px solid var(--wb-border-strong); }
+.warbirds .wb-linked-main { flex: 1 1 auto; }
+.warbirds .wb-linked-name { font-family: var(--wb-font-stencil); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+.warbirds .wb-linked-sub { font-size: 0.78rem; color: var(--wb-text-muted); }
+.warbirds .wb-linked-controls { display: flex; flex-direction: column; gap: 0.25rem; }
+.warbirds .wb-linked-controls button { font-size: 0.75rem; height: 1.8rem; }
+
+.warbirds .wb-drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  border-style: dashed;
+  color: var(--wb-text-muted);
+  text-align: center;
+}
+
+.warbirds .wb-drop-zone button { width: auto; }
+
+/* ---------------------------------------------------------------------- */
+/*  Vessels: airships, trains, fortifications                              */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-instruments-vessel { grid-template-columns: repeat(6, 1fr); }
+.warbirds .wb-instruments-vessel .wb-dial-input { flex-direction: row; gap: 0.3rem; }
+.warbirds .wb-instruments-vessel .wb-dial-input input { width: 3.2rem; }
+
+/* Sub-system rows: a grid so the columns line up without a table. */
+.warbirds .wb-subsystems { display: flex; flex-direction: column; gap: 0.3rem; }
+.warbirds .wb-sub-head,
+.warbirds .wb-sub-main {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1.3fr) 2.4rem 2.6rem 2.6rem 7.6rem 5rem minmax(10rem, 1fr) 1.5rem;
+  gap: 0.3rem;
+  align-items: center;
+}
+.warbirds .wb-sub-head {
+  padding: 0 0.3rem 0.2rem;
+  border-bottom: 1px solid var(--wb-border);
+  font-family: var(--wb-font-stencil);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wb-text-muted);
+}
+.warbirds .wb-sub-head .num, .warbirds .wb-sub-head .loc, .warbirds .wb-sub-head .dmg { text-align: center; }
+.warbirds .wb-sub {
+  padding: 0.25rem 0.3rem 0.3rem;
+  border: 1px solid color-mix(in srgb, var(--wb-border) 50%, transparent);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--wb-bg-inset) 55%, transparent);
+}
+.warbirds .wb-sub:hover { border-color: var(--wb-border); }
+.warbirds .wb-sub-main input[type="number"],
+.warbirds .wb-sub-main input.loc { width: 100%; height: 1.6rem; padding: 0; text-align: center; font-family: var(--wb-font-mono); font-size: 0.8rem; }
+.warbirds .wb-sub-main .name { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.warbirds .wb-sub-main .name input { width: 100%; height: 1.5rem; padding: 0 0.3rem; background: transparent; border-color: transparent; font-weight: 700; }
+.warbirds .wb-sub-main .name input.wb-sub-group { font-weight: 400; font-size: 0.7rem; color: var(--wb-text-muted); height: 1.2rem; }
+.warbirds .wb-sub-main .name input:hover,
+.warbirds .wb-sub-main .name input:focus { border-color: var(--wb-border); background: var(--wb-bg-inset); }
+.warbirds .wb-sub-main .str { display: flex; align-items: center; gap: 0.25rem; min-width: 0; }
+.warbirds .wb-sub-main .str input { width: 2.4rem; flex: 0 0 auto; }
+.warbirds .wb-sub-track { display: inline-flex; flex-wrap: wrap; gap: 0.1rem; min-width: 0; }
+.warbirds .wb-sub-track i {
+  font-style: normal;
+  font-family: var(--wb-font-mono);
+  font-size: 0.55rem;
+  min-width: 0.85rem;
+  padding: 0 0.05rem;
+  text-align: center;
+  border: 1px solid var(--wb-border);
+  border-radius: 2px;
+  background: var(--wb-bg-inset);
+  color: var(--wb-text-muted);
+}
+.warbirds .wb-sub-track i.hit { background: var(--wb-box-filled); border-color: var(--wb-box-filled); color: #fff; }
+.warbirds .wb-sub-main .dmg { display: flex; flex-direction: column; align-items: center; gap: 0.05rem; }
+.warbirds .wb-sub-main .dmg .wb-gauge-counter { justify-content: center; }
+.warbirds .wb-sub-damage { font-family: var(--wb-font-mono); font-weight: 700; min-width: 1.4rem; text-align: center; }
+.warbirds .wb-sub-damage.disabled { color: var(--wb-red); }
+.warbirds .wb-sub-status { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wb-text-muted); line-height: 1; }
+.warbirds .wb-disabled .wb-sub-status { color: var(--wb-red); font-weight: 700; }
+.warbirds .wb-disabled .name input:not(:focus):not(.wb-sub-group) { text-decoration: line-through; color: var(--wb-text-muted); }
+.warbirds .wb-sub-main .attack { display: flex; align-items: center; gap: 0.25rem; min-width: 0; }
+.warbirds .wb-sub-main .attack input[type="checkbox"] { flex: 0 0 auto; margin: 0 0.1rem 0 0; }
+.warbirds .wb-sub-main .attack input[type="number"] { width: 2.3rem; flex: 0 0 auto; }
+.warbirds .wb-sub-main .attack .wb-roll-button { padding: 0 0.4rem; height: 1.6rem; }
+.warbirds .wb-sub-main .controls { text-align: right; }
+.warbirds .wb-sub-extra { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.15rem; }
+.warbirds .wb-sub-extra input[type="text"] { flex: 1 1 auto; height: 1.4rem; font-size: 0.72rem; background: transparent; border-color: transparent; }
+.warbirds .wb-sub-extra input[type="text"]:hover,
+.warbirds .wb-sub-extra input[type="text"]:focus { border-color: var(--wb-border); background: var(--wb-bg-inset); }
+.warbirds .wb-sub-reduction { display: inline-flex; align-items: center; gap: 0.2rem; flex: 0 0 auto; font-family: var(--wb-font-mono); font-size: 0.68rem; color: var(--wb-text-muted); white-space: nowrap; }
+.warbirds .wb-sub-reduction input[type="number"] { width: 2.2rem; height: 1.4rem; padding: 0; text-align: center; font-size: 0.72rem; }
+
+.warbirds .wb-location-table { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin-top: 0.5rem; }
+.warbirds .wb-location-table .wb-hint { margin: 0 0.25rem 0 0; }
+.warbirds .wb-location-table .wb-chip strong { color: var(--wb-accent-text); margin-right: 0.2rem; }
+
+.wb-chat-card .wb-card-part { flex: 1 1 100%; }
+.wb-chat-card .wb-card-part i { margin-right: 0.2rem; opacity: 0.7; }
+
+/* Hard points over capacity, bail-out */
+.warbirds .wb-over { color: var(--wb-red); font-weight: 700; }
+.warbirds .wb-bail-out { border-color: var(--wb-red); color: #fff; background: var(--wb-red); }
+.warbirds .wb-bail-out:hover:not(:disabled) { border-color: var(--wb-red); box-shadow: 0 0 0 1px var(--wb-red); }
+.warbirds .wb-button-row .wb-hint { flex: 1 1 12rem; margin: 0; align-self: center; }
+.warbirds .wb-gritty-hint { color: var(--wb-accent-text); }
+
+/* Note cards (bail-out, BVR resolution) and secret BVR choices */
+.wb-chat-card .wb-card-icon { font-size: 1.3rem; opacity: 0.6; margin-right: 0.2rem; }
+.wb-chat-card .wb-card-choice { display: flex; align-items: baseline; gap: 0.5rem; margin: 0.35rem 0.5rem 0.15rem; padding: 0.25rem 0.5rem; border-radius: 4px; border-left: 4px solid var(--card-amber); background: rgba(232, 163, 61, 0.12); }
+.wb-chat-card .wb-card-choice-label { font-size: 0.75rem; opacity: 0.8; }
+.wb-chat-card .wb-card-choice strong { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.wb-chat-card .wb-card-secret { font-size: 0.72rem; opacity: 0.8; font-style: italic; }
+.wb-chat-card .wb-card-revealed { font-size: 0.72rem; font-weight: 700; color: var(--card-green); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ---------------------------------------------------------------------- */
+/*  Prose editors                                                          */
+/* ---------------------------------------------------------------------- */
+
+.warbirds prose-mirror { min-height: 4rem; }
+.warbirds prose-mirror .editor-content { padding: 0.25rem 0.4rem; }
+
+/* ---------------------------------------------------------------------- */
+/*  Responsive                                                             */
+/* ---------------------------------------------------------------------- */
+
+@container (max-width: 640px) {
+  .warbirds .wb-columns { flex-direction: column; }
+  .warbirds .wb-instruments { grid-template-columns: repeat(4, 1fr); }
+  .warbirds .wb-instruments-vessel { grid-template-columns: repeat(3, 1fr); }
+  .warbirds .wb-skill-columns { grid-template-columns: 1fr; }
+  .warbirds .wb-npc-block .wb-secondary-grid-npc { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------------------------------------------------------------------- */
+/*  Roll buttons                                                           */
+/* ---------------------------------------------------------------------- */
+
+.warbirds .wb-roll-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: auto;
+  height: 1.7rem;
+  padding: 0 0.5rem;
+  font-family: var(--wb-font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--wb-dial-text);
+  background: var(--wb-dial-bg);
+  border: 1px solid var(--wb-border);
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.warbirds .wb-roll-button:hover:not(:disabled) { border-color: var(--wb-amber); box-shadow: 0 0 0 1px var(--wb-amber); }
+.warbirds .wb-roll-button:disabled { opacity: 0.5; cursor: default; }
+.warbirds .wb-roll-button i { font-size: 0.75rem; }
+.warbirds .wb-table .wb-roll-button { padding: 0 0.35rem; height: 1.5rem; }
+.warbirds .wb-stat-item .wb-roll-button { height: 1.5rem; }
+.warbirds .wb-roll-button span { font-family: var(--wb-font-stencil); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.68rem; }
+
+.warbirds button.wb-rollable {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+  padding: 0 0.2rem;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.warbirds button.wb-rollable:hover:not(:disabled) { color: var(--wb-accent-text); background: var(--wb-row-hover); }
+.warbirds .wb-button-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+
+/* ---------------------------------------------------------------------- */
+/*  Roll dialogs                                                           */
+/* ---------------------------------------------------------------------- */
+
+.wb-dialog .wb-roll-parts {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.wb-dialog .wb-roll-parts li { display: flex; justify-content: space-between; gap: 1rem; }
+.wb-dialog .wb-roll-parts .value { font-family: var(--wb-font-mono); font-weight: 700; }
+.wb-dialog .wb-roll-base { border-top: 1px solid rgba(128, 128, 128, 0.4); margin-top: 0.2rem; padding-top: 0.2rem; }
+.wb-dialog .wb-roll-toggles, .wb-dialog .wb-roll-target { margin: 0.25rem 0 0.5rem; padding: 0.3rem 0.6rem 0.5rem; }
+.wb-dialog .wb-roll-toggles legend, .wb-dialog .wb-roll-target legend { font-weight: 700; }
+.wb-dialog .wb-roll-toggles label { display: block; font-size: 0.85rem; margin: 0.15rem 0; }
+.wb-dialog .wb-toggle-value { opacity: 0.7; }
+.wb-dialog .wb-weapon-line { margin: 0 0 0.5rem; font-size: 0.85rem; }
+.wb-dialog .wb-weapon-special { margin: 0 0 0.5rem; font-size: 0.75rem; opacity: 0.85; line-height: 1.3; }
+.wb-dialog .wb-weapon-special i { margin-right: 0.2rem; }
+.wb-dialog .wb-warning { margin: 0 0 0.4rem; font-size: 0.78rem; font-weight: 600; color: var(--wb-red, #c9463d); }
+.wb-dialog .form-fields input[name="defence"], .wb-dialog .form-fields input[name="armour"], .wb-dialog .form-fields input[name="difficultyCustom"] { flex: 0 0 5rem; text-align: center; }
+
+/* ---------------------------------------------------------------------- */
+/*  Chat cards                                                             */
+/* ---------------------------------------------------------------------- */
+
+.wb-chat-card {
+  --card-border: var(--wb-border, #8a7a5c);
+  --card-amber: #e8a33d;
+  --card-red: #c9463d;
+  --card-green: #5c9a4a;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: var(--font-size-13, 13px);
+}
+
+.wb-chat-card .wb-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background: rgba(63, 74, 34, 0.18);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.wb-chat-card .wb-card-header img { width: 36px; height: 36px; object-fit: cover; border-radius: 3px; border: 1px solid var(--card-border); flex: 0 0 auto; }
+.wb-chat-card .wb-card-titles { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.wb-chat-card .wb-card-titles h3 { margin: 0; border: none; font-family: var(--wb-font-stencil); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.2; }
+.wb-chat-card .wb-card-subtitle { font-size: 0.72rem; opacity: 0.75; }
+
+.wb-chat-card .wb-card-total {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  background: #15181c;
+  color: var(--card-amber);
+  font-family: var(--wb-font-mono, monospace);
+  font-size: 1.4rem;
+  font-weight: 700;
+  border: 1px solid #3a4048;
+}
+
+.wb-chat-card .wb-card-total.success { border-color: var(--card-green); }
+.wb-chat-card .wb-card-total.failure { border-color: var(--card-red); }
+.wb-chat-card .wb-card-spent { font-size: 0.75rem; color: #9ad17c; }
+
+.wb-chat-card .wb-card-target { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; font-size: 0.65rem; max-width: 70px; text-align: center; }
+.wb-chat-card .wb-card-target img { width: 28px; height: 28px; border-radius: 50%; }
+.wb-chat-card .wb-card-target span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70px; }
+
+.wb-chat-card .wb-card-dice { display: flex; align-items: center; gap: 0.3rem; padding: 0.35rem 0.5rem 0; }
+.wb-chat-card .wb-die {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--card-border);
+  font-family: var(--wb-font-mono, monospace);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.5);
+  flex: 0 0 auto;
+}
+
+.wb-chat-card .wb-die.discarded { opacity: 0.4; text-decoration: line-through; }
+.wb-chat-card .wb-die.one { border-color: var(--card-red); color: var(--card-red); }
+.wb-chat-card .wb-die.six { border-color: var(--card-green); color: var(--card-green); }
+.wb-chat-card .wb-card-formula { font-size: 0.72rem; opacity: 0.7; margin-left: auto; font-family: var(--wb-font-mono, monospace); }
+
+.wb-chat-card .wb-card-parts { list-style: none; margin: 0; padding: 0.25rem 0.5rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.15rem 0.6rem; }
+.wb-chat-card .wb-card-parts li { display: inline-flex; gap: 0.25rem; opacity: 0.85; }
+.wb-chat-card .wb-card-parts li span:last-child { font-family: var(--wb-font-mono, monospace); font-weight: 700; }
+
+.wb-chat-card .wb-card-outcome { display: flex; align-items: baseline; gap: 0.5rem; margin: 0.25rem 0.5rem; padding: 0.25rem 0.5rem; border-radius: 4px; border-left: 4px solid var(--card-green); background: rgba(92, 154, 74, 0.12); }
+.wb-chat-card .wb-card-outcome.failure { border-left-color: var(--card-red); background: rgba(201, 70, 61, 0.12); }
+.wb-chat-card .wb-card-outcome-label { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.8rem; }
+.wb-chat-card .wb-card-outcome-detail { font-size: 0.75rem; opacity: 0.8; }
+.wb-chat-card .wb-card-crit, .wb-chat-card .wb-card-note { margin: 0.25rem 0.5rem; font-size: 0.72rem; opacity: 0.9; }
+.wb-chat-card .wb-card-crit { color: var(--card-red); }
+
+.wb-chat-card .wb-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.3rem 0.5rem; border-top: 1px solid var(--card-border); font-size: 0.75rem; }
+.wb-chat-card .wb-card-footer button { width: auto; height: 1.6rem; font-size: 0.72rem; padding: 0 0.5rem; line-height: 1; }
+
+.wb-chat-card .wb-card-defence { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; padding: 0.2rem 0.5rem; font-size: 0.75rem; opacity: 0.9; }
+.wb-chat-card .wb-card-attacks { list-style: none; margin: 0; padding: 0.25rem 0.5rem 0.4rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.wb-chat-card .wb-card-attack { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.4rem; border-radius: 4px; border-left: 4px solid var(--card-border); background: rgba(0, 0, 0, 0.05); }
+.wb-chat-card .wb-card-attack.hit { border-left-color: var(--card-green); }
+.wb-chat-card .wb-card-attack.miss { border-left-color: var(--card-red); opacity: 0.8; }
+.wb-chat-card .wb-card-attack-total { font-family: var(--wb-font-mono, monospace); font-size: 1.1rem; font-weight: 700; min-width: 1.6rem; text-align: center; }
+.wb-chat-card .wb-card-attack-result { flex: 1 1 auto; font-size: 0.75rem; }
+.wb-chat-card .wb-card-apply { width: auto; height: 1.5rem; font-size: 0.7rem; padding: 0 0.45rem; line-height: 1; white-space: nowrap; }
+.wb-chat-card .wb-card-ammo.empty { color: var(--card-red); font-weight: 700; }
+.wb-chat-card .wb-card-cooldown { color: var(--card-amber); font-weight: 600; }
+
+.wb-chat-card .wb-card-kills { padding: 0.1rem 0.5rem 0.3rem; }
+.wb-chat-card .wb-card-kill { margin: 0.15rem 0; font-size: 0.75rem; font-weight: 600; color: var(--card-amber); display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; }
+.wb-chat-card .wb-card-kill.pending { color: inherit; font-weight: 400; opacity: 0.9; }
+
+/* Enemy flight generator */
+.wb-dialog .wb-enemy-skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.35rem 0.5rem; margin: 0.3rem 0; }
+.wb-dialog .wb-enemy-skills .wb-field span { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8; }
+.wb-dialog .form-fields input.wb-narrow { flex: 0 0 4rem; text-align: center; }
+
+/* Kill tally */
+.warbirds .wb-kills { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; }
+.warbirds .wb-kill-row { display: flex; align-items: center; gap: 0.5rem; }
+.warbirds .wb-kill-label { flex: 0 0 6rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wb-text-muted); }
+.warbirds .wb-kill-counter { display: flex; align-items: center; gap: 0.15rem; }
+.warbirds .wb-kill-counter input { width: 3rem; text-align: center; }
+.warbirds .wb-kill-progress { font-size: 0.72rem; color: var(--wb-text-muted); }
+.warbirds .wb-kill-progress.ace { color: var(--wb-accent); font-weight: 600; }
+.warbirds .wb-chip-ace { color: var(--wb-accent); border-color: var(--wb-accent); align-self: flex-start; }
+
+/* Dogfight round summary */
+.wb-dogfight-card .wb-dogfight-order { list-style: none; margin: 0; padding: 0.25rem 0.5rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.wb-dogfight-card .wb-dogfight-entry { display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0.35rem; border-radius: 4px; border-left: 4px solid var(--card-border); background: rgba(0, 0, 0, 0.05); font-size: 0.78rem; }
+.wb-dogfight-card .wb-dogfight-entry.side-friendly { border-left-color: var(--card-green); }
+.wb-dogfight-card .wb-dogfight-entry.side-enemy { border-left-color: var(--card-red); }
+.wb-dogfight-card .wb-dogfight-entry.crippled { opacity: 0.7; }
+.wb-dogfight-card .wb-dogfight-entry img { width: 22px; height: 22px; border: none; object-fit: cover; border-radius: 3px; }
+.wb-dogfight-card .wb-dogfight-rank { font-family: var(--wb-font-mono, monospace); opacity: 0.7; min-width: 1rem; text-align: right; }
+.wb-dogfight-card .wb-dogfight-name { flex: 1 1 auto; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wb-dogfight-card .wb-dogfight-side, .wb-dogfight-card .wb-dogfight-sa { font-size: 0.68rem; opacity: 0.75; white-space: nowrap; }
+.wb-dogfight-card .wb-dogfight-total { font-family: var(--wb-font-mono, monospace); font-size: 1.05rem; font-weight: 700; min-width: 1.6rem; text-align: center; }
+.wb-dogfight-card .wb-dogfight-line { margin: 0.2rem 0.5rem; font-size: 0.76rem; }
+.wb-dogfight-card .wb-dogfight-standoff { color: var(--card-amber); }
+.wb-dogfight-card .wb-dogfight-losers { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.25rem 0.5rem; }
+.wb-dogfight-card .wb-dogfight-loser { border: 1px solid var(--card-border); border-radius: 4px; padding: 0.3rem 0.4rem; }
+.wb-dogfight-card .wb-dogfight-loser-head { display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; }
+.wb-dogfight-card .wb-dogfight-loser-head img { width: 20px; height: 20px; border: none; object-fit: cover; border-radius: 3px; }
+.wb-dogfight-card .wb-dogfight-buttons { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.3rem; }
+.wb-dogfight-card .wb-dogfight-buttons button { width: auto; flex: 1 1 auto; height: 1.6rem; font-size: 0.7rem; padding: 0 0.4rem; line-height: 1; }
+.wb-dogfight-card .wb-dogfight-loser .wb-card-choice { margin: 0.3rem 0 0; }
+.wb-dogfight-card .wb-dogfight-rechoose { width: 1.5rem; height: 1.5rem; padding: 0; margin-left: auto; font-size: 0.7rem; line-height: 1; }
+.wb-dogfight-card .wb-dogfight-footnote { font-style: italic; opacity: 0.75; }
+.wb-dialog .wb-chosen-defence { color: var(--card-amber, #e8a33d); font-weight: 600; }
+.wb-chat-card .wb-card-attack-dice { display: inline-flex; gap: 0.15rem; }
+.wb-chat-card .wb-card-attacks-multi .wb-card-attack { flex-wrap: wrap; }
+.wb-chat-card .wb-card-attack-line { flex: 0 0 100%; font-size: 0.72rem; opacity: 0.9; }
+.wb-chat-card .wb-card-attack-line i { margin-right: 0.15rem; }
+.wb-chat-card .wb-card-effect { margin: 0.35rem 0.5rem 0.15rem; font-weight: 700; }
+.wb-chat-card .wb-card-description { padding: 0 0.5rem 0.4rem; font-size: 0.8rem; }
+.wb-chat-card .wb-card-scale { font-style: italic; }

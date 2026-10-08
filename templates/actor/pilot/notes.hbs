@@ -1,0 +1,26 @@
+<section class="tab notes {{tab.cssClass}}" data-group="primary" data-tab="notes">
+  {{#unless limited}}
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.appearance"}}</h2>
+    {{formInput systemFields.appearance value=systemSource.appearance placeholder=(localize "WARBIRDS.Pilot.appearancePlaceholder")}}
+  </section>
+  {{/unless}}
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.background"}}</h2>
+    <prose-mirror name="system.background" value="{{systemSource.background}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.background}}}</prose-mirror>
+  </section>
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.biography"}}</h2>
+    <prose-mirror name="system.biography" value="{{systemSource.biography}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.biography}}}</prose-mirror>
+  </section>
+  {{#unless limited}}
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.contacts"}}</h2>
+    <prose-mirror name="system.contacts" value="{{systemSource.contacts}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.contacts}}}</prose-mirror>
+  </section>
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.notes"}}</h2>
+    <prose-mirror name="system.notes" value="{{systemSource.notes}}" document-uuid="{{document.uuid}}" toggled {{#unless editable}}disabled{{/unless}}>{{{enriched.notes}}}</prose-mirror>
+  </section>
+  {{/unless}}
+</section>

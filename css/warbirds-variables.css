@@ -1,0 +1,58 @@
+/* Warbirds — theme tokens. Loaded in the "variables" cascade layer (see system.json).
+   Core applies .themed.theme-light / .themed.theme-dark to every ApplicationV2 window, so the tokens are
+   scoped the same way core and the official systems do it. */
+
+:root {
+  --wb-amber: #e8a33d;
+  --wb-amber-strong: #ffb84d;
+  --wb-olive: #6b7a3a;
+  --wb-olive-deep: #3f4a22;
+  --wb-gunmetal: #2b3138;
+  --wb-gunmetal-deep: #1b1f24;
+  --wb-red: #c9463d;
+  --wb-green: #6faa5a;
+  --wb-font-stencil: "Roboto Condensed", "Signika", "Arial Narrow", sans-serif;
+  --wb-font-mono: "Roboto Mono", "Courier New", Courier, monospace;
+}
+
+/* Light theme: cream paper, olive panels, gunmetal text. */
+@scope (.theme-light) to (.themed) {
+  --wb-bg: #efe9d8;
+  --wb-bg-panel: #f7f3e6;
+  --wb-bg-inset: #e4ddc6;
+  --wb-bg-header: #d9d2b4;
+  --wb-text: #1f2328;
+  --wb-text-muted: #5c5f52;
+  --wb-text-label: #3f4a22;
+  --wb-border: #a69d7a;
+  --wb-border-strong: #6b7a3a;
+  --wb-accent: #9a6a12;
+  --wb-accent-text: #1f2328;
+  --wb-dial-bg: #22262b;
+  --wb-dial-text: #ffb84d;
+  --wb-dial-label: #cfd4c4;
+  --wb-box-empty: #f7f3e6;
+  --wb-box-filled: #c9463d;
+  --wb-row-hover: rgba(107, 122, 58, 0.12);
+}
+
+/* Dark theme: gunmetal cockpit, amber instruments. */
+@scope (.theme-dark) to (.themed) {
+  --wb-bg: #1e2227;
+  --wb-bg-panel: #272c33;
+  --wb-bg-inset: #181b20;
+  --wb-bg-header: #2f3640;
+  --wb-text: #e6e1d2;
+  --wb-text-muted: #a6a79a;
+  --wb-text-label: #b9c48e;
+  --wb-border: #434a52;
+  --wb-border-strong: #6b7a3a;
+  --wb-accent: #e8a33d;
+  --wb-accent-text: #ffb84d;
+  --wb-dial-bg: #0f1114;
+  --wb-dial-text: #ffb84d;
+  --wb-dial-label: #9aa49a;
+  --wb-box-empty: #181b20;
+  --wb-box-filled: #c9463d;
+  --wb-row-hover: rgba(232, 163, 61, 0.1);
+}

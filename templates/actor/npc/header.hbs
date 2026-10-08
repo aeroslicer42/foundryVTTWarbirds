@@ -1,0 +1,29 @@
+<header class="wb-header">
+  <img class="wb-portrait" src="{{document.img}}" alt="{{document.name}}" data-action="editImage" data-edit="img">
+  <div class="wb-header-main">
+    <div class="wb-name-row">
+      {{#if editable}}
+      {{formInput fields.name value=source.name placeholder=(localize "DOCUMENT.FIELDS.name.label") classes="wb-name-input"}}
+      {{else}}
+      <h1 class="wb-name">{{document.name}}</h1>
+      {{/if}}
+      <span class="wb-status wb-status-{{system.status}}">{{statusLabel}}</span>
+    </div>
+    <div class="wb-header-fields">
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Npc.role"}}</span>
+        {{formInput systemFields.role value=systemSource.role placeholder=(localize "WARBIRDS.Npc.rolePlaceholder")}}
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Npc.mode"}}</span>
+        <select name="system.mode" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.npcModes selected=systemSource.mode localize=true}}</select>
+      </label>
+    </div>
+  </div>
+  <div class="wb-header-side">
+    <button type="button" class="wb-toggle{{#if system.lifeOnTheLine}} active{{/if}}" data-action="toggleField" data-field="lifeOnTheLine"
+            data-tooltip="{{localize "WARBIRDS.Pilot.lifeOnTheLineTooltip"}}" {{#unless editable}}disabled{{/unless}}>
+      <i class="fa-solid fa-skull"></i> {{localize "WARBIRDS.Pilot.lifeOnTheLine"}}
+    </button>
+  </div>
+</header>

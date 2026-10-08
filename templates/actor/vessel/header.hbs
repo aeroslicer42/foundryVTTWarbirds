@@ -1,0 +1,37 @@
+<header class="wb-header">
+  <img class="wb-portrait" src="{{document.img}}" alt="{{document.name}}" data-action="editImage" data-edit="img">
+  <div class="wb-header-main">
+    <div class="wb-name-row">
+      {{#if editable}}
+      {{formInput fields.name value=source.name placeholder=(localize "DOCUMENT.FIELDS.name.label") classes="wb-name-input"}}
+      {{else}}
+      <h1 class="wb-name">{{document.name}}</h1>
+      {{/if}}
+      <span class="wb-status wb-status-{{system.status}}">{{statusLabel}}</span>
+    </div>
+    <div class="wb-header-fields">
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Vessel.category"}}</span>
+        <select name="system.category" {{#unless editable}}disabled{{/unless}}>{{selectOptions config.vesselCategories selected=systemSource.category localize=true}}</select>
+      </label>
+      <label class="wb-field">
+        <span>{{localize "WARBIRDS.Vessel.model"}}</span>
+        {{formInput systemFields.model value=systemSource.model placeholder=(localize "WARBIRDS.Vessel.modelPlaceholder")}}
+      </label>
+      <label class="wb-field wb-field-wide">
+        <span>{{localize "WARBIRDS.Vessel.crew"}}</span>
+        {{formInput systemFields.crew value=systemSource.crew placeholder=(localize "WARBIRDS.Vessel.crewPlaceholder")}}
+      </label>
+    </div>
+  </div>
+  <div class="wb-header-side">
+    <div class="wb-gauge" data-tooltip="{{localize "WARBIRDS.Vessel.threatTooltip"}}">
+      <span class="wb-gauge-label">{{localize "WARBIRDS.Aircraft.threat"}}</span>
+      <span class="wb-gauge-value">{{system.threat.value}}</span>
+    </div>
+    <div class="wb-gauge" data-tooltip="{{localize "WARBIRDS.Vessel.defenceTooltip"}}">
+      <span class="wb-gauge-label">{{localize "WARBIRDS.Secondary.defence"}}</span>
+      <span class="wb-gauge-value">{{system.defence.value}}</span>
+    </div>
+  </div>
+</header>

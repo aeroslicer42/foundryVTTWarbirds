@@ -1,0 +1,54 @@
+<section class="tab gear {{tab.cssClass}}" data-group="primary" data-tab="gear">
+  <div class="wb-columns">
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.gear"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="gear" data-tooltip="{{localize "WARBIRDS.UI.addGear"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each gear}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable toggleField="system.equipped" toggleOn=system.equipped toggleLabel="WARBIRDS.Gear.equipped"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noGear"}}</li>
+          {{/each}}
+        </ul>
+        <p class="wb-hint">{{localize "WARBIRDS.Gear.hint"}}</p>
+      </section>
+    </div>
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.weapons"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="weapon" data-preset='{"category":"personal","damage":2,"ammo.value":6,"ammo.max":6}' data-tooltip="{{localize "WARBIRDS.UI.addWeapon"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each weapons}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner rollAction="fireWeapon" rollLabel="WARBIRDS.Roll.attack" rollIcon="fa-crosshairs"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noWeapons"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.maneuvers"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="maneuver" data-tooltip="{{localize "WARBIRDS.UI.addManeuver"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each maneuvers}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner rollAction="useManeuver" rollLabel="WARBIRDS.Roll.use" rollIcon="fa-comment"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noManeuvers"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    </div>
+  </div>
+</section>

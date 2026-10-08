@@ -1,0 +1,81 @@
+<section class="tab loadout {{tab.cssClass}}" data-group="primary" data-tab="loadout">
+  <div class="wb-columns">
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.weapons"}}
+          {{#if canRearm}}
+          <button type="button" class="wb-icon-button" data-action="rearm" data-tooltip="{{localize "WARBIRDS.UI.rearmHint"}}"><i class="fa-solid fa-rotate"></i></button>
+          {{/if}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="weapon" data-preset='{"category":"gun","accuracy":1,"damage":2,"ammo.value":10,"ammo.max":10}' data-tooltip="{{localize "WARBIRDS.UI.addWeapon"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each weapons}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner toggleField="system.mounted" toggleOn=system.mounted toggleLabel="WARBIRDS.Weapon.mounted" rollAction="fireWeapon" rollLabel="WARBIRDS.Roll.fire" rollIcon="fa-crosshairs"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noWeapons"}}</li>
+          {{/each}}
+        </ul>
+        <div class="wb-inline-fields">
+          <label class="wb-field"><span>{{localize "WARBIRDS.Aircraft.hardpoints"}}</span>{{formInput systemFields.hardpoints.fields.total value=systemSource.hardpoints.total}}</label>
+          <span class="wb-hint{{#if system.hardpoints.over}} wb-over{{/if}}">{{localize "WARBIRDS.Aircraft.hardpointsUsed" used=system.hardpoints.used total=system.hardpoints.total}}</span>
+          {{#if system.hardpoints.over}}<p class="wb-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "WARBIRDS.Aircraft.hardpointsOver"}}</p>{{/if}}
+        </div>
+        <label class="wb-field">
+          <span>{{localize "WARBIRDS.Aircraft.hardpointNotes"}}</span>
+          {{formInput systemFields.hardpoints.fields.notes value=systemSource.hardpoints.notes placeholder=(localize "WARBIRDS.Aircraft.hardpointNotesPlaceholder")}}
+        </label>
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.maneuvers"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="maneuver" data-tooltip="{{localize "WARBIRDS.UI.addManeuver"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each maneuvers}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner rollAction="useManeuver" rollLabel="WARBIRDS.Roll.use" rollIcon="fa-comment"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noManeuvers"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    </div>
+
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.traits"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="trait" data-tooltip="{{localize "WARBIRDS.UI.addTrait"}}"><i class="fa-solid fa-plus"></i></button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each traits}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable toggleField="system.active" toggleOn=system.active toggleLabel="WARBIRDS.Trait.active"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noTraits"}}</li>
+          {{/each}}
+        </ul>
+        {{#if traitModifiers.length}}
+        <div class="wb-modifier-summary">
+          <span class="wb-hint">{{localize "WARBIRDS.Trait.summary"}}</span>
+          {{#each traitModifiers}}<span class="wb-chip">{{value}} {{label}}</span>{{/each}}
+        </div>
+        {{/if}}
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.airframe"}}</h2>
+        <label class="wb-field"><span>{{localize "WARBIRDS.Aircraft.manufacturer"}}</span>{{formInput systemFields.manufacturer value=systemSource.manufacturer}}</label>
+        <label class="wb-field"><span>{{localize "WARBIRDS.Aircraft.ceiling"}}</span>{{formInput systemFields.ceiling value=systemSource.ceiling placeholder="18,300 m / 60,000 ft"}}</label>
+        <label class="wb-field"><span>{{localize "WARBIRDS.Aircraft.fuel"}}</span>{{formInput systemFields.fuel value=systemSource.fuel placeholder=(localize "WARBIRDS.Aircraft.fuelPlaceholder")}}</label>
+        <label class="wb-field"><span>{{localize "WARBIRDS.Aircraft.innateTraits"}}</span>{{formInput systemFields.innateTraits value=systemSource.innateTraits placeholder=(localize "WARBIRDS.Aircraft.innateTraitsPlaceholder")}}</label>
+      </section>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,1524 @@
+{
+  "TYPES": {
+    "Actor": {
+      "pilot": "Pilot",
+      "aircraft": "Aircraft",
+      "npc": "NPC",
+      "vessel": "Vessel"
+    },
+    "Item": {
+      "weapon": "Weapon",
+      "trait": "Trait",
+      "maneuver": "Manoeuvre",
+      "sponsorship": "Sponsorship / Contract",
+      "gear": "Gear"
+    },
+    "HINTS": {
+      "Actor": {
+        "pilot": "A player character: stats, skills, flight skills, Reserve and Rank/Fame.",
+        "aircraft": "A warbird or enemy fighter with its own token. Uses the linked pilot's skills, or its crew block when flown by an NPC.",
+        "npc": "A ground NPC: a thug (no Health track) or a full threat.",
+        "vessel": "An airship, train, fortification or courier: a big target with Threat and sub-systems that fighters strafe."
+      },
+      "Item": {
+        "weapon": "Aircraft guns, heavy ordinance, missiles, turrets or personal weapons.",
+        "trait": "A warbird trait whose modifiers feed the aircraft's ratings.",
+        "maneuver": "A stunt, defending option or BVR tactic, posted to chat when used.",
+        "sponsorship": "A sponsor or a contract worth Fame Points.",
+        "gear": "Personal equipment; armour adds to Resist while equipped."
+      }
+    }
+  },
+  "WARBIRDS": {
+    "Sheet": {
+      "pilot": "Warbirds Pilot Sheet",
+      "aircraft": "Warbirds Aircraft Sheet",
+      "npc": "Warbirds NPC Sheet",
+      "item": "Warbirds Item Sheet",
+      "vessel": "Warbirds Vessel Sheet"
+    },
+    "Settings": {
+      "standing": {
+        "name": "Standing stat",
+        "hint": "Jet Age and the historical sourcebooks replace Fame with military Rank. Pick which one pilot sheets show and use."
+      },
+      "gritty": {
+        "name": "Gritty rules (Shoot to Kill)",
+        "hint": "Jet Age optional rules: lives are always on the line in gunfights and in the air, and a pilot going down must roll 1d6 + Spirit vs 5 to bail out."
+      },
+      "enemyGrades": {
+        "name": "Enemy pilot grades",
+        "hint": "Crew numbers used by the enemy flight generator; edited from the generator dialog."
+      }
+    },
+    "Tabs": {
+      "stats": "Stats",
+      "aircraft": "Aircraft",
+      "standing": "Standing",
+      "standing_rank": "Rank & Contracts",
+      "standing_fame": "Fame & Contracts",
+      "gear": "Gear",
+      "notes": "Notes",
+      "cockpit": "Cockpit",
+      "loadout": "Loadout & Traits",
+      "crew": "Crew",
+      "main": "Stat Block",
+      "details": "Details",
+      "description": "Description"
+    },
+    "Stats": {
+      "body": "Body",
+      "mind": "Mind",
+      "spirit": "Spirit",
+      "sa": "SA"
+    },
+    "Skills": {
+      "academics": "Academics",
+      "athletics": "Athletics",
+      "awareness": "Awareness",
+      "barter": "Barter",
+      "closeCombat": "Close Combat",
+      "command": "Command",
+      "craft": "Craft",
+      "etiquette": "Etiquette",
+      "interrogation": "Interrogation",
+      "investigation": "Investigation",
+      "languages": "Languages",
+      "larceny": "Larceny",
+      "mechanics": "Mechanics",
+      "medicine": "Medicine",
+      "perform": "Perform",
+      "persuade": "Persuade",
+      "publicity": "Publicity",
+      "ride": "Ride",
+      "sailAirship": "Sail – Airship",
+      "shooting": "Shooting",
+      "stealth": "Stealth",
+      "survival": "Survival"
+    },
+    "FlightSkills": {
+      "piloting": "Piloting",
+      "strafing": "Strafing",
+      "gunnery": "Gunnery",
+      "ordinance": "Ordinance",
+      "ew": "Electronic Warfare"
+    },
+    "Difficulty": {
+      "routine": "Routine",
+      "easy": "Easy",
+      "moderate": "Moderate",
+      "tough": "Tough",
+      "veryTough": "Very Tough",
+      "nearImpossible": "Near Impossible",
+      "epic": "Epic"
+    },
+    "Standing": {
+      "rank": "Rank",
+      "fame": "Fame",
+      "fp": "FP",
+      "famePoints": "Fame Points",
+      "nextFame": "Next Fame level at {fp} FP",
+      "scandal": "Scandal",
+      "scandalTooltip": "While in a Scandal the Fame bonus becomes a penalty on Command, Etiquette, Perform, Persuade, Publicity and Interrogation rolls, item costs go up by 1 and items of value equal to Fame cannot be bought.",
+      "fameHint": "Once per session Fame may be added to one roll of: {skills}. Fame is also wealth: items of lower value are bought freely, equal value needs a Barter roll vs 6 + value.",
+      "rankHint": "Rank works like Fame: once per session add it to one roll of {skills} when dealing with the military, and it measures buying power. A higher Rank can always pull Rank on a lower one.",
+      "activeFP": "Active sponsors are worth {fp} FP. More than 10 FP of sponsors makes the plane easy to spot (+1 to Awareness rolls against it)."
+    },
+    "Eras": {
+      "azure": "Azure (core book)",
+      "postwar": "Post-War Era (1946–1958)",
+      "vietnam": "Vietnam Era (1959–1975)",
+      "digital": "Digital Era (1976–1991)",
+      "precision": "Precision Era (1992–2004)",
+      "stealth": "Stealth Era (2005–2022)"
+    },
+    "WeaponCategory": {
+      "gun": "Aircraft gun",
+      "ordinance": "Heavy ordinance",
+      "missile": "Air-to-air missile",
+      "turret": "Turret",
+      "personal": "Personal weapon"
+    },
+    "WeaponFlag": {
+      "bvr": "BVR capable",
+      "extendedRange": "Extended range (ER)",
+      "longRange": "Long range (fires first)",
+      "noHeadToHead": "No head-to-head",
+      "ignoresEPM": "Ignores EPM",
+      "ir": "Infrared seeker",
+      "rippleFire": "Can be ripple-fired",
+      "highVelocity": "High-velocity",
+      "guided": "Guided (+2 vs ground targets)",
+      "ignoresArmour": "Ignores Armour",
+      "extraDie": "Extra die to hit (keep the best)",
+      "missOnOne": "A natural 1 always misses",
+      "grouped": "Grouped targets (one roll vs every target)",
+      "twoLocations": "Hits two locations (heavy bomb)",
+      "slowTargets": "Performance 0–1 targets only",
+      "antiShip": "Airships and ships only",
+      "noPersonnel": "Cannot target people",
+      "fragmentary": "Fragmentary (no −2 vs people, hits everyone in the blast)"
+    },
+    "TraitCategory": {
+      "gunnery": "Gunnery",
+      "ordinance": "Ordinance",
+      "dogfighting": "Dogfighting",
+      "strafing": "Strafing",
+      "general": "General",
+      "innate": "Innate",
+      "courier": "Courier"
+    },
+    "TraitRestriction": {
+      "none": "Unrestricted",
+      "ace": "Ace only",
+      "elite": "Elite Ace only"
+    },
+    "TraitModifier": {
+      "performance": "Performance",
+      "armour": "Armour",
+      "structure": "Structure",
+      "dr": "Damage Resistance",
+      "radar": "Radar",
+      "epm": "EPM",
+      "super": "Super",
+      "dogfighting": "Dogfighting",
+      "strafing": "Strafing",
+      "gunnery": "Gunnery",
+      "ordinance": "Ordinance",
+      "ew": "Electronic Warfare",
+      "breakDefence": "Break Defence",
+      "escapeDefence": "Escape Defence",
+      "shootDefence": "Shoot Defence",
+      "stuntDefence": "Stunt Defence",
+      "stunt": "Stunts",
+      "disengage": "Disengage",
+      "awareness": "Awareness",
+      "ammo": "Ammo",
+      "bvr": "Grants BVR capability",
+      "helicopter": "Helicopter rules",
+      "strafingDie": "Extra Strafing die"
+    },
+    "ManeuverKind": {
+      "defence": "Defending option",
+      "stunt": "Basic stunt",
+      "advancedStunt": "Advanced stunt",
+      "bvrTactic": "BVR tactic",
+      "altitude": "BVR altitude",
+      "other": "Other"
+    },
+    "SponsorshipKind": {
+      "sponsor": "Sponsor",
+      "contract": "Contract"
+    },
+    "SponsorshipStatus": {
+      "offered": "Offered",
+      "active": "Active",
+      "completed": "Completed",
+      "failed": "Failed",
+      "dropped": "Dropped"
+    },
+    "NpcMode": {
+      "thug": "Thug",
+      "threat": "Threat"
+    },
+    "Advantage": {
+      "advantage": "Advantage",
+      "disadvantage": "Disadvantage",
+      "minor": "Minor",
+      "major": "Major"
+    },
+    "Status": {
+      "fine": "Up and Fighting",
+      "wounded": "Wounded",
+      "down": "Down but Not Out",
+      "out": "Out of the Fight",
+      "dead": "Dead"
+    },
+    "AircraftStatus": {
+      "fit": "Fit to Fly",
+      "smoke": "Trailing Smoke",
+      "crippled": "Crippled",
+      "down": "Going Down"
+    },
+    "Defence": {
+      "break": "Break",
+      "escape": "Escape",
+      "shoot": "Shoot",
+      "stunt": "Stunt"
+    },
+    "Ratings": {
+      "dogfighting": "Dogfighting",
+      "strafing": "Strafing",
+      "gunnery": "Gunnery",
+      "ordinance": "Ordinance",
+      "ew": "Electronic Warfare"
+    },
+    "Formula": {
+      "sa": "Situational Awareness = Body + Mind + Spirit",
+      "defence": "Defence = 3 + Body + Athletics (+ shield, Life on the Line, wound penalty)",
+      "resist": "Resist = Spirit + Armour from equipped gear",
+      "health": "Health = 3 + Body + Spirit",
+      "flightSkill": "1d6 + SA + skill (+ wound penalty)",
+      "dogfighting": "1d6 + SA + Piloting + Performance + traits (+ penalties)",
+      "strafing": "1d6 + SA + Strafing + Performance + traits (+ penalties)",
+      "gunnery": "1d6 + SA + Gunnery + weapon Accuracy + traits (+ penalties)",
+      "ordinance": "1d6 + SA + Ordinance + weapon Accuracy + traits (+ Radar for missiles, + penalties)",
+      "ew": "1d6 + SA + Electronic Warfare + Radar + traits (+ penalties)",
+      "breakDefence": "SA + Piloting + Performance + traits (+ penalties)",
+      "escapeDefence": "Break Defence + 2 (+ traits). Super is added when disengaging.",
+      "shootDefence": "Break Defence − 2 (+ traits)",
+      "stuntDefence": "1d6 + SA + Piloting + traits. Needs Performance 3+, not while Trailing Smoke or Crippled."
+    },
+    "Headers": {
+      "stats": "Stats",
+      "secondary": "Secondary Stats",
+      "healthTrack": "Health Track",
+      "skills": "Skills",
+      "flightSkills": "Flight Skills",
+      "personalWeapons": "Personal Weapons",
+      "advantages": "Advantages & Disadvantages",
+      "fighterStats": "Fighter Stats",
+      "structureTrack": "Structure Track",
+      "ratings": "Total Ratings",
+      "defences": "Defence",
+      "loadout": "Loadout",
+      "traits": "Warbird Traits",
+      "sponsors": "Sponsors",
+      "contracts": "Contracts",
+      "gear": "Gear",
+      "weapons": "Weapons",
+      "maneuvers": "Manoeuvres & Stunts",
+      "appearance": "Appearance & Mannerisms",
+      "background": "Background",
+      "biography": "Biography",
+      "contacts": "Contacts",
+      "notes": "Notes",
+      "description": "Description",
+      "airframe": "Airframe",
+      "crew": "Crew (NPC pilot)",
+      "statBlock": "Stat Block"
+    },
+    "Pilot": {
+      "callsign": "Callsign",
+      "player": "Player",
+      "nationality": "Nationality",
+      "squadron": "Squadron",
+      "unit": "Unit / Posting",
+      "standingTooltip": "Rank or Fame, depending on the world setting.",
+      "reserve": "Reserve",
+      "reserveMax": "Reserve (session start)",
+      "reserveTooltip": "Reserve refreshes each session to highest skill + 2 (currently {suggested}). Spend +1 per point on a roll, up to +3.",
+      "reserveHint": "Suggested: {suggested} (highest skill + 2)",
+      "lifeOnTheLine": "Life on the Line",
+      "lifeOnTheLineTooltip": "+1 to all rolls and Defence for the scene, but injuries become serious and death is possible.",
+      "statPoints": "Stat Points",
+      "wounds": "Damage taken",
+      "killsAir": "Air kills",
+      "killsGround": "Ground kills",
+      "eliteAce": "Elite Ace",
+      "dogfightingAce": "Dogfighting Ace",
+      "strafingAce": "Strafing Ace",
+      "aircraftNotLinkedBack": "This aircraft lists a different pilot. Open it and link this pilot to keep both sheets in sync.",
+      "noAircraft": "No aircraft assigned. Drag an Aircraft actor from the sidebar onto this sheet, or pick one.",
+      "linkAircraft": "Assign aircraft",
+      "appearancePlaceholder": "Looks, dress, mannerisms, catchphrases...",
+      "aceProgress": "{remaining} more to {milestone}",
+      "killCredited": "{kind} credited to {name} ({count} so far)",
+      "killPending": "Kill for {name}: the pilot's owner or the GM can credit it",
+      "creditKill": "Credit kill",
+      "killAir": "Air kill",
+      "killGround": "Ground kill",
+      "milestoneTitle": "Ace milestone",
+      "milestoneLine": "{name} is now a {milestone} ({air} air kills, {ground} ground kills). A new Warbird trait may be taken."
+    },
+    "Aircraft": {
+      "model": "Model",
+      "role": "Role",
+      "era": "Era",
+      "pilot": "Pilot",
+      "crewStats": "NPC crew (Crew tab)",
+      "linkPilot": "Assign a pilot",
+      "performance": "Performance",
+      "armour": "Armour",
+      "structure": "Structure",
+      "dr": "Dmg Resist",
+      "radar": "Radar",
+      "epm": "EPM",
+      "super": "Super",
+      "bvr": "BVR",
+      "threat": "Threat",
+      "damage": "Damage taken",
+      "customTrack": "Custom penalty track",
+      "customTrackPlaceholder": "blank = automatic, or e.g. 0 -1 -2",
+      "hardpoints": "Hard points",
+      "hardpointsUsed": "{used} / {total} hard points in use",
+      "hardpointNotes": "Hard point loads",
+      "hardpointNotesPlaceholder": "4 Sparrows, 4 Sidewinders, 3 drop tanks or gun pods",
+      "manufacturer": "Manufacturer / Nation",
+      "ceiling": "Ceiling",
+      "fuel": "Fuel / Range",
+      "fuelPlaceholder": "Limited Fuel (1.75 hours, 2,600 km with drop tanks)",
+      "innateTraits": "Innate traits",
+      "innateTraitsPlaceholder": "Environmental Controls, Radio (100 km), Gun Camera, Refueling Probe",
+      "performanceHint": "0 building · 1 airship/train · 2 non-Guild fighter · 3 warbird · 4–5 elite · 6–7 top jets. Base value is editable below the dial; traits are added automatically.",
+      "armourHint": "Armour = Resist for vehicles. Subtracted from damage (less the weapon's AP).",
+      "structureHint": "Remaining / total Structure. The box below sets the base Structure; traits add to it.",
+      "drHint": "Damage Resistance adds extra 0 boxes at the start of the Structure track.",
+      "radarHint": "Radar Rating −3..+3 (F-4 = 0). Added to Electronic Warfare rolls and to air-to-air missile attacks. Leave blank for no radar.",
+      "gunsightOnly": "gunsight only",
+      "gunsightOnlyHint": "A radar gunsight only: it does not count for Electronic Warfare or missile attacks.",
+      "epmHint": "Electronic Protection Measures 0–4: a Defence bonus against missiles (chaff, flares, jammers).",
+      "superHint": "Super rating 0–4: added to Performance only when disengaging or chasing a disengaging enemy, never in a dogfight.",
+      "bvrHint": "Beyond-visual-range capable: has the radar and missiles for a BVR engagement. Also granted by a BVR trait.",
+      "threatHint": "Couriers and bombers with turrets: enemies roll Strafing against this number instead of Dogfighting. 0 = none.",
+      "flownBy": "flown by {name}",
+      "usingCrew": "using the crew block (no pilot linked)",
+      "crippledWarning": "Crippled: automatically loses Dogfighting rolls, −3 to everything, difficulty 6 Piloting roll to land.",
+      "superHintShort": "Super {super}: add it to Performance when disengaging or chasing a disengaging plane.",
+      "noStunts": "Stunts need Performance 3 or more and an aircraft that is not Trailing Smoke or Crippled.",
+      "epmHintShort": "EPM {epm} is added to Defence against missiles.",
+      "crewIgnored": "{name} is flying this aircraft, so the crew block below is ignored.",
+      "crewHint": "No pilot actor is linked, so the ratings on the Cockpit tab use these numbers. Fill them in for enemy fighters and NPC wingmen.",
+      "crewName": "Pilot name",
+      "crewNamePlaceholder": "Capt. Ivan “Red Two” Petrov",
+      "hardpointsOver": "More ordinance mounted than the airframe has hard points. Check the pylons on each weapon.",
+      "bailOutHintCrippled": "Crippled: posts the rule (limp to safety and bail out rather than risk a crash landing). No roll is needed yet.",
+      "bailOutHintDown": "Going Down: posts the rule (the pilot bails out at the last second; trapped if Life is on the Line). Turn on the gritty rules in the system settings for the 1d6 + Spirit vs 5 roll.",
+      "bailOutHintRoll": "Going Down under the gritty rules: rolls the pilot's 1d6 + Spirit against 5. Failure means the pilot dies.",
+      "grittyOn": "Gritty rules (Shoot to Kill) are on: flying always puts Life on the Line, and a pilot Going Down must roll 1d6 + Spirit vs 5 to bail out.",
+      "downWarning": "Going Down: damage has reached double the Structure. The plane is lost; the pilot bails out or dies with it.",
+      "helicopterHint": "Helicopter: rolls an extra d6 on Strafing (keep the best), can hover (sitting duck, Shoot Defence, may fire back head-to-head), and bails out on 1d6 + Body + Athletics vs 5.",
+      "bailOutHintHelicopter": "Helicopter rules: rolls the pilot's 1d6 + Body + Athletics against 5 to jump clear. Failure means riding the wreck down."
+    },
+    "Npc": {
+      "role": "Role",
+      "rolePlaceholder": "Pirate Boarding Party Leader",
+      "mode": "Type",
+      "thugHint": "Thugs do not roll initiative, have no Health track and are out of the fight on any hit. Every skill roll is 1d6 + the skill bonus.",
+      "initiative": "Initiative",
+      "skillBonus": "Skills",
+      "attack": "Attack",
+      "oneHit": "No Health track: any hit knocks a thug out of the fight.",
+      "override": "Set",
+      "weapons": "Armament (quick note)",
+      "weaponsPlaceholder": "Lead +2 damage for pistol (6 shots), Lead +1 for knife",
+      "thugSkillsHint": "Only skills with a level are shown for thugs.",
+      "overrideHint": "Tick to use the typed stat-block value instead of the number computed from stats and skills."
+    },
+    "Track": {
+      "boxTooltip": "Box {index}: penalty {penalty}",
+      "overflowTooltip": "Damage beyond the track",
+      "penalty": "Penalty"
+    },
+    "Table": {
+      "skill": "Skill",
+      "stat": "Stat",
+      "level": "Level",
+      "xp": "XP",
+      "knack": "K",
+      "knackTooltip": "Knack: roll 2d6 and keep either die.",
+      "total": "Roll",
+      "name": "Name",
+      "skillsHint": "1d6 + stat + level; Knack rolls 2d6 and keeps one."
+    },
+    "UI": {
+      "delete": "Delete (shift-click to skip confirmation)",
+      "bonus": "Bonus",
+      "newSkill": "New skill",
+      "addSkill": "Add a skill",
+      "addWeapon": "Add a weapon",
+      "noWeapons": "No weapons.",
+      "noWeaponsMounted": "Nothing mounted. Drag weapons here or add them on the Loadout tab.",
+      "newAdvantage": "New advantage",
+      "addAdvantage": "Add an advantage or disadvantage",
+      "noAdvantages": "None yet.",
+      "effectPlaceholder": "What it does in play",
+      "open": "Open",
+      "unlink": "Unlink",
+      "noTraits": "No traits.",
+      "addSponsor": "Add a sponsor",
+      "noSponsors": "No sponsors.",
+      "addContract": "Add a contract",
+      "noContracts": "No contracts.",
+      "addGear": "Add gear",
+      "noGear": "No gear.",
+      "addManeuver": "Add a manoeuvre",
+      "noManeuvers": "No manoeuvres.",
+      "addTrait": "Add a trait",
+      "noSkills": "No skills.",
+      "rearmHint": "Rearm: refill every ammo counter and recharge capacitor weapons (between scenes)"
+    },
+    "Gear": {
+      "equipped": "Equipped",
+      "hint": "Equipped armour adds to Resist and shields add to Defence. A flight jacket is +1 Resist and free for pilots.",
+      "uses": "uses",
+      "value": "Value (0–6)",
+      "quantity": "Quantity",
+      "armour": "Armour (Resist)",
+      "defence": "Defence bonus",
+      "usesCurrent": "Uses left",
+      "usesMax": "Uses max",
+      "notes": "Notes",
+      "valueHint": "Value is compared against Fame/Rank when buying: lower buys freely, equal needs a Barter roll vs 6 + value, higher cannot be bought."
+    },
+    "Weapon": {
+      "acc": "Acc",
+      "lead": "Lead",
+      "ap": "AP",
+      "ammo": "Ammo",
+      "mounted": "Mounted",
+      "category": "Category",
+      "skill": "Skill used",
+      "skillDefault": "Default for category",
+      "accuracy": "Accuracy",
+      "damage": "Damage",
+      "attacksPerRound": "Attacks / round",
+      "ammoCurrent": "Ammo left",
+      "ammoMax": "Ammo max",
+      "ammoTracked": "Track ammo",
+      "pylons": "Hard points used",
+      "range": "Range (personal)",
+      "special": "Special",
+      "specialPlaceholder": "Drop bombs: Performance 0–1 targets only",
+      "flags": "Jet Age properties",
+      "hint": "Accuracy is added to the attack roll. Damage is Lead + N. AP ignores that much of the target's Armour. Missiles carry 1 shot per hard point and use the Ordinance skill plus the aircraft's Radar rating.",
+      "skillBest": "Gunnery or Ordinance (best)",
+      "cooldown": "Cooldown (rounds)",
+      "cooldownSummary": "Cooldown {rounds}",
+      "coolingBadge": "Cooling — ready round {round}",
+      "rechargeLabel": "Recharge",
+      "recharge": {
+        "none": "No recharge",
+        "round": "Recharges each round not fired",
+        "scene": "Recharges between scenes"
+      },
+      "altModeLabel": "Alternative mode",
+      "altModePlaceholder": "Laser guided / Against vehicles…",
+      "altModeAccuracy": "Mode Acc",
+      "altModeDamage": "Mode Lead",
+      "automationHint": "Cooldown: rounds to wait after firing (1 = every other round); the loadout shows when the weapon is ready again during a combat. Recharge: capacitor weapons regain 1 shot at the end of each combat round they did not fire, or are refilled with Rearm between scenes. Alternative mode: offered as a checkbox in the attack dialog, with its Accuracy / Lead change."
+    },
+    "Trait": {
+      "active": "Active",
+      "summary": "Automatic modifiers from active traits:",
+      "category": "Category",
+      "restriction": "Restriction",
+      "timesTaken": "Times taken",
+      "situational": "Situational",
+      "situationalHint": "The modifiers only apply in some situations (e.g. Frontal Armour when strafing). They are shown but not added to the ratings automatically.",
+      "grantsBvrHint": "This trait makes the aircraft BVR capable.",
+      "effect": "Effect",
+      "effectPlaceholder": "+1 Escape Defence and +1 to disengage",
+      "conflicts": "Conflicts with",
+      "modifiers": "Modifiers",
+      "modifiersHint": "Numbers added to the aircraft's stats and ratings while the trait is active (multiplied by times taken).",
+      "grantsBvr": "BVR capable",
+      "grantsHelicopterHint": "Rotary-wing rules: an extra d6 on Strafing rolls (keep the best), hovering, and bailing out on 1d6 + Body + Athletics vs 5.",
+      "grantsStrafingDieHint": "Rolls an extra d6 on Strafing rolls and keeps the best (stacks with a Knack)."
+    },
+    "Maneuver": {
+      "kind": "Kind",
+      "defence": "Defence used",
+      "cost": "Cost",
+      "requirement": "Requirement",
+      "requirementPlaceholder": "Performance 3+, not Trailing Smoke",
+      "effect": "Effect",
+      "onSuccess": "On success",
+      "onFailure": "On failure"
+    },
+    "Sponsorship": {
+      "kind": "Kind",
+      "status": "Status",
+      "fp": "Fame Points",
+      "employer": "Company / Employer",
+      "risk": "Risk",
+      "riskPlaceholder": "Low / Medium / High",
+      "duration": "Duration",
+      "obligations": "Obligations",
+      "obligationsPlaceholder": "Ad on the plane and jacket, exclusive use of the product, one day off flying to record jingles",
+      "hint": "Sponsors pay 1, 2 or 3 FP and drop you on a Scandal (after the first). Contracts pay 1–3 FP; after the first failure, every failed contract costs its FP value."
+    },
+    "Item": {
+      "ownedBy": "Owned by {name}",
+      "source": "Source",
+      "sourcePlaceholder": "Jet Age p.12",
+      "noDetails": "This item type has no details.",
+      "weapon": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "source": {
+            "label": "Source"
+          },
+          "category": {
+            "label": "Category"
+          },
+          "skill": {
+            "label": "Skill"
+          },
+          "accuracy": {
+            "label": "Accuracy"
+          },
+          "damage": {
+            "label": "Damage (Lead +)"
+          },
+          "ap": {
+            "label": "Armour Piercing"
+          },
+          "ammo": {
+            "label": "Ammo",
+            "value": {
+              "label": "Ammo left"
+            },
+            "max": {
+              "label": "Ammo max"
+            },
+            "tracked": {
+              "label": "Track ammo"
+            }
+          },
+          "pylons": {
+            "label": "Hard points used"
+          },
+          "attacksPerRound": {
+            "label": "Attacks per round"
+          },
+          "mounted": {
+            "label": "Mounted"
+          },
+          "range": {
+            "label": "Range"
+          },
+          "special": {
+            "label": "Special"
+          },
+          "flags": {
+            "label": "Properties"
+          }
+        }
+      },
+      "trait": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "source": {
+            "label": "Source"
+          },
+          "category": {
+            "label": "Category"
+          },
+          "restriction": {
+            "label": "Restriction"
+          },
+          "conflicts": {
+            "label": "Conflicts with"
+          },
+          "timesTaken": {
+            "label": "Times taken"
+          },
+          "active": {
+            "label": "Active"
+          },
+          "situational": {
+            "label": "Situational"
+          },
+          "effect": {
+            "label": "Effect"
+          },
+          "modifiers": {
+            "label": "Modifiers"
+          },
+          "grants": {
+            "label": "Grants",
+            "bvr": {
+              "label": "BVR capability"
+            },
+            "helicopter": {
+              "label": "Helicopter rules"
+            },
+            "strafingDie": {
+              "label": "Extra Strafing die"
+            }
+          }
+        }
+      },
+      "maneuver": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "source": {
+            "label": "Source"
+          },
+          "kind": {
+            "label": "Kind"
+          },
+          "cost": {
+            "label": "Cost"
+          },
+          "requirement": {
+            "label": "Requirement"
+          },
+          "effect": {
+            "label": "Effect"
+          },
+          "onSuccess": {
+            "label": "On success"
+          },
+          "onFailure": {
+            "label": "On failure"
+          },
+          "defence": {
+            "label": "Defence used"
+          }
+        }
+      },
+      "sponsorship": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "source": {
+            "label": "Source"
+          },
+          "kind": {
+            "label": "Kind"
+          },
+          "status": {
+            "label": "Status"
+          },
+          "fp": {
+            "label": "Fame Points"
+          },
+          "employer": {
+            "label": "Employer"
+          },
+          "risk": {
+            "label": "Risk"
+          },
+          "duration": {
+            "label": "Duration"
+          },
+          "obligations": {
+            "label": "Obligations"
+          }
+        }
+      },
+      "gear": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "source": {
+            "label": "Source"
+          },
+          "value": {
+            "label": "Value"
+          },
+          "quantity": {
+            "label": "Quantity"
+          },
+          "equipped": {
+            "label": "Equipped"
+          },
+          "armour": {
+            "label": "Armour"
+          },
+          "defence": {
+            "label": "Defence bonus"
+          },
+          "uses": {
+            "label": "Uses",
+            "value": {
+              "label": "Uses left"
+            },
+            "max": {
+              "label": "Uses max"
+            }
+          },
+          "notes": {
+            "label": "Notes"
+          }
+        }
+      }
+    },
+    "Secondary": {
+      "defence": "Defence",
+      "resist": "Resist",
+      "health": "Health"
+    },
+    "Dialog": {
+      "deleteRecordTitle": "Delete entry",
+      "deleteRecordContent": "Delete “{name}”?",
+      "linkAircraftTitle": "Assign an aircraft",
+      "linkPilotTitle": "Assign a pilot",
+      "link": "Link",
+      "rearmTitle": "Rearm",
+      "rearmContent": "Refill {count} weapon(s) to full ammo?"
+    },
+    "Notifications": {
+      "itemNotAccepted": "This sheet does not accept items of type {type}.",
+      "dropAircraftOnly": "Only Aircraft actors can be assigned to a pilot.",
+      "dropPilotOnly": "Only Pilot actors can be assigned to an aircraft.",
+      "noAircraft": "There are no aircraft you own in this world yet.",
+      "noPilots": "There are no pilots you own in this world yet.",
+      "outOfAmmo": "{name} is out of ammo.",
+      "noReserve": "No Reserve left to spend.",
+      "damageApplied": "{amount} damage applied to {name}.",
+      "subsystemDisabled": "{name} is disabled and cannot fire.",
+      "subsystemDestroyed": "{name} is disabled: 1 damage to the main Structure, Threat may drop.",
+      "damageRedirected": "{name} was already disabled: damage went to the main Structure instead.",
+      "hardpointsOver": "{used} hard points in use but the airframe only has {total}.",
+      "milestone": "{name} is now a {milestone}!",
+      "cannotCredit": "Only the pilot's owner or the GM can credit this kill."
+    },
+    "Actor": {
+      "creature": {
+        "FIELDS": {
+          "stats": {
+            "label": "Stats",
+            "body": {
+              "label": "Body"
+            },
+            "mind": {
+              "label": "Mind"
+            },
+            "spirit": {
+              "label": "Spirit"
+            }
+          },
+          "skills": {
+            "label": "Skills"
+          },
+          "wounds": {
+            "label": "Damage taken"
+          },
+          "health": {
+            "label": "Health",
+            "bonus": {
+              "label": "Health bonus"
+            },
+            "dr": {
+              "label": "Damage Resistance"
+            }
+          },
+          "defence": {
+            "label": "Defence",
+            "bonus": {
+              "label": "Defence bonus"
+            }
+          },
+          "resist": {
+            "label": "Resist",
+            "bonus": {
+              "label": "Resist bonus"
+            }
+          },
+          "lifeOnTheLine": {
+            "label": "Life on the Line"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "notes": {
+            "label": "Notes"
+          }
+        }
+      },
+      "pilot": {
+        "FIELDS": {
+          "callsign": {
+            "label": "Callsign"
+          },
+          "player": {
+            "label": "Player"
+          },
+          "nationality": {
+            "label": "Nationality"
+          },
+          "squadron": {
+            "label": "Squadron"
+          },
+          "unit": {
+            "label": "Unit"
+          },
+          "appearance": {
+            "label": "Appearance"
+          },
+          "background": {
+            "label": "Background"
+          },
+          "contacts": {
+            "label": "Contacts"
+          },
+          "biography": {
+            "label": "Biography"
+          },
+          "statPoints": {
+            "label": "Stat Points"
+          },
+          "flightSkills": {
+            "label": "Flight skills",
+            "piloting": {
+              "label": "Piloting",
+              "level": {
+                "label": "Level"
+              },
+              "xp": {
+                "label": "XP"
+              },
+              "knack": {
+                "label": "Knack"
+              }
+            },
+            "strafing": {
+              "label": "Strafing",
+              "level": {
+                "label": "Level"
+              },
+              "xp": {
+                "label": "XP"
+              },
+              "knack": {
+                "label": "Knack"
+              }
+            },
+            "gunnery": {
+              "label": "Gunnery",
+              "level": {
+                "label": "Level"
+              },
+              "xp": {
+                "label": "XP"
+              },
+              "knack": {
+                "label": "Knack"
+              }
+            },
+            "ordinance": {
+              "label": "Ordinance",
+              "level": {
+                "label": "Level"
+              },
+              "xp": {
+                "label": "XP"
+              },
+              "knack": {
+                "label": "Knack"
+              }
+            },
+            "ew": {
+              "label": "Electronic Warfare",
+              "level": {
+                "label": "Level"
+              },
+              "xp": {
+                "label": "XP"
+              },
+              "knack": {
+                "label": "Knack"
+              }
+            }
+          },
+          "reserve": {
+            "label": "Reserve",
+            "value": {
+              "label": "Current"
+            },
+            "max": {
+              "label": "Session start"
+            }
+          },
+          "rank": {
+            "label": "Rank",
+            "value": {
+              "label": "Rank"
+            }
+          },
+          "fame": {
+            "label": "Fame",
+            "value": {
+              "label": "Fame"
+            },
+            "points": {
+              "label": "Fame Points"
+            }
+          },
+          "scandal": {
+            "label": "Scandal"
+          },
+          "kills": {
+            "label": "Kills",
+            "air": {
+              "label": "Air kills"
+            },
+            "ground": {
+              "label": "Ground kills"
+            }
+          },
+          "advantages": {
+            "label": "Advantages & Disadvantages"
+          },
+          "aircraft": {
+            "label": "Aircraft"
+          }
+        }
+      },
+      "aircraft": {
+        "FIELDS": {
+          "model": {
+            "label": "Model"
+          },
+          "era": {
+            "label": "Era"
+          },
+          "manufacturer": {
+            "label": "Manufacturer"
+          },
+          "role": {
+            "label": "Role"
+          },
+          "performance": {
+            "label": "Performance"
+          },
+          "armour": {
+            "label": "Armour"
+          },
+          "structure": {
+            "label": "Structure",
+            "max": {
+              "label": "Structure"
+            },
+            "dr": {
+              "label": "Damage Resistance"
+            },
+            "track": {
+              "label": "Custom penalty track"
+            }
+          },
+          "damage": {
+            "label": "Damage taken"
+          },
+          "radar": {
+            "label": "Radar",
+            "value": {
+              "label": "Radar Rating"
+            },
+            "gunsightOnly": {
+              "label": "Gunsight only"
+            }
+          },
+          "epm": {
+            "label": "EPM"
+          },
+          "super": {
+            "label": "Super"
+          },
+          "bvr": {
+            "label": "BVR capable"
+          },
+          "threat": {
+            "label": "Threat"
+          },
+          "hardpoints": {
+            "label": "Hard points",
+            "total": {
+              "label": "Hard points"
+            },
+            "notes": {
+              "label": "Loads"
+            }
+          },
+          "ceiling": {
+            "label": "Ceiling"
+          },
+          "fuel": {
+            "label": "Fuel"
+          },
+          "innateTraits": {
+            "label": "Innate traits"
+          },
+          "pilot": {
+            "label": "Pilot"
+          },
+          "crew": {
+            "label": "Crew",
+            "name": {
+              "label": "Pilot name"
+            },
+            "sa": {
+              "label": "SA"
+            },
+            "flightSkills": {
+              "label": "Flight skills",
+              "piloting": {
+                "label": "Piloting",
+                "level": {
+                  "label": "Level"
+                },
+                "xp": {
+                  "label": "XP"
+                },
+                "knack": {
+                  "label": "Knack"
+                }
+              },
+              "strafing": {
+                "label": "Strafing",
+                "level": {
+                  "label": "Level"
+                },
+                "xp": {
+                  "label": "XP"
+                },
+                "knack": {
+                  "label": "Knack"
+                }
+              },
+              "gunnery": {
+                "label": "Gunnery",
+                "level": {
+                  "label": "Level"
+                },
+                "xp": {
+                  "label": "XP"
+                },
+                "knack": {
+                  "label": "Knack"
+                }
+              },
+              "ordinance": {
+                "label": "Ordinance",
+                "level": {
+                  "label": "Level"
+                },
+                "xp": {
+                  "label": "XP"
+                },
+                "knack": {
+                  "label": "Knack"
+                }
+              },
+              "ew": {
+                "label": "Electronic Warfare",
+                "level": {
+                  "label": "Level"
+                },
+                "xp": {
+                  "label": "XP"
+                },
+                "knack": {
+                  "label": "Knack"
+                }
+              }
+            },
+            "reserve": {
+              "label": "Reserve",
+              "value": {
+                "label": "Current"
+              },
+              "max": {
+                "label": "Max"
+              }
+            },
+            "lifeOnTheLine": {
+              "label": "Life on the Line"
+            }
+          },
+          "description": {
+            "label": "Description"
+          },
+          "notes": {
+            "label": "Notes"
+          }
+        }
+      },
+      "npc": {
+        "FIELDS": {
+          "mode": {
+            "label": "Type"
+          },
+          "role": {
+            "label": "Role"
+          },
+          "skillBonus": {
+            "label": "Skill bonus"
+          },
+          "attack": {
+            "label": "Attack bonus"
+          },
+          "initiative": {
+            "label": "Initiative",
+            "base": {
+              "label": "Initiative"
+            },
+            "override": {
+              "label": "Use stat-block value"
+            }
+          },
+          "defence": {
+            "label": "Defence",
+            "bonus": {
+              "label": "Bonus"
+            },
+            "base": {
+              "label": "Defence"
+            },
+            "override": {
+              "label": "Use stat-block value"
+            }
+          },
+          "resist": {
+            "label": "Resist",
+            "bonus": {
+              "label": "Bonus"
+            },
+            "base": {
+              "label": "Resist"
+            },
+            "override": {
+              "label": "Use stat-block value"
+            }
+          },
+          "health": {
+            "label": "Health",
+            "bonus": {
+              "label": "Bonus"
+            },
+            "dr": {
+              "label": "Damage Resistance"
+            },
+            "base": {
+              "label": "Health"
+            },
+            "override": {
+              "label": "Use stat-block value"
+            }
+          },
+          "weapons": {
+            "label": "Armament"
+          }
+        }
+      },
+      "vessel": {
+        "FIELDS": {
+          "category": {
+            "label": "Category"
+          },
+          "model": {
+            "label": "Model"
+          },
+          "performance": {
+            "label": "Performance"
+          },
+          "armour": {
+            "label": "Armour"
+          },
+          "structure": {
+            "label": "Structure",
+            "max": {
+              "label": "Structure"
+            },
+            "dr": {
+              "label": "Damage Resistance"
+            },
+            "track": {
+              "label": "Custom penalty track"
+            }
+          },
+          "damage": {
+            "label": "Damage taken"
+          },
+          "defence": {
+            "label": "Defence",
+            "base": {
+              "label": "Base Defence"
+            },
+            "bonus": {
+              "label": "Defence bonus"
+            }
+          },
+          "threat": {
+            "label": "Threat",
+            "base": {
+              "label": "Base Threat"
+            },
+            "bonus": {
+              "label": "Threat bonus"
+            }
+          },
+          "subsystems": {
+            "label": "Sub-systems"
+          },
+          "crew": {
+            "label": "Crew"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "notes": {
+            "label": "Notes"
+          }
+        }
+      }
+    },
+    "Roll": {
+      "roll": "Roll",
+      "fire": "Fire",
+      "attack": "Attack",
+      "use": "Use",
+      "base": "Base",
+      "modifier": "Modifier",
+      "modifierHint": "Situational bonuses and penalties: Awesome (+1 to +3), help (+1/+2), tactical advantage, darkness, called shots...",
+      "attackModifierHint": "Hold bonus (+1/+2), ganging up (+1/+2), tactics, Awesome, called shots (needs Lead 3, -3 damage)...",
+      "difficulty": "Difficulty",
+      "noDifficulty": "None / opposed roll",
+      "options": "Options",
+      "knack": "Knack (2d6, keep one)",
+      "knackHint": "Rolls two dice; the better die is kept. The other die is shown on the card in case you prefer it.",
+      "rollStat": "Roll {stat}",
+      "rollSkill": "Roll {skill}",
+      "skillCheck": "Skill check",
+      "statCheck": "Stat check",
+      "flightSkillCheck": "Flight skill check",
+      "ratingRoll": "Aircraft rating",
+      "stuntDefenceRoll": "Stunt Defence for this round",
+      "standingBonus": "{stat} bonus (once per session)",
+      "unskilled": "Unskilled: difficulty +2 (applied as −2 to the roll)",
+      "woundPenalty": "Wound penalty",
+      "structurePenalty": "Structure penalty",
+      "traits": "Traits",
+      "disengaging": "Disengaging or chasing a disengaging plane (Super and disengage traits)",
+      "outnumber1": "Outnumber the enemy by one plane",
+      "outnumber2": "Outnumber the enemy by two or more planes",
+      "cuttingItClose": "Cutting It Close (-1 Strafing and Defence, +1 to attacks)",
+      "controllerSupport": "GCI / AWACS controller support",
+      "highAltitude": "High altitude (look-down)",
+      "afterDrag": "Dragged last round",
+      "noRadar": "No radar: this aircraft cannot take part in a BVR engagement.",
+      "useFireButton": "Rolled when firing a weapon (the Fire button adds the weapon's Accuracy).",
+      "attacks": "Attacks this round",
+      "target": "Target",
+      "noTarget": "No token targeted",
+      "defenceUsed": "Defence used",
+      "defence": "Defence",
+      "defenceHint": "Pick the defender's choice (Break, Escape, Shoot) or type a number. For a Stunt, enter the defender's rolled Stunt Defence.",
+      "stuntDefenceChoice": "Stunt (defender rolls 1d6 + SA + Piloting)",
+      "stuntPlaceholder": "rolled",
+      "ambushDefence": "Ambushed (Defence = Performance)",
+      "allOutDefence": "All-out Defence (+2)",
+      "customDefence": "Other / unknown",
+      "applyEPM": "Add the target's EPM {epm} to its Defence (missiles)",
+      "armourHint": "The weapon's AP {ap} is subtracted from this before it reduces damage.",
+      "scale": "Scale",
+      "scaleNone": "Same scale",
+      "scaleDown": "Person attacking a vehicle (damage ÷ 3)",
+      "scaleUp": "Vehicle attacking a person (damage × 3, -2 to hit)",
+      "scaleUpPenalty": "Vehicle vs person",
+      "consumeAmmo": "Use ammo",
+      "success": "Success",
+      "failure": "Failure",
+      "lead": "Lead",
+      "hit": "Hit",
+      "miss": "Miss",
+      "damage": "Damage",
+      "compareToDefence": "Compare with the target's Defence",
+      "noDefenceGiven": "No Defence given: compare the totals by hand.",
+      "applyDamage": "Apply",
+      "applied": "Applied",
+      "outOfAmmo": "out of ammo",
+      "critFailAvailable": "Natural 1 missing by 3+: you may ask the GM for a critical failure (+1 XP, +1 Reserve).",
+      "discardedDie": "Discarded die (Knack)",
+      "spendReserve": "Spend Reserve +1",
+      "reserveSpentTooltip": "Reserve spent on this roll",
+      "thugSkill": "Skill roll",
+      "randomLocation": "Random location (roll d6)",
+      "vesselDefenceHint": "Guns pick a part; ordinance hits a random location (spend Reserve to shift the roll). Typed values override the part's numbers.",
+      "customDifficultyHint": "Type any target number here (a vessel's Threat, 5 to bail out...). It overrides the list.",
+      "bailOut": "Bail out",
+      "bailOutDown": "Going Down: the pilot bails out at the last second. The GM may call for a certain death scenario and require all remaining Reserve to get out in time.",
+      "bailOutTrapped": "Going Down with Life on the Line: there is no time to bail out. The pilot dies trapped in the machine.",
+      "bailOutCrippled": "Crippled: limp to a safe area and bail out rather than risk a crash landing. Landing takes a difficulty 6 Piloting roll; a failed roll means bailing out at the last second (the GM may call for certain death).",
+      "bailOutCrippledLotl": "Crippled with Life on the Line: the pilot is injured as well and passes out after landing or crashing, with the permanent injuries and long healing of being Out of the Fight.",
+      "bailOutGritty": "Gritty rules: a pilot whose plane is Going Down rolls 1d6 + Spirit vs 5 to bail out. Failure means the pilot dies.",
+      "customDifficulty": "Typed number →",
+      "bailOutFormula": "1d6 + Spirit vs 5",
+      "bailOutGrittyLater": "Gritty rules are on: if the plane ends up Going Down, the pilot must roll 1d6 + Spirit vs 5 to bail out.",
+      "dragDefence": "Dragging (Escape Defence +2)",
+      "lowLost": "Low altitude and lost the last EW roll (carry-over)",
+      "ewResults": "Opposed roll: compare Leads. 1–3: the loser reveals their tactic and the winner may change theirs. 3–6: the winner is also +1 to attack and Defence. 7+: the loser is an unaware target (counts as Press, cannot attack, Defence = Performance). A low-altitude winner sneaks into the merge instead.",
+      "bailOutHelicopter": "Helicopter: jettison the rotors and jump. 1d6 + Body + Athletics vs 5; failure means riding the wreck to the ground.",
+      "bailOutFormulaHelicopter": "1d6 + Body + Athletics vs 5",
+      "extraDie": "Extra die (keep the best)",
+      "helicopterStrafing": "Helicopter: extra Strafing die",
+      "targets": "Targets",
+      "groupedHint": "One roll, compared with each target's own Defence (the chosen defence type applies to all; a typed number overrides them).",
+      "perTarget": "each target's own",
+      "twoLocations": "Two hit locations",
+      "secondLocation": "Second location",
+      "secondLocationHint": "Heavy bombs hit two different locations; the second never repeats the first.",
+      "coolingDown": "Cooling down — ready again on round {round}.",
+      "readyRound": "Ready again on round {round}",
+      "slowTargetsWarning": "{name} has Performance {performance}: this weapon can only hit Performance 0–1 targets.",
+      "antiShipWarning": "{name} is not an airship or ship: this weapon can only target those.",
+      "noPersonnelWarning": "{name} is a person: this weapon cannot target people.",
+      "firstTargetOnly": "Several tokens are targeted; only the first is used.",
+      "extraDieShort": "2d6, keep the best",
+      "missOnOneShort": "a natural 1 misses",
+      "autoMiss": "Automatic miss (natural 1)",
+      "fragmentaryHint": "Fragmentary: no −2 against person-sized targets, and one roll hits everyone you have targeted in the blast.",
+      "initiativeRound": "Dogfighting roll · round {round}",
+      "initiativeAutoLose": "Crippled: the aircraft automatically loses the Dogfighting roll this round.",
+      "chosenDefence": "Chosen on this round's dogfight card: {defence}."
+    },
+    "VesselCategory": {
+      "airship": "Airship",
+      "train": "Train",
+      "fortification": "Fortification",
+      "courier": "Courier / bomber",
+      "other": "Other"
+    },
+    "VesselStatus": {
+      "intact": "Intact",
+      "damaged": "Damaged",
+      "adrift": "Adrift / burning",
+      "destroyed": "Destroyed"
+    },
+    "Vessel": {
+      "category": "Category",
+      "model": "Class / model",
+      "modelPlaceholder": "Escort frigate, pirate airfield...",
+      "crew": "Crew / gunners",
+      "crewPlaceholder": "Gunners roll 1d6 +2; crack shots +3 or +4",
+      "threatTooltip": "Threat: attackers roll Strafing (1d6 + Performance + Strafing + SA) against this. Failing by N lets up to 3 gunners fire on the way in. Destroyed sub-systems lower it.",
+      "defenceTooltip": "Defence of the main body (usually 3 + Performance; big ships -1 or -2). Sub-systems are usually 2 higher. Adrift ships are Defence 1.",
+      "base": "Base",
+      "fromDestroyed": "from destroyed sub-systems",
+      "mainStructure": "Main Structure",
+      "structureHint": "Filling the track leaves the vessel adrift (Defence 1, Threat 0); double the track destroys it. Penalties apply to its Defence.",
+      "subsystems": "Sub-systems",
+      "gunners": "{count} gunners ready",
+      "hitLocation": "Hit location",
+      "hitLocationTooltip": "Roll d6 for a random ordinance hit",
+      "addSubsystem": "Add a sub-system unit",
+      "newSubsystem": "Sub-system",
+      "group": "Group (e.g. Gun Emplacements)",
+      "locationHint": "d6 result(s) that hit this unit, e.g. 4 or 4 5",
+      "subTrack": "Penalty track (DR {dr})",
+      "disabled": "Disabled",
+      "attackEnabled": "This unit can shoot (gun emplacement, battery, turret)",
+      "specialPlaceholder": "Special: destroying the bridge gives -2 Defence; engines out -> Performance 0...",
+      "reductionHint": "Every N destroyed units of this group lower Threat (and damage the main Structure) by the amount. Most: 1 x -1; escort frigate emplacements: 3 x -1.",
+      "noSubsystems": "No sub-systems. Each entry is one unit: add four entries for four gun emplacements.",
+      "locationTable": "Ordinance hit table:",
+      "reserveShift": "Spend Reserve to shift the location roll up or down.",
+      "rulesHint": "Disabling a unit does 1 damage to the main Structure. Hitting an already disabled unit damages the main Structure instead. Strafers who beat the Threat take one retaliatory shot (Break Defence) on the way out.",
+      "defShort": "Def",
+      "armShort": "Arm",
+      "attackColumns": "Attack: 1d6 + · Lead + · AP",
+      "attackBonus": "Attack bonus (1d6 + this)",
+      "attackDamage": "Damage: Lead + this",
+      "perUnits": "per",
+      "dmgShort": "Dmg"
+    },
+    "Bvr": {
+      "press": "Press",
+      "crank": "Crank",
+      "notch": "Notch",
+      "drag": "Drag",
+      "high": "High altitude",
+      "medium": "Medium altitude",
+      "low": "Low altitude",
+      "outcomeHeadToHead": "Head-to-head",
+      "outcomeDogfight": "Dogfight",
+      "outcomeBvr": "Another BVR round",
+      "outcomeDisengage": "Disengaged",
+      "outcomeHint": {
+        "headToHead": "No Dogfighting roll: both fighters fire at once with Gunnery or Ordinance and both use Shoot Defence.",
+        "dogfight": "The fighters merge: roll Dogfighting as normal (High altitude gives +1 on the first round).",
+        "bvr": "Missiles fly at range and the fighters stay beyond visual range. Each may shift one altitude block before the next Electronic Warfare roll.",
+        "disengage": "Both fighters drag away from each other: the engagement is over."
+      },
+      "fighter": "Fighter {n}",
+      "tactic": "Tactic",
+      "outcome": "What happens",
+      "resolveTitle": "BVR resolution",
+      "resolve": "Resolve",
+      "resolveHint": "Compare both fighters' secret tactics once the Electronic Warfare roll is settled (Jet Age p8).",
+      "secretCard": "Secret choice: only you and the GM can see this.",
+      "reveal": "Reveal",
+      "revealed": "Revealed",
+      "hiddenChoice": "Hidden choice"
+    },
+    "Dogfight": {
+      "title": "Dogfight",
+      "round": "Round {round}",
+      "side": {
+        "friendly": "Friendly",
+        "enemy": "Enemy"
+      },
+      "outnumber": "{side} flight outnumbers the other {own} to {other}: +{bonus} to its Dogfighting rolls.",
+      "waiting": "Waiting for every aircraft's Dogfighting roll…",
+      "oneSided": "No opposing aircraft in the fight: nobody has anyone to shoot.",
+      "mayShoot": "may shoot",
+      "tieSa": "tie, higher SA",
+      "standoff": "{a} and {b} tied with equal SA: neither may shoot the other.",
+      "shotBy": "may be shot by",
+      "defends": "Defends with",
+      "rechoose": "Choose again",
+      "manual": "Holds, disengage attempts and head-to-heads are resolved by hand. A defence choice applies to every attack on that aircraft this round and the Fire dialog defaults to it.",
+      "choiceTitle": "Defence choice",
+      "choice": {
+        "break": "Break Defence against every attack this round.",
+        "escape": "Escape Defence: the aircraft must disengage next round.",
+        "shoot": "Shoot Defence (−2): fires back after being shot at.",
+        "stunt": "Stunt Defence: the rolled value is used against every attack this round."
+      }
+    },
+    "StatusEffect": {
+      "trailingSmoke": "Trailing Smoke",
+      "crippled": "Crippled",
+      "goingDown": "Going Down",
+      "adrift": "Adrift",
+      "destroyed": "Destroyed",
+      "downButNotOut": "Down but Not Out",
+      "outOfTheFight": "Out of the Fight"
+    },
+    "EnemyFlight": {
+      "title": "Create enemy flight",
+      "create": "Create flight",
+      "source": "Aircraft to copy",
+      "count": "Number of aircraft",
+      "prefix": "Name prefix",
+      "start": "First number",
+      "defaultPrefix": "Red",
+      "prefixHint": "The copies are named prefix + number (Red 1, Red 2…) and placed in the 'Enemy Flights' folder, each with its own linked actor.",
+      "crew": "Crew",
+      "grade": "Pilot grade",
+      "gradeHint": "Picking a grade fills in the numbers below; change them freely. Regular, Squadron Leader and Strafing Ace follow the core book's NPC examples (p162, p166); Rookie and Ace are table defaults.",
+      "saveGrade": "Save these numbers as the default for this grade",
+      "disposition": "Token disposition",
+      "place": "Place the tokens next to {name}",
+      "folder": "Enemy Flights",
+      "created": "Created {count} aircraft ({prefix} flight).",
+      "gmOnly": "Only the GM can create enemy flights.",
+      "noAircraft": "There are no aircraft in this world to copy; import one from a compendium first.",
+      "grades": {
+        "rookie": "Rookie (all skills 1)",
+        "regular": "Regular pilot (Piloting 2, Gunnery 2)",
+        "leader": "Squadron leader",
+        "strafer": "Strafing ace",
+        "ace": "Ace"
+      }
+    },
+    "TestFight": {
+      "title": "Test Fight",
+      "gmOnly": "Only the GM can set up a test fight.",
+      "replace": "A test fight already exists. Delete it (its actors, scene and combat) and build a new one?",
+      "created": "Created {friendlies} against {enemies}, with tokens on the Test Fight scene and a combat ready.",
+      "next": "Click Begin Combat in the combat tracker: everyone rolls Dogfighting, the round card appears, and the losers pick their defence. Target an enemy token and Fire from a cockpit to shoot."
+    }
+  }
+}

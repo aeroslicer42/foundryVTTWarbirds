@@ -1,0 +1,210 @@
+<section class="tab stats {{tab.cssClass}}" data-group="primary" data-tab="stats">
+  <div class="wb-columns">
+
+    {{!-- Left column: stats, secondary stats, health, skills --}}
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.stats"}}</h2>
+        <div class="wb-stat-grid">
+          {{#each stats}}
+          <div class="wb-stat">
+            <button type="button" class="wb-stat-label wb-rollable" data-action="rollStat" data-stat="{{key}}" data-tooltip="{{localize "WARBIRDS.Roll.rollStat" stat=label}}" {{#unless ../owner}}disabled{{/unless}}>{{label}}</button>
+            <input type="number" name="system.stats.{{key}}" value="{{source}}" min="-3" max="3" step="1" {{#unless ../editable}}disabled{{/unless}}>
+          </div>
+          {{/each}}
+          <div class="wb-stat wb-stat-derived" data-tooltip="{{localize "WARBIRDS.Formula.sa"}}">
+            <span class="wb-stat-label">{{localize "WARBIRDS.Stats.sa"}}</span>
+            <span class="wb-stat-value">{{wbSigned system.sa}}</span>
+          </div>
+        </div>
+        <div class="wb-inline-fields">
+          <label class="wb-field">
+            <span>{{localize "WARBIRDS.Pilot.statPoints"}}</span>
+            {{formInput systemFields.statPoints value=systemSource.statPoints}}
+          </label>
+          <label class="wb-field">
+            <span>{{localize "WARBIRDS.Pilot.reserveMax"}}</span>
+            {{formInput systemFields.reserve.fields.max value=systemSource.reserve.max}}
+          </label>
+          <span class="wb-hint">{{localize "WARBIRDS.Pilot.reserveHint" suggested=system.reserve.suggested}}</span>
+        </div>
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.secondary"}}</h2>
+        <div class="wb-secondary-grid">
+          <div class="wb-secondary" data-tooltip="{{localize "WARBIRDS.Formula.defence"}}">
+            <span class="wb-secondary-label">{{localize "WARBIRDS.Secondary.defence"}}</span>
+            <span class="wb-secondary-value">{{system.defence.value}}</span>
+            <label class="wb-bonus"><span>{{localize "WARBIRDS.UI.bonus"}}</span>{{formInput systemFields.defence.fields.bonus value=systemSource.defence.bonus}}</label>
+          </div>
+          <div class="wb-secondary" data-tooltip="{{localize "WARBIRDS.Formula.resist"}}">
+            <span class="wb-secondary-label">{{localize "WARBIRDS.Secondary.resist"}}</span>
+            <span class="wb-secondary-value">{{system.resist.value}}</span>
+            <label class="wb-bonus"><span>{{localize "WARBIRDS.UI.bonus"}}</span>{{formInput systemFields.resist.fields.bonus value=systemSource.resist.bonus}}</label>
+          </div>
+          <div class="wb-secondary" data-tooltip="{{localize "WARBIRDS.Formula.health"}}">
+            <span class="wb-secondary-label">{{localize "WARBIRDS.Secondary.health"}}</span>
+            <span class="wb-secondary-value">{{system.health.value}} / {{system.health.max}}</span>
+            <label class="wb-bonus"><span>{{localize "WARBIRDS.UI.bonus"}}</span>{{formInput systemFields.health.fields.bonus value=systemSource.health.bonus}}</label>
+          </div>
+        </div>
+        <div class="wb-track-header">
+          <span>{{localize "WARBIRDS.Headers.healthTrack"}}</span>
+          <span class="wb-penalty-badge">{{localize "WARBIRDS.Track.penalty"}} {{wbSigned system.penalty}}</span>
+          <label class="wb-bonus wb-wounds"><span>{{localize "WARBIRDS.Pilot.wounds"}}</span>{{formInput systemFields.wounds value=systemSource.wounds}}</label>
+        </div>
+        {{> "systems/warbirds/templates/shared/track.hbs" track=track editable=editable}}
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.personalWeapons"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="createItem" data-type="weapon"
+                  data-preset='{"category":"personal","damage":2,"ammo.value":6,"ammo.max":6}' data-tooltip="{{localize "WARBIRDS.UI.addWeapon"}}">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          {{/if}}
+        </h2>
+        <ul class="wb-item-list">
+          {{#each weapons}}
+          {{> "systems/warbirds/templates/shared/item-row.hbs" item=this editable=../editable owner=../owner rollAction="fireWeapon" rollLabel="WARBIRDS.Roll.attack" rollIcon="fa-crosshairs"}}
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noWeapons"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+
+    </div>
+
+    {{!-- Right column: flight skills, weapons, advantages --}}
+    <div class="wb-column">
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.flightSkills"}}</h2>
+        <table class="wb-table wb-flight-skills">
+          <thead>
+            <tr>
+              <th class="name">{{localize "WARBIRDS.Table.skill"}}</th>
+              <th class="num">{{localize "WARBIRDS.Table.level"}}</th>
+              <th class="num">{{localize "WARBIRDS.Table.xp"}}</th>
+              <th class="num">{{localize "WARBIRDS.Table.knack"}}</th>
+              <th class="num">{{localize "WARBIRDS.Table.total"}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each flightSkills}}
+            <tr>
+              <td class="name">{{label}}</td>
+              <td class="num"><input type="number" name="system.flightSkills.{{key}}.level" value="{{level}}" min="0" max="6" step="1" {{#unless ../editable}}disabled{{/unless}}></td>
+              <td class="num"><input type="number" name="system.flightSkills.{{key}}.xp" value="{{xp}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}></td>
+              <td class="num"><input type="checkbox" name="system.flightSkills.{{key}}.knack" {{checked knack}} {{#unless ../editable}}disabled{{/unless}}></td>
+              <td class="num wb-total">
+                <button type="button" class="wb-roll-button" data-action="rollFlightSkill" data-skill="{{key}}" data-tooltip="{{localize "WARBIRDS.Formula.flightSkill"}}" {{#unless ../owner}}disabled{{/unless}}>
+                  <i class="fa-solid fa-dice-d6"></i> {{wbSigned total}}
+                </button>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <div class="wb-kills">
+          {{#each killTally}}
+          <div class="wb-kill-row">
+            <span class="wb-kill-label">{{label}}</span>
+            <div class="wb-kill-counter">
+              <button type="button" class="wb-icon-button" data-action="adjustField" data-field="kills.{{key}}" data-delta="-1" data-min="0" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-minus"></i></button>
+              <input type="number" name="system.kills.{{key}}" value="{{value}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}>
+              <button type="button" class="wb-icon-button" data-action="adjustField" data-field="kills.{{key}}" data-delta="1" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <span class="wb-kill-progress{{#if ace}} ace{{/if}}">{{progress}}</span>
+          </div>
+          {{/each}}
+          {{#if system.ace.elite}}<span class="wb-chip wb-chip-ace">{{localize "WARBIRDS.Pilot.eliteAce"}}</span>{{/if}}
+        </div>
+      </section>
+
+      <section class="wb-panel">
+        <h2 class="wb-panel-title">
+          {{localize "WARBIRDS.Headers.advantages"}}
+          {{#if editable}}
+          <button type="button" class="wb-icon-button" data-action="addRecord" data-field="advantages"
+                  data-preset='{"name":"{{localize "WARBIRDS.UI.newAdvantage"}}","kind":"advantage","level":"minor"}' data-tooltip="{{localize "WARBIRDS.UI.addAdvantage"}}">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          {{/if}}
+        </h2>
+        <ul class="wb-record-list">
+          {{#each advantages}}
+          <li class="wb-record wb-advantage-{{kind}}" data-record-id="{{id}}" data-record-name="{{name}}">
+            <div class="wb-record-row">
+              <input type="text" class="wb-record-name" name="system.advantages.{{id}}.name" value="{{name}}" {{#unless ../editable}}disabled{{/unless}}>
+              <select name="system.advantages.{{id}}.kind" {{#unless ../editable}}disabled{{/unless}}>
+                {{selectOptions ../config.advantageKinds selected=kind localize=true}}
+              </select>
+              <select name="system.advantages.{{id}}.level" {{#unless ../editable}}disabled{{/unless}}>
+                {{selectOptions ../config.advantageLevels selected=level localize=true}}
+              </select>
+              {{#if ../editable}}
+              <button type="button" class="wb-icon-button" data-action="deleteRecord" data-field="advantages" data-tooltip="{{localize "WARBIRDS.UI.delete"}}"><i class="fa-solid fa-trash"></i></button>
+              {{/if}}
+            </div>
+            <input type="text" class="wb-record-description" name="system.advantages.{{id}}.description" value="{{description}}"
+                   placeholder="{{localize "WARBIRDS.UI.effectPlaceholder"}}" {{#unless ../editable}}disabled{{/unless}}>
+          </li>
+          {{else}}
+          <li class="wb-empty">{{localize "WARBIRDS.UI.noAdvantages"}}</li>
+          {{/each}}
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  {{!-- Skills, two columns across the full width --}}
+  <section class="wb-panel wb-skills-panel">
+    <h2 class="wb-panel-title">
+      {{localize "WARBIRDS.Headers.skills"}}
+      <span class="wb-panel-sub">{{localize "WARBIRDS.Table.skillsHint"}}</span>
+      {{#if editable}}
+      <button type="button" class="wb-icon-button" data-action="addRecord" data-field="skills"
+              data-preset='{"name":"{{localize "WARBIRDS.UI.newSkill"}}","stat":"mind"}' data-tooltip="{{localize "WARBIRDS.UI.addSkill"}}">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      {{/if}}
+    </h2>
+    <div class="wb-skill-columns">
+      {{#each skillColumns}}
+      <div class="wb-skill-column">
+        <div class="wb-skill-row wb-skill-head">
+          <span class="name">{{localize "WARBIRDS.Table.skill"}}</span>
+          <span class="stat">{{localize "WARBIRDS.Table.stat"}}</span>
+          <span class="num">{{localize "WARBIRDS.Table.level"}}</span>
+          <span class="num">{{localize "WARBIRDS.Table.xp"}}</span>
+          <span class="knack" data-tooltip="{{localize "WARBIRDS.Table.knackTooltip"}}">{{localize "WARBIRDS.Table.knack"}}</span>
+          <span class="roll">{{localize "WARBIRDS.Table.total"}}</span>
+          <span class="controls"></span>
+        </div>
+        {{#each this}}
+        <div class="wb-skill-row" data-record-id="{{id}}" data-record-name="{{name}}">
+          <input type="text" class="name" name="system.skills.{{id}}.name" value="{{name}}" {{#unless @root.editable}}disabled{{/unless}}>
+          <select class="stat" name="system.skills.{{id}}.stat" {{#unless @root.editable}}disabled{{/unless}}>
+            {{selectOptions @root.config.stats selected=stat localize=true}}
+          </select>
+          <input type="number" class="num" name="system.skills.{{id}}.level" value="{{level}}" min="0" max="6" step="1" {{#unless @root.editable}}disabled{{/unless}}>
+          <input type="number" class="num" name="system.skills.{{id}}.xp" value="{{xp}}" min="0" step="1" {{#unless @root.editable}}disabled{{/unless}}>
+          <input type="checkbox" class="knack" name="system.skills.{{id}}.knack" {{checked knack}} {{#unless @root.editable}}disabled{{/unless}} data-tooltip="{{localize "WARBIRDS.Table.knackTooltip"}}">
+          <button type="button" class="wb-roll-button roll" data-action="rollSkill" data-skill="{{id}}" data-tooltip="{{localize "WARBIRDS.Roll.rollSkill" skill=name}}" {{#unless @root.owner}}disabled{{/unless}}>
+            <i class="fa-solid fa-dice-d6"></i> {{wbSigned total}}
+          </button>
+          <span class="controls">
+            {{#if @root.editable}}
+            <button type="button" class="wb-icon-button" data-action="deleteRecord" data-field="skills" data-tooltip="{{localize "WARBIRDS.UI.delete"}}"><i class="fa-solid fa-trash"></i></button>
+            {{/if}}
+          </span>
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </section>
+</section>

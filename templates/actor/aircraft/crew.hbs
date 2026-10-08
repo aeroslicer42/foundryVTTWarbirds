@@ -1,0 +1,42 @@
+<section class="tab crew {{tab.cssClass}}" data-group="primary" data-tab="crew">
+  <section class="wb-panel">
+    <h2 class="wb-panel-title">{{localize "WARBIRDS.Headers.crew"}}</h2>
+    {{#if pilot}}
+    <p class="wb-hint">{{localize "WARBIRDS.Aircraft.crewIgnored" name=pilot.name}}</p>
+    {{else}}
+    <p class="wb-hint">{{localize "WARBIRDS.Aircraft.crewHint"}}</p>
+    {{/if}}
+    <div class="wb-inline-fields">
+      <label class="wb-field wb-field-wide"><span>{{localize "WARBIRDS.Aircraft.crewName"}}</span>{{formInput systemFields.crew.fields.name value=systemSource.crew.name placeholder=(localize "WARBIRDS.Aircraft.crewNamePlaceholder")}}</label>
+      <label class="wb-field"><span>{{localize "WARBIRDS.Stats.sa"}}</span>{{formInput systemFields.crew.fields.sa value=systemSource.crew.sa}}</label>
+    </div>
+    <table class="wb-table wb-flight-skills">
+      <thead>
+        <tr>
+          <th class="name">{{localize "WARBIRDS.Table.skill"}}</th>
+          <th class="num">{{localize "WARBIRDS.Table.level"}}</th>
+          <th class="num">{{localize "WARBIRDS.Table.xp"}}</th>
+          <th class="num">{{localize "WARBIRDS.Table.knack"}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each crewSkills}}
+        <tr>
+          <td class="name">{{label}}</td>
+          <td class="num"><input type="number" name="system.crew.flightSkills.{{key}}.level" value="{{level}}" min="0" max="6" step="1" {{#unless ../editable}}disabled{{/unless}}></td>
+          <td class="num"><input type="number" name="system.crew.flightSkills.{{key}}.xp" value="{{xp}}" min="0" step="1" {{#unless ../editable}}disabled{{/unless}}></td>
+          <td class="num"><input type="checkbox" name="system.crew.flightSkills.{{key}}.knack" {{checked knack}} {{#unless ../editable}}disabled{{/unless}}></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="wb-inline-fields">
+      <label class="wb-field"><span>{{localize "WARBIRDS.Pilot.reserve"}}</span>{{formInput systemFields.crew.fields.reserve.fields.value value=systemSource.crew.reserve.value}}</label>
+      <label class="wb-field"><span>{{localize "WARBIRDS.Pilot.reserveMax"}}</span>{{formInput systemFields.crew.fields.reserve.fields.max value=systemSource.crew.reserve.max}}</label>
+      <label class="wb-dial-check">
+        <input type="checkbox" name="system.crew.lifeOnTheLine" {{checked systemSource.crew.lifeOnTheLine}} {{#unless editable}}disabled{{/unless}}>
+        <span>{{localize "WARBIRDS.Pilot.lifeOnTheLine"}}</span>
+      </label>
+    </div>
+  </section>
+</section>
